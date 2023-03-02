@@ -46,7 +46,9 @@ def show_player(ai_content: str, lang_code: str, is_speech_slow: bool) -> None:
     st.audio(sound_file)
 
 
-def send_ai_request(api_key: str, user_text: str, ) -> str:
+@st.cache_data()
+# @st.cache_data(suppress_st_warning=True)
+def send_ai_request(api_key: str, user_text: str, ) -> Dict:
     openai.api_key = api_key
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -57,10 +59,7 @@ def send_ai_request(api_key: str, user_text: str, ) -> str:
             }
         ]
     )
-    if st.checkbox(label="Show Full API Response", value=False):
-        st.json(completion)
-
-    return completion.get("choices")[0].get("message").get("content")
+    return completion
 
 
 def api_key_checker(api_key: str) -> str:
