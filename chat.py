@@ -15,7 +15,7 @@ icons_dir = assets_dir / "icons"
 
 # --- GENERAL SETTINGS ---
 PAGE_TITLE = "AI Talks"
-PAGE_ICON = ":robot:"
+PAGE_ICON = "🤖"
 
 st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
 
