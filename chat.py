@@ -29,7 +29,7 @@ def main() -> None:
     api_key = st.text_input(label="Input OpenAI API key:")
     api_key = api_key_checker(api_key)
 
-    user_text = st.text_area(label="Start your conversation with AI:")
+    user_text = st.text_area(label="Begin your dialogue with AI:")
     if st.button("Rerun"):
         st.cache_data.clear()
 
