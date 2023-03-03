@@ -42,7 +42,7 @@ def show_player(ai_content: str, lang_code: str, is_speech_slow: bool) -> None:
     sound_file = BytesIO()
     tts = gTTS(text=ai_content, lang=lang_code, slow=is_speech_slow)
     tts.write_to_fp(sound_file)
-    st.write("Push play to hear sound of AI:")
+    st.write("To hear the voice of AI, press the play button.")
     st.audio(sound_file)
 
 
