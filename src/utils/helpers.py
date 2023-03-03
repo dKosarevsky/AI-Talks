@@ -47,12 +47,12 @@ def show_player(ai_content: str, lang_code: str, is_speech_slow: bool) -> None:
 
 
 @st.cache_data()
-# @st.cache_data(suppress_st_warning=True)
-def send_ai_request(api_key: str, user_text: str, ) -> Dict:
-    openai.api_key = api_key
+def send_ai_request(user_text: str, ) -> Dict:
+    openai.api_key = st.secrets.api_credentials.api_key
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
             {
                 "role": "user",
                 "content": user_text
@@ -60,9 +60,3 @@ def send_ai_request(api_key: str, user_text: str, ) -> Dict:
         ]
     )
     return completion
-
-
-def api_key_checker(api_key: str) -> str:
-    if api_key == "ZVER":
-        return st.secrets.api_credentials.api_key
-    return api_key

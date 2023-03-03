@@ -1,7 +1,7 @@
 from openai.error import AuthenticationError
 from pathlib import Path
 
-from src.utils.helpers import api_key_checker, send_ai_request, lang_selector, speech_speed_radio, show_player
+from src.utils.helpers import send_ai_request, lang_selector, speech_speed_radio, show_player
 
 import streamlit as st
 
@@ -26,16 +26,13 @@ st.markdown("---")
 
 
 def main() -> None:
-    api_key = st.text_input(label="Input OpenAI API key:")
-    api_key = api_key_checker(api_key)
-
     user_text = st.text_area(label="Start your conversation with AI:")
     if st.button("Rerun"):
         st.cache_data.clear()
 
-    if api_key and user_text:
+    if user_text:
         try:
-            completion = send_ai_request(api_key, user_text)
+            completion = send_ai_request(user_text)
             if st.checkbox(label="Show Full API Response", value=False):
                 st.json(completion)
             ai_content = completion.get("choices")[0].get("message").get("content")
