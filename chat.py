@@ -1,7 +1,8 @@
 from openai.error import AuthenticationError
 from pathlib import Path
 
-from src.utils.helpers import send_ai_request, lang_selector, speech_speed_radio, show_player
+from src.utils.ai import ai_settings, send_ai_request
+from src.utils.tts import lang_selector, speech_speed_radio, show_player
 
 import streamlit as st
 
@@ -30,9 +31,11 @@ def main() -> None:
     if st.button("Rerun"):
         st.cache_data.clear()
 
+    model, role = ai_settings()
+
     if user_text:
         try:
-            completion = send_ai_request(user_text)
+            completion = send_ai_request(user_text, model, role)
             if st.checkbox(label="Show Full API Response", value=False):
                 st.json(completion)
             ai_content = completion.get("choices")[0].get("message").get("content")

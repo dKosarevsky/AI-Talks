@@ -3,9 +3,8 @@ from gtts import gTTS, lang
 from io import BytesIO
 
 import streamlit as st
-import openai
 
-DEFAULT_SPEECH_LANG = "Russian"
+DEFAULT_SPEECH_LANG = "English"
 
 
 def get_dict_key(dictionary: Dict, value: Any) -> Optional[Any]:
@@ -44,19 +43,3 @@ def show_player(ai_content: str, lang_code: str, is_speech_slow: bool) -> None:
     tts.write_to_fp(sound_file)
     st.write("To hear the voice of AI, press the play button.")
     st.audio(sound_file)
-
-
-@st.cache_data()
-def send_ai_request(user_text: str, ) -> Dict:
-    openai.api_key = st.secrets.api_credentials.api_key
-    completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {
-                "role": "user",
-                "content": user_text
-            }
-        ]
-    )
-    return completion
