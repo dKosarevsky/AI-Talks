@@ -1,4 +1,4 @@
-from openai.error import AuthenticationError
+from openai.error import OpenAIError
 from pathlib import Path
 
 from src.utils.ai import ai_settings, send_ai_request
@@ -49,7 +49,7 @@ def main() -> None:
                 with col2:
                     is_speech_slow = speech_speed_radio()
                 show_player(ai_content, lang_code, is_speech_slow)
-        except AuthenticationError as err:
+        except OpenAIError as err:
             st.error(err)
 
 

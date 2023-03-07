@@ -34,10 +34,7 @@ def send_ai_request(user_text: str, ai_model: str, ai_role: str) -> Dict:
         model=ai_model,
         messages=[
             {"role": "system", "content": f"You are a {ai_role}."},
-            {
-                "role": "user",
-                "content": user_text
-            }
+            {"role": "user", "content": user_text},
         ]
     )
     return completion
