@@ -10,12 +10,13 @@ AI_MODEL_OPTIONS = [
 AI_ROLE_OPTIONS = [
     "helpful assistant",
     "code assistant",
+    "code reviewer",
     "text improver",
     "cinema expert",
     "sport expert",
     "online games expert",
-    "expert in delicious food recipes",
-    "expert in healthy food recipes",
+    "food recipes expert",
+    "English grammar expert",
 ]
 
 

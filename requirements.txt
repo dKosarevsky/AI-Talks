@@ -1,3 +1,4 @@
 streamlit==1.19.0
 openai==0.27.0
 gtts==2.3.1
+pip==23.0.1
