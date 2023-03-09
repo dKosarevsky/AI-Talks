@@ -1,5 +1,5 @@
 from typing import Any, Dict, Optional
-from gtts import gTTS, lang
+from gtts import gTTS, gTTSError, lang
 from io import BytesIO
 
 import streamlit as st
@@ -39,7 +39,10 @@ def speech_speed_radio() -> bool:
 
 def show_player(ai_content: str, lang_code: str, is_speech_slow: bool) -> None:
     sound_file = BytesIO()
-    tts = gTTS(text=ai_content, lang=lang_code, slow=is_speech_slow)
-    tts.write_to_fp(sound_file)
-    st.write("To hear the voice of AI, press the play button.")
-    st.audio(sound_file)
+    try:
+        tts = gTTS(text=ai_content, lang=lang_code, slow=is_speech_slow)
+        tts.write_to_fp(sound_file)
+        st.write("To hear the voice of AI, press the play button.")
+        st.audio(sound_file)
+    except gTTSError as err:
+        st.error(err)
