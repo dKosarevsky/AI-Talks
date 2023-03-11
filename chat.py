@@ -56,8 +56,6 @@ def main() -> None:
             ]
         try:
             completion = send_ai_request(model, st.session_state["messages"])
-            if st.checkbox(label="Show Full API Response", value=False):
-                st.json(completion)
         except OpenAIError as err:
             st.error(err)
         ai_content = completion.get("choices")[0].get("message").get("content")
