@@ -18,7 +18,7 @@ def lang_selector() -> str:
     lang_options = list(lang.tts_langs().values())
     default_index = lang_options.index(DEFAULT_SPEECH_LANG)
     lang_name = st.selectbox(
-        label="Select speech language",
+        label="Select Speech Language",
         options=lang_options,
         index=default_index
     )
@@ -31,18 +31,23 @@ def speech_speed_radio() -> bool:
         "Slow": True
     }
     speed_speech = st.radio(
-        label="Select speech speed",
+        label="Select Speech Speed",
         options=speed_options.keys(),
     )
     return speed_options.get(speed_speech)
 
 
-def show_player(ai_content: str, lang_code: str, is_speech_slow: bool) -> None:
+def show_player(ai_content: str) -> None:
     sound_file = BytesIO()
+    col1, col2 = st.columns(2)
+    with col1:
+        lang_code = lang_selector()
+    with col2:
+        is_speech_slow = speech_speed_radio()
     try:
         tts = gTTS(text=ai_content, lang=lang_code, slow=is_speech_slow)
         tts.write_to_fp(sound_file)
-        st.write("To hear the voice of AI, press the play button.")
+        st.write("To Hear The Voice Of AI, Press Play.")
         st.audio(sound_file)
     except gTTSError as err:
         st.error(err)
