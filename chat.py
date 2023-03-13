@@ -56,14 +56,14 @@ def main() -> None:
             ]
         try:
             completion = send_ai_request(model, st.session_state["messages"])
-        except OpenAIError as err:
+            ai_content = completion.get("choices")[0].get("message").get("content")
+            st.session_state["messages"].append({"role": "assistant", "content": ai_content})
+            if ai_content:
+                show_conversation(ai_content, user_content)
+                st.markdown("---")
+                show_player(ai_content)
+        except (OpenAIError, UnboundLocalError) as err:
             st.error(err)
-        ai_content = completion.get("choices")[0].get("message").get("content")
-        st.session_state["messages"].append({"role": "assistant", "content": ai_content})
-        if ai_content:
-            show_conversation(ai_content, user_content)
-            st.markdown("---")
-            show_player(ai_content)
 
 
 if __name__ == "__main__":
