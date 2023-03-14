@@ -5,7 +5,7 @@ import openai
 
 AI_MODEL_OPTIONS = [
     "gpt-3.5-turbo",
-    "gpt-4.0",
+    "gpt-4",
 ]
 
 AI_ROLE_OPTIONS = [
