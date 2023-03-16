@@ -1,5 +1,5 @@
-streamlit==1.19.0
-streamlit-chat==0.0.2.1
-openai==0.27.0
+streamlit==1.20.0
+streamlit-chat==0.0.2.2
+openai==0.27.2
 gtts==2.3.1
 pip==23.0.1
