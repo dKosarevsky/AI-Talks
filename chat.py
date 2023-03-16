@@ -68,3 +68,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    st.image("assets/ai.jpg")

@@ -64,11 +64,3 @@ repos:
       - id: mypy
         additional_dependencies: [ types-PyYAML==6.0.10, types_requests==2.28.8, types-ujson==5.5.0 ]
         args: [ --ignore-missing-imports, --warn-no-return, --warn-redundant-casts, --disallow-incomplete-defs ]
-
-  - repo: https://github.com/sourcery-ai/sourcery
-    rev: v1.0.1
-    hooks:
-      - id: sourcery
-        # The best way to use Sourcery in a pre-commit hook
-        # is to review only changed lines:
-        args: [ --diff=git diff HEAD ]
