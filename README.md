@@ -1,6 +1,6 @@
 # Voice ChatGPT via streamlit
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://voice-chat-gpt.streamlit.app)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ai-talks.streamlit.app)
 
 ## Настройка pre-commit хуков[^1]
 
