@@ -21,6 +21,6 @@ def show_conversation(ai_content: str, user_text: str) -> None:
         st.session_state.generated.append(ai_content)
     if st.session_state["generated"]:
         for i in range(len(st.session_state["generated"]) - 1, -1, -1):
+            message("", key=str(i))
             st.markdown(st.session_state["generated"][i])
-            # message(st.session_state["generated"][i], key=str(i))
             message(st.session_state["past"][i], is_user=True, key=str(i) + "_user", avatar_style="micah")

@@ -39,15 +39,6 @@ repos:
     hooks:
       - id: validate-pyproject
 
-  - repo: https://github.com/pre-commit/mirrors-pylint
-    rev: a1b176a5ee919967cf01e87c0222bd64b94fe0de
-    hooks:
-      - id: pylint
-        args:
-          - --max-line-length=120
-          - --ignore-imports=yes
-          - -d duplicate-code
-
   - repo: https://github.com/pre-commit/pygrep-hooks
     rev: v1.9.0
     hooks:
