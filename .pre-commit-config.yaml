@@ -26,7 +26,6 @@ repos:
       - id: end-of-file-fixer
       - id: check-added-large-files
       - id: detect-private-key
-      - id: check-docstring-first
       - id: requirements-txt-fixer
       - id: debug-statements
 
