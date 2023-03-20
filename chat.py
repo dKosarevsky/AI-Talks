@@ -3,6 +3,7 @@ from pathlib import Path
 
 from src.utils.ai import ai_settings, send_ai_request
 from src.utils.tts import show_player
+from src.utils.donates import show_donates
 from src.utils.conversation import get_user_input, clear_chat, show_conversation
 
 import streamlit as st
@@ -68,4 +69,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    st.markdown("---")
     st.image("assets/ai.jpg")
+    show_donates()
