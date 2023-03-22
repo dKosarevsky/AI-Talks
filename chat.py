@@ -49,7 +49,7 @@ selected_lang = option_menu(
             "margin": "auto",
             "background-color": "#2C3333",
             "height": "30px",
-            "width": "13rem",
+            "width": "5rem",
             "color": "#CBE4DE",
             "border-radius": "5px"
         },
