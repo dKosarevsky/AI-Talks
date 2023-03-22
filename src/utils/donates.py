@@ -12,4 +12,8 @@ def show_donates() -> None:
         - [Buy Me A Coffee](https://www.buymeacoffee.com/aitalks)
         - [ko-fi](https://ko-fi.com/ai_talks)
         - [PayPal](https://www.paypal.com/paypalme/aitalks)
+
+        **Crypto:**
+        - USD Tether (USDT TRC20) ```TMQ5RiyQ7bv3XjB6Wf6JbPHVrGkhBKtmfA```
+        - Toncoin (TON) ```UQDbnx17N2iOmxfQF0k55QScDMB0MHL9rsq-iGB93RMqDhIH```
     """)
