@@ -36,27 +36,28 @@ selected_lang = option_menu(
     default_index=0,
     orientation="horizontal",
     styles={
-        "container": {"padding": "0px",
-                      "display": "grid",
-                      "margin": "0!important",
-                      "background-color": "#23212c"
-                      },
-        "icon": {"color": "#8bff80", "font-size": "14px"},
+        "container": {
+            "padding": "0px",
+            "display": "grid",
+            "margin": "0!important",
+            "background-color": "#2C3333"
+        },
+        "icon": {"color": "#CBE4DE", "font-size": "14px"},
         "nav-link": {
             "font-size": "14px",
             "text-align": "center",
             "margin": "auto",
-            "background-color": "#23212c",
+            "background-color": "#2C3333",
             "height": "30px",
             "width": "13rem",
-            "color": "#7970a9",
+            "color": "#CBE4DE",
             "border-radius": "5px"
         },
         "nav-link-selected": {
-            "background-color": "#454158",
+            "background-color": "#2E4F4F",
             "font-weight": "300",
-            "color": "#f7f8f2",
-            "border": "1px solid #fe80bf"
+            "color": "#f5f5f5",
+            "border": "1px solid #0E8388"
         }
     }
 )
