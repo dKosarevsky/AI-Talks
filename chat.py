@@ -91,9 +91,9 @@ if __name__ == "__main__":
     )
     st.markdown("---")
     match selected_footer:
-        case "Info":
+        case st.session_state.locale.footer_option1:
             show_info(tg_svg)
-        case "Donates":
+        case st.session_state.locale.footer_option2:
             show_donates()
         case _:
             show_info(tg_svg)
