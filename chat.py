@@ -82,7 +82,7 @@ if __name__ == "__main__":
     st.markdown("---")
     selected_footer = option_menu(
         menu_title=None,
-        options=["Info", "Donates", ],
+        options=[st.session_state.locale.footer_option1, st.session_state.locale.footer_option2],
         icons=["info-circle", "piggy-bank"],
         menu_icon="cast",
         default_index=0,

@@ -21,6 +21,8 @@ class Locale:
     select_placeholder2: str
     stt_placeholder: str
     footer_title: str
+    footer_option1: str
+    footer_option2: str
     footer_chat: str
     footer_channel: str
 
@@ -43,6 +45,8 @@ class EnLocale(Locale):
     select_placeholder2: str = "Select AI Role"
     stt_placeholder: str = "To Hear The Voice Of AI, Press Play"
     footer_title: str = "Support & Feedback"
+    footer_option1: str = "Info"
+    footer_option2: str = "Donates"
     footer_chat: str = "AI Talks Chat"
     footer_channel: str = "AI Talks Channel"
 
@@ -65,6 +69,8 @@ class RuLocale(Locale):
     select_placeholder2: str = "Выберите Роль ИИ"
     stt_placeholder: str = "Чтобы Услышать ИИ Нажми Кнопку Проигрывателя"
     footer_title: str = "Поддержка и Обратная Связь"
+    footer_option1: str = "Информация"
+    footer_option2: str = "Задонатить"
     footer_chat: str = "Чат Разговорчики с ИИ"
     footer_channel: str = "Канал Разговорчики с ИИ"
 
