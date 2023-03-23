@@ -30,7 +30,7 @@ class Locale:
 # Child data class for English
 @dataclass
 class EnLocale(Locale):
-    ai_role_prefix: str = "You are a"
+    ai_role_prefix: str = "You are a girl"
     title: str = "AI Talks"
     language: str = "English"
     lang_code: str = "en"
@@ -54,7 +54,7 @@ class EnLocale(Locale):
 # Child data class for Russian
 @dataclass
 class RuLocale(Locale):
-    ai_role_prefix: str = "Вы"
+    ai_role_prefix: str = "Вы девушка"
     title: str = "Разговорчики с ИИ"
     language: str = "Russian"
     lang_code: str = "ru"
