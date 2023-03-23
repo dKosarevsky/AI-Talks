@@ -4,6 +4,7 @@ from pathlib import Path
 from src.styles.menu_styles import HEADER_STYLES, FOOTER_STYLES
 from src.utils.lang import en, ru
 from src.utils.footer import show_donates, show_info
+from src.utils.helpers import get_random_img, get_files_in_dir
 from src.utils.conversation import get_user_input, show_chat_buttons, show_conversation
 
 import streamlit as st
@@ -13,7 +14,6 @@ current_dir = Path(__file__).parent if "__file__" in locals() else Path.cwd()
 css_file = current_dir / "src/styles/.css"
 assets_dir = current_dir / "assets"
 icons_dir = assets_dir / "icons"
-tg_svg = icons_dir / "telegram.svg"
 tg_svg = icons_dir / "tg.svg"
 
 # --- GENERAL SETTINGS ---
@@ -78,7 +78,7 @@ if __name__ == "__main__":
     st.markdown("---")
     main()
     st.markdown("---")
-    st.image("assets/ai.jpg")
+    st.image(f"assets/{get_random_img(get_files_in_dir(assets_dir))}")
     st.markdown("---")
     selected_footer = option_menu(
         menu_title=None,
