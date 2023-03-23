@@ -1,8 +1,9 @@
 from streamlit_option_menu import option_menu
 from pathlib import Path
 
+from src.styles.menu_styles import HEADER_STYLES, FOOTER_STYLES
 from src.utils.lang import en, ru
-from src.utils.donates import show_donates
+from src.utils.footer import show_donates, show_info
 from src.utils.conversation import get_user_input, show_chat_buttons, show_conversation
 
 import streamlit as st
@@ -10,8 +11,10 @@ import streamlit as st
 # --- PATH SETTINGS ---
 current_dir = Path(__file__).parent if "__file__" in locals() else Path.cwd()
 css_file = current_dir / "src/styles/.css"
-assets_dir = current_dir / "src/assets"
+assets_dir = current_dir / "assets"
 icons_dir = assets_dir / "icons"
+tg_svg = icons_dir / "telegram.svg"
+tg_svg = icons_dir / "tg.svg"
 
 # --- GENERAL SETTINGS ---
 PAGE_TITLE = "AI Talks"
@@ -31,35 +34,11 @@ with open(css_file) as f:
 selected_lang = option_menu(
     menu_title=None,
     options=["En", "Ru", ],
-    icons=["flag_en", "flag_ru"],
+    icons=["globe2", "globe"],
     menu_icon="cast",
-    default_index=0,
+    default_index=1,
     orientation="horizontal",
-    styles={
-        "container": {
-            "padding": "0px",
-            "display": "grid",
-            "margin": "0!important",
-            "background-color": "#2C3333"
-        },
-        "icon": {"color": "#CBE4DE", "font-size": "14px"},
-        "nav-link": {
-            "font-size": "14px",
-            "text-align": "center",
-            "margin": "auto",
-            "background-color": "#2C3333",
-            "height": "30px",
-            "width": "7rem",
-            "color": "#CBE4DE",
-            "border-radius": "5px"
-        },
-        "nav-link-selected": {
-            "background-color": "#2E4F4F",
-            "font-weight": "300",
-            "color": "#f5f5f5",
-            "border": "1px solid #0E8388"
-        }
-    }
+    styles=HEADER_STYLES
 )
 
 # Storing The Context
@@ -100,4 +79,21 @@ if __name__ == "__main__":
     main()
     st.markdown("---")
     st.image("assets/ai.jpg")
-    show_donates()
+    st.markdown("---")
+    selected_footer = option_menu(
+        menu_title=None,
+        options=["Info", "Donates", ],
+        icons=["info-circle", "piggy-bank"],
+        menu_icon="cast",
+        default_index=0,
+        orientation="horizontal",
+        styles=FOOTER_STYLES
+    )
+    st.markdown("---")
+    match selected_footer:
+        case "Info":
+            show_info(tg_svg)
+        case "Donates":
+            show_donates()
+        case _:
+            show_info(tg_svg)

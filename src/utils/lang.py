@@ -14,12 +14,15 @@ class Locale:
     donates1: str
     donates2: str
     chat_placeholder: str
-    chat_btn0: str
-    chat_btn1: str
-    chat_btn2: str
+    chat_run_btn: str
+    chat_rerun_btn: str
+    chat_clear_btn: str
     select_placeholder1: str
     select_placeholder2: str
     stt_placeholder: str
+    footer_title: str
+    footer_chat: str
+    footer_channel: str
 
 
 # Child data class for English
@@ -33,12 +36,15 @@ class EnLocale(Locale):
     donates1: str = "Russia"
     donates2: str = "World"
     chat_placeholder: str = "Start Your Conversation With AI:"
-    chat_btn0: str = "Run"
-    chat_btn1: str = "Rerun"
-    chat_btn2: str = "Clear Conversation"
+    chat_run_btn: str = "Run"
+    chat_rerun_btn: str = "Rerun"
+    chat_clear_btn: str = "Clear Conversation"
     select_placeholder1: str = "Select AI Model"
     select_placeholder2: str = "Select AI Role"
     stt_placeholder: str = "To Hear The Voice Of AI, Press Play"
+    footer_title: str = "Support & Feedback"
+    footer_chat: str = "AI Talks Chat"
+    footer_channel: str = "AI Talks Channel"
 
 
 # Child data class for Russian
@@ -52,12 +58,15 @@ class RuLocale(Locale):
     donates1: str = "Россия"
     donates2: str = "Остальной Мир"
     chat_placeholder: str = "Начните Вашу Беседу с ИИ:"
-    chat_btn0: str = "Запустить"
-    chat_btn1: str = "Перезапустить"
-    chat_btn2: str = "Очистить Беседу"
+    chat_run_btn: str = "Запустить"
+    chat_rerun_btn: str = "Перезапустить"
+    chat_clear_btn: str = "Очистить Беседу"
     select_placeholder1: str = "Выберите Модель ИИ"
     select_placeholder2: str = "Выберите Роль ИИ"
     stt_placeholder: str = "Чтобы Услышать ИИ Нажми Кнопку Проигрывателя"
+    footer_title: str = "Поддержка и Обратная Связь"
+    footer_chat: str = "Чат Разговорчики с ИИ"
+    footer_channel: str = "Канал Разговорчики с ИИ"
 
 
 AI_ROLE_OPTIONS_EN = [
