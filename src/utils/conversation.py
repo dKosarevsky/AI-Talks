@@ -19,8 +19,9 @@ def get_user_input() -> str:
 
 
 def show_chat_buttons() -> None:
-    b1, b2 = st.columns(2)
-    with b1, b2:
+    b0, b1, b2 = st.columns(3)
+    with b0, b1, b2:
+        b0.button(st.session_state.locale.chat_btn0)
         b1.button(st.session_state.locale.chat_btn1, on_click=st.cache_data.clear)
         b2.button(st.session_state.locale.chat_btn2, on_click=clear_chat)
 

@@ -14,6 +14,7 @@ class Locale:
     donates1: str
     donates2: str
     chat_placeholder: str
+    chat_btn0: str
     chat_btn1: str
     chat_btn2: str
     select_placeholder1: str
@@ -32,6 +33,7 @@ class EnLocale(Locale):
     donates1: str = "Russia"
     donates2: str = "World"
     chat_placeholder: str = "Start Your Conversation With AI:"
+    chat_btn0: str = "Run"
     chat_btn1: str = "Rerun"
     chat_btn2: str = "Clear Conversation"
     select_placeholder1: str = "Select AI Model"
@@ -50,6 +52,7 @@ class RuLocale(Locale):
     donates1: str = "Россия"
     donates2: str = "Остальной Мир"
     chat_placeholder: str = "Начните Вашу Беседу с ИИ:"
+    chat_btn0: str = "Запустить"
     chat_btn1: str = "Перезапустить"
     chat_btn2: str = "Очистить Беседу"
     select_placeholder1: str = "Выберите Модель ИИ"
