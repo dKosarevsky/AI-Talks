@@ -17,6 +17,7 @@ class Locale:
     chat_run_btn: str
     chat_rerun_btn: str
     chat_clear_btn: str
+    chat_save_btn: str
     select_placeholder1: str
     select_placeholder2: str
     stt_placeholder: str
@@ -40,7 +41,8 @@ class EnLocale(Locale):
     chat_placeholder: str = "Start Your Conversation With AI:"
     chat_run_btn: str = "Run"
     chat_rerun_btn: str = "Rerun"
-    chat_clear_btn: str = "Clear Conversation"
+    chat_clear_btn: str = "Clear Chat"
+    chat_save_btn: str = "Save Chat"
     select_placeholder1: str = "Select AI Model"
     select_placeholder2: str = "Select AI Role"
     stt_placeholder: str = "To Hear The Voice Of AI, Press Play"
@@ -64,7 +66,8 @@ class RuLocale(Locale):
     chat_placeholder: str = "Начните Вашу Беседу с ИИ:"
     chat_run_btn: str = "Запустить"
     chat_rerun_btn: str = "Перезапустить"
-    chat_clear_btn: str = "Очистить Беседу"
+    chat_clear_btn: str = "Очистить Чат"
+    chat_save_btn: str = "Сохранить Чат"
     select_placeholder1: str = "Выберите Модель ИИ"
     select_placeholder2: str = "Выберите Роль ИИ"
     stt_placeholder: str = "Чтобы Услышать ИИ Нажми Кнопку Проигрывателя"

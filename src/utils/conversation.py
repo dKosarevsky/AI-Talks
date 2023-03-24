@@ -18,11 +18,17 @@ def get_user_input():
 
 
 def show_chat_buttons() -> None:
-    b0, b1, b2 = st.columns(3)
+    b0, b1, b2, b4 = st.columns(4)
     with b0, b1, b2:
-        b0.button(st.session_state.locale.chat_run_btn)
-        b1.button(st.session_state.locale.chat_rerun_btn, on_click=st.cache_data.clear)
-        b2.button(st.session_state.locale.chat_clear_btn, on_click=clear_chat)
+        b0.button(label=st.session_state.locale.chat_run_btn)
+        b1.button(label=st.session_state.locale.chat_rerun_btn, on_click=st.cache_data.clear)
+        b2.button(label=st.session_state.locale.chat_clear_btn, on_click=clear_chat)
+        b4.download_button(
+            label=st.session_state.locale.chat_save_btn,
+            data="\n".join([str(d) for d in st.session_state.messages[1:]]),
+            file_name="ai-talks-chat.json",
+            mime="application/json",
+        )
 
 
 def show_chat(ai_content: str, user_text: str) -> None:
@@ -38,15 +44,15 @@ def show_chat(ai_content: str, user_text: str) -> None:
 
 
 def show_conversation(user_content: str, model: str, role: str) -> None:
-    if st.session_state["messages"]:
-        st.session_state["messages"].append({"role": "user", "content": user_content})
+    if st.session_state.messages:
+        st.session_state.messages.append({"role": "user", "content": user_content})
     else:
         st.session_state["messages"] = [
             {"role": "system", "content": f"{st.session_state.locale.ai_role_prefix} {role}."},
             {"role": "user", "content": user_content},
         ]
     try:
-        completion = send_ai_request(model, st.session_state["messages"])
+        completion = send_ai_request(model, st.session_state.messages)
         ai_content = completion.get("choices")[0].get("message").get("content")
         st.session_state["messages"].append({"role": "assistant", "content": ai_content})
         if ai_content:
