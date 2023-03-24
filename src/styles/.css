@@ -24,9 +24,29 @@ hr {
 #MainMenu {
     visibility: hidden;
 }
+
 footer {
     visibility: hidden;
 }
+
 header {
     visibility: hidden;
+}
+
+audio::-webkit-media-controls-panel,
+audio::-webkit-media-controls-enclosure {
+    background-color: #2E4F4F;
+    max-height: 30px;
+    border-radius: 4px;
+}
+
+audio::-webkit-media-controls-time-remaining-display,
+audio::-webkit-media-controls-current-time-display {
+    color: #CBE4DE;
+    text-shadow: none;
+}
+
+audio::-webkit-media-controls-timeline {
+    border-radius: 8px;
+    margin: 10px;
 }

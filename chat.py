@@ -36,7 +36,7 @@ selected_lang = option_menu(
     options=["En", "Ru", ],
     icons=["globe2", "globe"],
     menu_icon="cast",
-    default_index=1,
+    default_index=0,
     orientation="horizontal",
     styles=HEADER_STYLES
 )
