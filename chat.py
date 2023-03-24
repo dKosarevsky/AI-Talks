@@ -53,17 +53,18 @@ if "user_text" not in st.session_state:
 
 
 def main() -> None:
-    user_content = get_user_input()
-    show_chat_buttons()
+    if st.session_state.user_text:
+        show_conversation(st.session_state.user_text, st.session_state.model, st.session_state.role)
+        st.session_state.user_text = ""
 
     c1, c2 = st.columns(2)
     with c1, c2:
-        model = c1.selectbox(label=st.session_state.locale.select_placeholder1, options=AI_MODEL_OPTIONS)
-        role = c2.selectbox(label=st.session_state.locale.select_placeholder2,
-                            options=st.session_state.locale.ai_role_options)
+        c1.selectbox(label=st.session_state.locale.select_placeholder1, key="model", options=AI_MODEL_OPTIONS)
+        c2.selectbox(label=st.session_state.locale.select_placeholder2, key="role",
+                     options=st.session_state.locale.ai_role_options)
 
-    if user_content:
-        show_conversation(user_content, model, role)
+    get_user_input()
+    show_chat_buttons()
 
 
 if __name__ == "__main__":

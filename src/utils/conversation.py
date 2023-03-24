@@ -13,9 +13,8 @@ def clear_chat() -> None:
     st.session_state["user_text"] = ""
 
 
-def get_user_input() -> str:
-    user_text = st.text_area(label=st.session_state.locale.chat_placeholder, key="user_text")
-    return user_text
+def get_user_input():
+    st.text_area(label=st.session_state.locale.chat_placeholder, value=st.session_state.user_text, key="user_text")
 
 
 def show_chat_buttons() -> None:
@@ -32,10 +31,10 @@ def show_chat(ai_content: str, user_text: str) -> None:
         st.session_state.past.append(user_text)
         st.session_state.generated.append(ai_content)
     if st.session_state["generated"]:
-        for i in range(len(st.session_state["generated"]) - 1, -1, -1):
+        for i in range(len(st.session_state["generated"])):
+            message(st.session_state["past"][i], is_user=True, key=str(i) + "_user", avatar_style="micah")
             message("", key=str(i))
             st.markdown(st.session_state["generated"][i])
-            message(st.session_state["past"][i], is_user=True, key=str(i) + "_user", avatar_style="micah")
 
 
 def show_conversation(user_content: str, model: str, role: str) -> None:
