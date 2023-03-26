@@ -14,6 +14,7 @@ current_dir = Path(__file__).parent if "__file__" in locals() else Path.cwd()
 css_file = current_dir / "src/styles/.css"
 assets_dir = current_dir / "assets"
 icons_dir = assets_dir / "icons"
+img_dir = assets_dir / "img"
 tg_svg = icons_dir / "tg.svg"
 
 # --- GENERAL SETTINGS ---
@@ -79,7 +80,7 @@ if __name__ == "__main__":
     st.markdown("---")
     main()
     st.markdown("---")
-    st.image(f"assets/{get_random_img(get_files_in_dir(assets_dir))}")
+    st.image(f"{img_dir}/{get_random_img(get_files_in_dir(img_dir))}")
     st.markdown("---")
     selected_footer = option_menu(
         menu_title=None,
