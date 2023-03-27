@@ -45,7 +45,7 @@ class EnLocale(Locale):
     chat_save_btn: str = "Save Chat"
     select_placeholder1: str = "Select AI Model"
     select_placeholder2: str = "Select AI Role"
-    stt_placeholder: str = "To Hear The Voice Of AI, Press Play"
+    stt_placeholder: str = "To Hear The Voice Of AI Press Play"
     footer_title: str = "Support & Feedback"
     footer_option1: str = "Info"
     footer_option2: str = "Donates"
