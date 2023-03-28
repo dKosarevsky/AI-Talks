@@ -58,11 +58,16 @@ def main() -> None:
         show_conversation(st.session_state.user_text, st.session_state.model, st.session_state.role)
         st.session_state.user_text = ""
 
-    c1, c2 = st.columns(2)
+    c1, c2, c3 = st.columns(3)
     with c1, c2:
         c1.selectbox(label=st.session_state.locale.select_placeholder1, key="model", options=AI_MODEL_OPTIONS)
-        c2.selectbox(label=st.session_state.locale.select_placeholder2, key="role",
-                     options=st.session_state.locale.ai_role_options)
+        role_kind = c2.radio("Role Kind", ("Select", "Create"), horizontal=True)
+        match role_kind:
+            case "Select":
+                c3.selectbox(label=st.session_state.locale.select_placeholder2, key="role",
+                             options=st.session_state.locale.ai_role_options)
+            case "Create":
+                c3.text_input(label=st.session_state.locale.select_placeholder3, key="role")
 
     get_user_input()
     show_chat_buttons()

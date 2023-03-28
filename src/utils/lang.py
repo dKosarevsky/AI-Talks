@@ -19,6 +19,7 @@ class Locale:
     chat_save_btn: str
     select_placeholder1: str
     select_placeholder2: str
+    select_placeholder3: str
     stt_placeholder: str
     footer_title: str
     footer_option1: str
@@ -43,6 +44,7 @@ class EnLocale(Locale):
     chat_save_btn: str = "Save"
     select_placeholder1: str = "Select AI Model"
     select_placeholder2: str = "Select AI Role"
+    select_placeholder3: str = "Create AI Role"
     stt_placeholder: str = "To Hear The Voice Of AI Press Play"
     footer_title: str = "Support & Feedback"
     footer_option1: str = "Info"
@@ -67,6 +69,7 @@ class RuLocale(Locale):
     chat_save_btn: str = "Сохранить"
     select_placeholder1: str = "Выберите Модель ИИ"
     select_placeholder2: str = "Выберите Роль ИИ"
+    select_placeholder3: str = "Создайте Роль ИИ"
     stt_placeholder: str = "Чтобы Услышать ИИ Нажми Кнопку Проигрывателя"
     footer_title: str = "Поддержка и Обратная Связь"
     footer_option1: str = "Информация"
@@ -85,10 +88,10 @@ AI_ROLE_OPTIONS_EN = [
     "online games expert",
     "food recipes expert",
     "English grammar expert",
-    "friendly and helpful teaching assistant. You explain concepts in great depth using simple terms, and you give examples to help people learn. At the end of each explanation, you ask a question to check for understanding",  # NOQA: E501
-    "laconic assistant. You reply with brief, to-the-point answers with no elaboration",
+    "friendly and helpful teaching assistant",
+    "laconic assistant",
     "helpful, pattern-following assistant",
-    "helpful, pattern-following assistant that translates corporate jargon into plain English",
+    "translate corporate jargon into plain English",
 ]
 
 AI_ROLE_OPTIONS_RU = [
@@ -102,10 +105,10 @@ AI_ROLE_OPTIONS_RU = [
     "эксперт по рецептам блюд",
     "эксперт по английской грамматике",
     "эксперт по русской грамматике",
-    "дружелюбный и полезный помощник преподавателя. Вы объясняете концепции в подробностях, используя простые термины, и даёте примеры, чтобы помочь людям научиться. В конце каждого объяснения вы задаете вопрос, чтобы проверить понимание",  # NOQA: E501
-    "лаконичный помощник. Вы отвечаете краткими, по существу ответами без лишних слов",
+    "дружелюбный и полезный помощник преподавателя",
+    "лаконичный помощник",
     "полезный помощник, следующий шаблонам",
-    "полезный помощник, следующий шаблонам, который переводит корпоративный жаргон на простой английский",
+    "переводчик корпоративного жаргона на простой русский",
 ]
 
 en = EnLocale(ai_role_options=AI_ROLE_OPTIONS_EN)
