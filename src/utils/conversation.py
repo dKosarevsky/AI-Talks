@@ -65,9 +65,12 @@ def chat_gpt_conversation() -> None:
 
 
 def bard_conversation() -> None:
-    bard = Chatbot(st.secrets.api_credentials.bard_session)
-    ai_content = bard.ask(st.session_state.user_text)
-    st.warning(ai_content)
+    try:
+        bard = Chatbot(st.secrets.api_credentials.bard_session)
+        ai_content = bard.ask(st.session_state.user_text)
+        st.warning(ai_content)
+    except AttributeError as err:
+        st.error(err)
 
 
 def show_conversation() -> None:
