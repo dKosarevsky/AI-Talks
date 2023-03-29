@@ -24,6 +24,7 @@ AI_MODEL_OPTIONS = [
     "gpt-3.5-turbo",
     "gpt-4",
     "gpt-4-32k",
+    "bard",
 ]
 
 st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
@@ -55,7 +56,7 @@ if "user_text" not in st.session_state:
 
 def main() -> None:
     if st.session_state.user_text:
-        show_conversation(st.session_state.user_text, st.session_state.model, st.session_state.role)
+        show_conversation()
         st.session_state.user_text = ""
 
     c1, c2, c3 = st.columns(3)

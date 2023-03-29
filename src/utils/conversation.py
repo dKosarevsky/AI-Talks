@@ -2,7 +2,8 @@ import streamlit as st
 from openai.error import InvalidRequestError, OpenAIError
 from streamlit_chat import message
 
-from src.utils.agi.chat_gpt import send_ai_request
+from src.utils.agi.bard import Chatbot
+from src.utils.agi.chat_gpt import chat_gpt_request
 from src.utils.tts import show_player
 
 
@@ -42,20 +43,13 @@ def show_chat(ai_content: str, user_text: str) -> None:
             st.markdown(st.session_state.generated[i])
 
 
-def show_conversation(user_content: str, model: str, role: str) -> None:
-    if st.session_state.messages:
-        st.session_state.messages.append({"role": "user", "content": user_content})
-    else:
-        st.session_state.messages = [
-            {"role": "system", "content": f"{st.session_state.locale.ai_role_prefix} {role}."},
-            {"role": "user", "content": user_content},
-        ]
+def chat_gpt_conversation() -> None:
     try:
-        completion = send_ai_request(model, st.session_state.messages)
+        completion = chat_gpt_request(st.session_state.model, st.session_state.messages)
         ai_content = completion.get("choices")[0].get("message").get("content")
         st.session_state.messages.append({"role": "assistant", "content": ai_content})
         if ai_content:
-            show_chat(ai_content, user_content)
+            show_chat(ai_content, st.session_state.user_text)
             st.markdown("---")
             show_player(ai_content)
     except InvalidRequestError as err:
@@ -63,8 +57,28 @@ def show_conversation(user_content: str, model: str, role: str) -> None:
             st.session_state.messages.pop(1)
             if len(st.session_state.messages) == 1:
                 st.session_state.user_text = ""
-            show_conversation(st.session_state.user_text, st.session_state.model, st.session_state.role)
+            show_conversation()
         else:
             st.error(err)
     except (OpenAIError, UnboundLocalError) as err:
         st.error(err)
+
+
+def bard_conversation() -> None:
+    bard = Chatbot(st.secrets.api_credentials.bard_session)
+    ai_content = bard.ask(st.session_state.user_text)
+    st.warning(ai_content)
+
+
+def show_conversation() -> None:
+    if st.session_state.messages:
+        st.session_state.messages.append({"role": "user", "content": st.session_state.user_text})
+    else:
+        st.session_state.messages = [
+            {"role": "system", "content": f"{st.session_state.locale.ai_role_prefix} {st.session_state.role}."},
+            {"role": "user", "content": st.session_state.user_text},
+        ]
+    if st.session_state.model == "bard":
+        bard_conversation()
+    else:
+        chat_gpt_conversation()

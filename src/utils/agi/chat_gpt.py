@@ -6,7 +6,7 @@ import streamlit as st
 
 
 @st.cache_data()
-def send_ai_request(ai_model: str, messages: List[dict]) -> dict:
+def chat_gpt_request(ai_model: str, messages: List[dict]) -> dict:
     openai.api_key = st.secrets.api_credentials.api_key
     logging.warning("messages:")
     logging.warning(messages)
