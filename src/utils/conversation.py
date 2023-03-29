@@ -2,7 +2,7 @@ import streamlit as st
 from openai.error import InvalidRequestError, OpenAIError
 from streamlit_chat import message
 
-from src.utils.ai_interaction import send_ai_request
+from src.utils.agi.chat_gpt import send_ai_request
 from src.utils.tts import show_player
 
 
@@ -58,11 +58,13 @@ def show_conversation(user_content: str, model: str, role: str) -> None:
             show_chat(ai_content, user_content)
             st.markdown("---")
             show_player(ai_content)
-    except InvalidRequestError as e:
-        if e.code == "context_length_exceeded":
+    except InvalidRequestError as err:
+        if err.code == "context_length_exceeded":
             st.session_state.messages.pop(1)
             if len(st.session_state.messages) == 1:
                 st.session_state.user_text = ""
             show_conversation(st.session_state.user_text, st.session_state.model, st.session_state.role)
+        else:
+            st.error(err)
     except (OpenAIError, UnboundLocalError) as err:
         st.error(err)
