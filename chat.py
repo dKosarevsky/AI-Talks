@@ -62,12 +62,16 @@ def main() -> None:
     c1, c2, c3 = st.columns(3)
     with c1, c2:
         c1.selectbox(label=st.session_state.locale.select_placeholder1, key="model", options=AI_MODEL_OPTIONS)
-        role_kind = c2.radio("Role Kind", ("Select", "Create"), horizontal=True)
+        role_kind = c2.radio(
+            label=st.session_state.locale.radio_placeholder,
+            options=(st.session_state.locale.radio_text1, st.session_state.locale.radio_text2),
+            horizontal=True,
+        )
         match role_kind:
-            case "Select":
+            case st.session_state.locale.radio_text1:
                 c3.selectbox(label=st.session_state.locale.select_placeholder2, key="role",
                              options=st.session_state.locale.ai_role_options)
-            case "Create":
+            case st.session_state.locale.radio_text2:
                 c3.text_input(label=st.session_state.locale.select_placeholder3, key="role")
 
     get_user_input()

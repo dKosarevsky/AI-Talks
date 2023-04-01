@@ -20,6 +20,9 @@ class Locale:
     select_placeholder1: str
     select_placeholder2: str
     select_placeholder3: str
+    radio_placeholder: str
+    radio_text1: str
+    radio_text2: str
     stt_placeholder: str
     footer_title: str
     footer_option1: str
@@ -42,9 +45,12 @@ class EnLocale(Locale):
     chat_run_btn: str = "Run"
     chat_clear_btn: str = "Clear"
     chat_save_btn: str = "Save"
-    select_placeholder1: str = "Select AI Model"
-    select_placeholder2: str = "Select AI Role"
-    select_placeholder3: str = "Create AI Role"
+    select_placeholder1: str = "Select Model"
+    select_placeholder2: str = "Select Role"
+    select_placeholder3: str = "Create Role"
+    radio_placeholder: str = "Role Interaction"
+    radio_text1: str = "Select"
+    radio_text2: str = "Create"
     stt_placeholder: str = "To Hear The Voice Of AI Press Play"
     footer_title: str = "Support & Feedback"
     footer_option1: str = "Info"
@@ -67,9 +73,12 @@ class RuLocale(Locale):
     chat_run_btn: str = "Запустить"
     chat_clear_btn: str = "Очистить"
     chat_save_btn: str = "Сохранить"
-    select_placeholder1: str = "Выберите Модель ИИ"
-    select_placeholder2: str = "Выберите Роль ИИ"
-    select_placeholder3: str = "Создайте Роль ИИ"
+    select_placeholder1: str = "Выберите Модель"
+    select_placeholder2: str = "Выберите Роль"
+    select_placeholder3: str = "Создайте Роль"
+    radio_placeholder: str = "Взаимодествие с Ролью"
+    radio_text1: str = "Выбрать"
+    radio_text2: str = "Создать"
     stt_placeholder: str = "Чтобы Услышать ИИ Нажми Кнопку Проигрывателя"
     footer_title: str = "Поддержка и Обратная Связь"
     footer_option1: str = "Информация"
