@@ -82,6 +82,7 @@ def show_conversation() -> None:
             {"role": "user", "content": st.session_state.user_text},
         ]
     if st.session_state.model == "bard":
-        bard_conversation()
+        st.warning("Sorry, bard is not active at this moment")
+        # bard_conversation()
     else:
         chat_gpt_conversation()
