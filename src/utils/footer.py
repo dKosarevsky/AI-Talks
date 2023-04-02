@@ -6,6 +6,9 @@ from src.utils.helpers import render_svg
 
 
 def show_info(icon: Path) -> None:
+    st.markdown(f"<div style='text-align: justify;'>{st.session_state.locale.responsibility_denial}</div>",
+                unsafe_allow_html=True)
+    st.markdown("---")
     st.markdown(f"""
         ### :page_with_curl: {st.session_state.locale.footer_title}
         - {render_svg(icon)} [{st.session_state.locale.footer_chat}](https://t.me/talks_ai)
@@ -25,6 +28,15 @@ def show_donates() -> None:
         - [PayPal](https://www.paypal.com/paypalme/aitalks)
 
         **Crypto:**
-        - USD Tether (USDT TRC20) ```TMQ5RiyQ7bv3XjB6Wf6JbPHVrGkhBKtmfA```
-        - Toncoin (TON) ```UQDbnx17N2iOmxfQF0k55QScDMB0MHL9rsq-iGB93RMqDhIH```
+        - USD Tether (USDT TRC20):
+        ```
+        TMQ5RiyQ7bv3XjB6Wf6JbPHVrGkhBKtmfA
+        ```
+        - Toncoin (TON):
+        ```
+        UQDbnx17N2iOmxfQF0k55QScDMB0MHL9rsq-iGB93RMqDhIH
+        ```
     """)
+    st.markdown("---")
+    st.markdown(f"<div style='text-align: justify;'>{st.session_state.locale.donates_info}</div>",
+                unsafe_allow_html=True)

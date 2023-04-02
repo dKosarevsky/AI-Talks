@@ -29,6 +29,8 @@ class Locale:
     footer_option2: str
     footer_chat: str
     footer_channel: str
+    responsibility_denial: str
+    donates_info: str
 
 
 # Child data class for English
@@ -57,6 +59,17 @@ class EnLocale(Locale):
     footer_option2: str = "Donates"
     footer_chat: str = "AI Talks Chat"
     footer_channel: str = "AI Talks Channel"
+    responsibility_denial: str = """
+    `AI Talks` uses the `Open AI` API to interact with `ChatGPT`, an AI that generates information.
+    Please note that neural network responses may not be reliable, inaccurate or irrelevant.
+    We are not responsible for any consequences associated with the use or reliance on the information provided.
+    Use the received data at your discretion.
+    """
+    donates_info: str = """
+    `AI Talks` collects donations solely for the purpose of paying for the `Open AI` API.
+    This allows you to provide access to communication with AI for all users.
+    Support us for joint development and interaction with the intelligence of the future!
+    """
 
 
 # Child data class for Russian
@@ -85,6 +98,18 @@ class RuLocale(Locale):
     footer_option2: str = "Задонатить"
     footer_chat: str = "Чат Разговорчики с ИИ"
     footer_channel: str = "Канал Разговорчики с ИИ"
+    responsibility_denial: str = """
+    `Разговорчики с ИИ` использует API `Open AI` для взаимодействия с `ChatGPT`, ИИ, генерирующим информацию.
+    Пожалуйста, учтите, что ответы нейронной сети могут быть недостоверными, неточными или нерелевантными.
+    Мы не несём ответственности за любые последствия,
+    связанные с использованием или доверием к информации сгенерированныой нейронной сетью.
+    Используйте полученные данные генераций на своё усмотрение.
+    """
+    donates_info: str = """
+    `AI Talks` собирает донаты исключительно с целью оплаты API `Open AI`.
+    Это позволяет обеспечить доступ к общению с ИИ для всех желающих пользователей.
+    Поддержите нас для совместного развития и взаимодействия с интеллектом будущего!
+    """
 
 
 AI_ROLE_OPTIONS_EN = [
