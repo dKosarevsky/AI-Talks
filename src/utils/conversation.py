@@ -1,5 +1,6 @@
 import streamlit as st
 from openai.error import InvalidRequestError, OpenAIError
+from requests.exceptions import TooManyRedirects
 from streamlit_chat import message
 
 from src.utils.agi.bard import Chatbot
@@ -69,7 +70,7 @@ def bard_conversation() -> None:
         bard = Chatbot(st.secrets.api_credentials.bard_session)
         ai_content = bard.ask(st.session_state.user_text)
         st.warning(ai_content.get("content"))
-    except AttributeError as err:
+    except (TooManyRedirects, AttributeError) as err:
         st.error(err)
 
 
