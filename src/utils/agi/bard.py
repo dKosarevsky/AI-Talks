@@ -1,50 +1,15 @@
 """
 Reverse engineering of Google Bard from https://github.com/discordtehe/Bard
 """
-import argparse
 import json
 import random
 import re
 import string
 
 import requests
-from prompt_toolkit import PromptSession, prompt
-from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
-from prompt_toolkit.completion import WordCompleter
-from prompt_toolkit.history import InMemoryHistory
-from prompt_toolkit.key_binding import KeyBindings
-from rich.console import Console
-from rich.markdown import Markdown
+import streamlit as st
 
 US_AG = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36"
-
-
-def __create_session() -> PromptSession:
-    return PromptSession(history=InMemoryHistory())
-
-
-def __create_completer(commands: list, pattern_str: str = "$") -> WordCompleter:
-    return WordCompleter(words=commands, pattern=re.compile(pattern_str))
-
-
-def __get_input(
-    session: PromptSession = None,
-    completer: WordCompleter = None,
-    key_bindings: KeyBindings = None,
-) -> str:
-    """
-    Multiline input function.
-    """
-    return (
-        session.prompt(
-            completer=completer,
-            multiline=True,
-            auto_suggest=AutoSuggestFromHistory(),
-            key_bindings=key_bindings,
-        )
-        if session
-        else prompt(multiline=True)
-    )
 
 
 class Chatbot:
@@ -87,7 +52,7 @@ class Chatbot:
         resp = self.session.get(url="https://bard.google.com/", timeout=10)
         # Find "SNlM0e":"<ID>"
         if resp.status_code != 200:
-            raise Exception("Could not get Google Bard")
+            st.error("Could not get Google Bard")
         SNlM0e = re.search(r"SNlM0e\":\"(.*?)\"", resp.text).group(1)
         return SNlM0e
 
@@ -117,7 +82,7 @@ class Chatbot:
 
         # do the request!
         resp = self.session.post(
-            "https://bard.google.com/u/1/_/BardChatUi/data/assistant.lamda.BardFrontendService/StreamGenerate",
+            "https://bard.google.com/_/BardChatUi/data/assistant.lamda.BardFrontendService/StreamGenerate",
             params=params,
             data=data,
             timeout=120,
@@ -140,37 +105,3 @@ class Chatbot:
         self.choice_id = results["choices"][0]["id"]
         self._reqid += 100000
         return results
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--session",
-        help="__Secure-1PSID cookie.",
-        type=str,
-        required=True,
-    )
-    args = parser.parse_args()
-
-    chatbot = Chatbot(args.session)
-    prompt_session = __create_session()
-    completions = __create_completer(["!exit", "!reset"])
-    console = Console()
-    try:
-        while True:
-            console.print("You:")
-            user_prompt = __get_input(session=prompt_session, completer=completions)
-            console.print()
-            if user_prompt == "!exit":
-                break
-            elif user_prompt == "!reset":
-                chatbot.conversation_id = ""
-                chatbot.response_id = ""
-                chatbot.choice_id = ""
-                continue
-            print("Bard:")
-            response = chatbot.ask(user_prompt)
-            console.print(Markdown(response["content"]))
-            print()
-    except KeyboardInterrupt:
-        print("Exiting...")
