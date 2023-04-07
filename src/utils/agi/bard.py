@@ -12,7 +12,7 @@ import streamlit as st
 US_AG = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36"
 
 
-class Chatbot:
+class BardChat:
     """
     A class to interact with Google Bard.
     Parameters

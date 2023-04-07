@@ -17,6 +17,10 @@ class Locale:
     chat_run_btn: str
     chat_clear_btn: str
     chat_save_btn: str
+    speak_btn: str
+    input_kind: str
+    input_kind_1: str
+    input_kind_2: str
     select_placeholder1: str
     select_placeholder2: str
     select_placeholder3: str
@@ -44,9 +48,13 @@ class EnLocale(Locale):
     donates1: str = "Russia"
     donates2: str = "World"
     chat_placeholder: str = "Start Your Conversation With AI:"
-    chat_run_btn: str = "Run"
+    chat_run_btn: str = "Ask"
     chat_clear_btn: str = "Clear"
     chat_save_btn: str = "Save"
+    speak_btn: str = "Push to Speak"
+    input_kind: str = "Input Kind"
+    input_kind_1: str = "Text"
+    input_kind_2: str = "Voice [test mode]"
     select_placeholder1: str = "Select Model"
     select_placeholder2: str = "Select Role"
     select_placeholder3: str = "Create Role"
@@ -83,9 +91,13 @@ class RuLocale(Locale):
     donates1: str = "Россия"
     donates2: str = "Остальной Мир"
     chat_placeholder: str = "Начните Вашу Беседу с ИИ:"
-    chat_run_btn: str = "Запустить"
+    chat_run_btn: str = "Спросить"
     chat_clear_btn: str = "Очистить"
     chat_save_btn: str = "Сохранить"
+    speak_btn: str = "Нажмите и Говорите"
+    input_kind: str = "Вид ввода"
+    input_kind_1: str = "Текст"
+    input_kind_2: str = "Голос [тестовый режим]"
     select_placeholder1: str = "Выберите Модель"
     select_placeholder2: str = "Выберите Роль"
     select_placeholder3: str = "Создайте Роль"

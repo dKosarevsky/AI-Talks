@@ -3,20 +3,34 @@ from openai.error import InvalidRequestError, OpenAIError
 from requests.exceptions import TooManyRedirects
 from streamlit_chat import message
 
-from src.utils.agi.bard import Chatbot
+from src.utils.agi.bard import BardChat
 from src.utils.agi.chat_gpt import chat_gpt_request
+from src.utils.stt import show_voice_input
 from src.utils.tts import show_player
 
 
 def clear_chat() -> None:
-    st.session_state["generated"] = []
-    st.session_state["past"] = []
-    st.session_state["messages"] = []
-    st.session_state["user_text"] = ""
+    st.session_state.generated = []
+    st.session_state.past = []
+    st.session_state.messages = []
+    st.session_state.user_text = ""
+
+
+def show_text_input() -> None:
+    st.text_area(label=st.session_state.locale.chat_placeholder, value=st.session_state.user_text, key="user_text")
 
 
 def get_user_input():
-    st.text_area(label=st.session_state.locale.chat_placeholder, value=st.session_state.user_text, key="user_text")
+    match st.session_state.input_kind:
+        case st.session_state.locale.input_kind_1:
+            clear_chat()
+            show_text_input()
+        case st.session_state.locale.input_kind_2:
+            clear_chat()
+            show_voice_input()
+            show_text_input()
+        case _:
+            show_text_input()
 
 
 def show_chat_buttons() -> None:
@@ -39,7 +53,7 @@ def show_chat(ai_content: str, user_text: str) -> None:
         st.session_state.generated.append(ai_content)
     if st.session_state.generated:
         for i in range(len(st.session_state.generated)):
-            message(st.session_state["past"][i], is_user=True, key=str(i) + "_user", avatar_style="micah")
+            message(st.session_state.past[i], is_user=True, key=str(i) + "_user", avatar_style="micah")
             message("", key=str(i))
             st.markdown(st.session_state.generated[i])
 
@@ -67,7 +81,7 @@ def chat_gpt_conversation() -> None:
 
 def bard_conversation() -> None:
     try:
-        bard = Chatbot(st.secrets.api_credentials.bard_session)
+        bard = BardChat(st.secrets.api_credentials.bard_session)
         ai_content = bard.ask(st.session_state.user_text)
         st.warning(ai_content.get("content"))
     except (TooManyRedirects, AttributeError) as err:
