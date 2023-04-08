@@ -38,7 +38,7 @@ with open(css_file) as f:
 selected_lang = option_menu(
     menu_title=None,
     options=[LANG_EN, LANG_RU, ],
-    icons=["globe2", "globe"],
+    icons=["globe2", "translate"],
     menu_icon="cast",
     default_index=0,
     orientation="horizontal",
@@ -105,7 +105,7 @@ if __name__ == "__main__":
             st.session_state.locale.footer_option0,
             st.session_state.locale.footer_option2,
         ],
-        icons=["info-circle", "", "piggy-bank"],
+        icons=["info-circle", "chat-square-text", "piggy-bank"],  # https://icons.getbootstrap.com/
         menu_icon="cast",
         default_index=0,
         orientation="horizontal",
