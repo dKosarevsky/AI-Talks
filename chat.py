@@ -97,7 +97,6 @@ if __name__ == "__main__":
         case _:
             st.session_state.locale = en
     st.markdown(f"<h1 style='text-align: center;'>{st.session_state.locale.title}</h1>", unsafe_allow_html=True)
-    st.markdown("---")
     selected_footer = option_menu(
         menu_title=None,
         options=[
@@ -111,7 +110,6 @@ if __name__ == "__main__":
         orientation="horizontal",
         styles=FOOTER_STYLES
     )
-    st.markdown("---")
     match selected_footer:
         case st.session_state.locale.footer_option0:
             main()
