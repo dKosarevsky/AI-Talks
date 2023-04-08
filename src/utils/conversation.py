@@ -23,12 +23,9 @@ def show_text_input() -> None:
 def get_user_input():
     match st.session_state.input_kind:
         case st.session_state.locale.input_kind_1:
-            clear_chat()
             show_text_input()
         case st.session_state.locale.input_kind_2:
-            clear_chat()
             show_voice_input()
-            show_text_input()
         case _:
             show_text_input()
 
