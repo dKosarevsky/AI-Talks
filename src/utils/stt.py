@@ -84,3 +84,4 @@ def show_voice_input() -> None:
                 st.image(REC_GIF)
             elif result.get("GET_ONREC") == "stop" and st.session_state.input["text"] != "":
                 st.session_state.user_text = st.session_state.input["text"]
+                st.session_state.input["text"] = ""
