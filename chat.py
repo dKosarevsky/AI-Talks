@@ -98,14 +98,14 @@ if __name__ == "__main__":
             st.session_state.locale = en
     st.markdown(f"<h1 style='text-align: center;'>{st.session_state.locale.title}</h1>", unsafe_allow_html=True)
     st.markdown("---")
-    main()
-    st.markdown("---")
-    st.image(f"{img_dir}/{get_random_img(get_files_in_dir(img_dir))}")
-    st.markdown("---")
     selected_footer = option_menu(
         menu_title=None,
-        options=[st.session_state.locale.footer_option1, st.session_state.locale.footer_option2],
-        icons=["info-circle", "piggy-bank"],
+        options=[
+            st.session_state.locale.footer_option1,
+            st.session_state.locale.footer_option0,
+            st.session_state.locale.footer_option2,
+        ],
+        icons=["info-circle", "", "piggy-bank"],
         menu_icon="cast",
         default_index=0,
         orientation="horizontal",
@@ -113,7 +113,10 @@ if __name__ == "__main__":
     )
     st.markdown("---")
     match selected_footer:
+        case st.session_state.locale.footer_option0:
+            main()
         case st.session_state.locale.footer_option1:
+            st.image(f"{img_dir}/{get_random_img(get_files_in_dir(img_dir))}")
             show_info(tg_svg)
         case st.session_state.locale.footer_option2:
             show_donates()
