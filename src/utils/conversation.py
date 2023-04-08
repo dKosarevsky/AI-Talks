@@ -8,8 +8,6 @@ from src.utils.agi.chat_gpt import chat_gpt_request
 from src.utils.stt import show_voice_input
 from src.utils.tts import show_player
 
-AI_ROLE = f"{st.session_state.locale.ai_role_prefix} {st.session_state.role}. {st.session_state.locale.ai_role_postfix}"
-
 
 def clear_chat() -> None:
     st.session_state.generated = []
@@ -91,8 +89,9 @@ def show_conversation() -> None:
     if st.session_state.messages:
         st.session_state.messages.append({"role": "user", "content": st.session_state.user_text})
     else:
+        ai_role = f"{st.session_state.locale.ai_role_prefix} {st.session_state.role}. {st.session_state.locale.ai_role_postfix}"  # NOQA: E501
         st.session_state.messages = [
-            {"role": "system", "content": AI_ROLE},
+            {"role": "system", "content": ai_role},
             {"role": "user", "content": st.session_state.user_text},
         ]
     if st.session_state.model == "bard":
