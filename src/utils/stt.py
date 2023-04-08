@@ -66,15 +66,16 @@ def show_voice_input() -> None:
     if "input" not in st.session_state:
         st.session_state.input = {"text": "", "session": 0}
     result = get_bokeh_result()
-    st.text_area(st.session_state.input["text"])
+    tr = st.empty()
+    tr.text_area("TEST", value=st.session_state.input["text"])
     if result:
         if "GET_TEXT" in result and (
                 result.get("GET_TEXT")["t"] != "" and result.get("GET_TEXT")["s"] != st.session_state.input["session"]):
             st.session_state.input["text"] = result.get("GET_TEXT")["t"]
-            st.code(st.session_state.input["text"])
+            tr.text_area("TEST", value=st.session_state.input["text"])
             st.session_state.input["session"] = result.get("GET_TEXT")["s"]
         if "GET_INTRM" in result and result.get("GET_INTRM") != "":
-            st.code(st.session_state.input["text"] + " " + result.get("GET_INTRM"))
+            tr.text_area("TEST", value=st.session_state.input["text"] + " " + result.get("GET_INTRM"))
         if "GET_ONREC" in result:
             if result.get("GET_ONREC") == "start":
                 st.image(REC_GIF)
