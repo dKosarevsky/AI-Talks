@@ -71,6 +71,8 @@ def show_voice_input() -> None:
             if result.get("GET_TEXT")["t"] != "" and result.get("GET_TEXT")["s"] != st.session_state.input["session"]:
                 st.session_state.input["text"] = result.get("GET_TEXT")["t"]
                 st.session_state.input["session"] = result.get("GET_TEXT")["s"]
+        if "GET_INTRM" in result and result.get("GET_INTRM") != "":
+            st.code(st.session_state.input["text"] + " " + result.get("GET_INTRM"))
         if "GET_ONREC" in result:
             placeholder = st.container()
             if result.get("GET_ONREC") == "start":
