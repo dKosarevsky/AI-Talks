@@ -66,20 +66,20 @@ def show_voice_input() -> None:
     if "input" not in st.session_state:
         st.session_state.input = {"text": "", "session": 0}
     result = get_bokeh_result()
+    st.text_area(st.session_state.input["text"])
     if result:
-        if "GET_TEXT" in result:
-            if result.get("GET_TEXT")["t"] != "" and result.get("GET_TEXT")["s"] != st.session_state.input["session"]:
-                st.session_state.input["text"] = result.get("GET_TEXT")["t"]
-                st.session_state.input["session"] = result.get("GET_TEXT")["s"]
+        if "GET_TEXT" in result and (
+                result.get("GET_TEXT")["t"] != "" and result.get("GET_TEXT")["s"] != st.session_state.input["session"]):
+            st.session_state.input["text"] = result.get("GET_TEXT")["t"]
+            st.code(st.session_state.input["text"])
+            st.session_state.input["session"] = result.get("GET_TEXT")["s"]
         if "GET_INTRM" in result and result.get("GET_INTRM") != "":
             st.code(st.session_state.input["text"] + " " + result.get("GET_INTRM"))
         if "GET_ONREC" in result:
-            placeholder = st.container()
             if result.get("GET_ONREC") == "start":
-                placeholder.image(REC_GIF)
+                st.image(REC_GIF)
                 st.session_state.input["text"] = ""
             elif result.get("GET_ONREC") == "running":
-                placeholder.image(REC_GIF)
-            elif result.get("GET_ONREC") == "stop":
-                if st.session_state.input["text"] != "":
-                    st.session_state.user_text = st.session_state.input["text"]
+                st.image(REC_GIF)
+            elif result.get("GET_ONREC") == "stop" and st.session_state.input["text"] != "":
+                st.session_state.user_text = st.session_state.input["text"]
