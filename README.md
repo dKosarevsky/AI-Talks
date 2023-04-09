@@ -20,7 +20,7 @@ Install the required dependencies:
 pip install -r requirements.txt
 ```
 
-Add your API keys into `.streamlit/secrets.toml`:
+Add your API key into `.streamlit/secrets.toml`:
 
 ```toml
 [api_credentials]
