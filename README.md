@@ -6,6 +6,8 @@
 
 AI Talks is a Streamlit app, that ...
 
+![](assets/demo/ai-talks.gif)
+
 ## Installation
 
 Clone the repository:
