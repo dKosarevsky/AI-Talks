@@ -25,7 +25,6 @@ Add your API keys into `.streamlit/secrets.toml`:
 ```toml
 [api_credentials]
 api_key = "sk-..."
-bard_session = "..."
 ```
 
 ## Usage
