@@ -4,7 +4,7 @@ from requests.exceptions import TooManyRedirects
 from streamlit_chat import message
 
 from src.utils.agi.bard import BardChat
-from src.utils.agi.chat_gpt import chat_gpt_request
+from src.utils.agi.chat_gpt import create_gpt_completion
 from src.utils.stt import show_voice_input
 from src.utils.tts import show_player
 
@@ -55,9 +55,9 @@ def show_chat(ai_content: str, user_text: str) -> None:
             st.markdown(st.session_state.generated[i])
 
 
-def chat_gpt_conversation() -> None:
+def show_gpt_conversation() -> None:
     try:
-        completion = chat_gpt_request(st.session_state.model, st.session_state.messages)
+        completion = create_gpt_completion(st.session_state.model, st.session_state.messages)
         ai_content = completion.get("choices")[0].get("message").get("content")
         st.session_state.messages.append({"role": "assistant", "content": ai_content})
         if ai_content:
@@ -76,7 +76,7 @@ def chat_gpt_conversation() -> None:
         st.error(err)
 
 
-def bard_conversation() -> None:
+def show_bard_conversation() -> None:
     try:
         bard = BardChat(st.secrets.api_credentials.bard_session)
         ai_content = bard.ask(st.session_state.user_text)
@@ -95,6 +95,6 @@ def show_conversation() -> None:
             {"role": "user", "content": st.session_state.user_text},
         ]
     if st.session_state.model == "bard":
-        bard_conversation()
+        show_bard_conversation()
     else:
-        chat_gpt_conversation()
+        show_gpt_conversation()
