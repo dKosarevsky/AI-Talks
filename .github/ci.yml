@@ -1,0 +1,31 @@
+name: Python package
+
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ "3.10" ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements_server.txt
+          pip install -r requirements_dev.txt
+      - name: Log in with sourcery
+        run:
+          sourcery login --token ${{ secrets.SOURCERY_TOKEN }}
+      - name: Run pre-commit checks
+        run: pre-commit run --all-files -a
+      - name: Run tests
+        run: pytest

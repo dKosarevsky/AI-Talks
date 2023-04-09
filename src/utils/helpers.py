@@ -20,5 +20,5 @@ def get_files_in_dir(path: Path) -> List[str]:
     return files
 
 
-def get_random_img(my_list: list) -> str:
-    return random.choice(my_list)
+def get_random_img(img_names: list[str]) -> str:
+    return random.choice(img_names)
