@@ -12,7 +12,7 @@ class Locale:
 @dataclass
 class EnLocale(Locale):
     ai_role_prefix: str = "You are a female"
-    ai_role_postfix: str = "Answer as concisely as possible with a little humor expression."
+    ai_role_postfix: str = "Answer as concisely as possible."
     title: str = "AI Talks"
     language: str = "English"
     lang_code: str = "en"
@@ -57,7 +57,7 @@ class EnLocale(Locale):
 @dataclass
 class RuLocale(Locale):
     ai_role_prefix: str = "Вы девушка"
-    ai_role_postfix: str = "Отвечай максимально лаконично, с легким налётом юмора."
+    ai_role_postfix: str = "Отвечай максимально лаконично."
     title: str = "Разговорчики с ИИ"
     language: str = "Russian"
     lang_code: str = "ru"
