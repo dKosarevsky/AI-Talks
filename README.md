@@ -51,6 +51,10 @@ This project is released under the MIT License.
 <details>
    <summary>Support project</summary>
 
+`AI Talks` collects donations solely for the purpose of paying for the `Open AI` API.
+This allows you to provide access to communication with AI for all users.
+Support us for joint development and interaction with the intelligence of the future!
+
 **Crypto:**
 
 - USD Tether (USDT TRC20):
