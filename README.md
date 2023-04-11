@@ -4,7 +4,7 @@
 
 ## ChatGPT Assistant via Streamlit
 
-AI Talks is a Streamlit app, that ...
+Build Your Own AI Assistant.
 
 ![](assets/demo/ai-talks.gif)
 
@@ -46,3 +46,34 @@ streamlit run chat.py
 ## License
 
 This project is released under the MIT License.
+
+## Donation
+<details>
+   <summary>Support project</summary>
+
+**Crypto:**
+
+- USD Tether (USDT TRC20):
+
+```
+TMQ5RiyQ7bv3XjB6Wf6JbPHVrGkhBKtmfA
+```
+
+- Toncoin (TON):
+
+```
+UQDbnx17N2iOmxfQF0k55QScDMB0MHL9rsq-iGB93RMqDhIH
+```
+
+**World:**
+- [Buy Me A Coffee](https://www.buymeacoffee.com/aitalks)
+- [ko-fi](https://ko-fi.com/ai_talks)
+- [PayPal](https://www.paypal.com/paypalme/aitalks)
+
+**Russia:**
+- [Tinkoff](https://www.tinkoff.ru/cf/4Ugsr5kQ1sR)
+- [CloudTips (Tinkoff)](https://pay.cloudtips.ru/p/eafa15b2)
+
+![](/assets/qr/tink.png)
+
+</details>
