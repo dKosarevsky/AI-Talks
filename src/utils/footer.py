@@ -41,6 +41,7 @@ def show_donates() -> None:
     st.markdown(f"""
         **{st.session_state.locale.donates1}:**
         - [Tinkoff](https://www.tinkoff.ru/cf/4Ugsr5kQ1sR)
+        - [boosty](https://boosty.to/ai-talks/donate)
         - [CloudTips (Tinkoff)](https://pay.cloudtips.ru/p/eafa15b2)
     """)
     _, img_col, _ = st.columns(3)
