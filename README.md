@@ -78,7 +78,7 @@ UQDbnx17N2iOmxfQF0k55QScDMB0MHL9rsq-iGB93RMqDhIH
 
 **Russia:**
 - [Tinkoff](https://www.tinkoff.ru/cf/4Ugsr5kQ1sR)
-- [boosty](https://boosty.to/aitalks/donate)
+- [boosty](https://boosty.to/ai-talks/donate)
 - [CloudTips (Tinkoff)](https://pay.cloudtips.ru/p/eafa15b2)
 
 ![](/assets/qr/tink.png)
