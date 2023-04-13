@@ -2,27 +2,27 @@
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ai-talks.streamlit.app)
 
-## ChatGPT Assistant via Streamlit
+A ChatGPT API wrapper, providing a user-friendly Streamlit web interface.
 
-Build Your Own AI Assistant.
+Enhance your ChatGPT experience with our user-friendly API wrapper, featuring a seamless Streamlit web interface. Effortlessly interact with ChatGPT, while enjoying an intuitive and responsive design. Discover simplified access to advanced AI technology in just a few clicks.
 
 ![](assets/demo/ai-talks.gif)
 
-## Installation
+## Setup
 
-Clone the repository:
+1. Clone repo:
 
 ```bash
 git clone https://github.com/dKosarevsky/AI-Talks.git
 ```
 
-Install the required dependencies:
+2. Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Add your API key into `.streamlit/secrets.toml`:
+3. Add API key to `.streamlit/secrets.toml`:
 
 ```toml
 [api_credentials]
@@ -42,6 +42,8 @@ Another way:
 ```bash
 streamlit run chat.py
 ```
+
+Once the script is started, you can go to the URL [http://localhost:8501](http://localhost:8501) to start using the bot.
 
 ## License
 
