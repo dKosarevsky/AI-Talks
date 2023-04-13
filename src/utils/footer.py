@@ -6,15 +6,17 @@ from src.utils.helpers import render_svg
 
 
 def show_info(icon: Path) -> None:
-    st.markdown("---")
+    st.divider()
     st.markdown(f"<div style='text-align: justify;'>{st.session_state.locale.responsibility_denial}</div>",
                 unsafe_allow_html=True)
-    st.markdown("---")
+    st.divider()
     st.markdown(f"""
         ### :page_with_curl: {st.session_state.locale.footer_title}
         - {render_svg(icon)} [{st.session_state.locale.footer_chat}](https://t.me/talks_ai)
         - {render_svg(icon)} [{st.session_state.locale.footer_channel}](https://t.me/talks_aii)
     """, unsafe_allow_html=True)
+    st.divider()
+    st.markdown("[project repo](https://github.com/dKosarevsky/AI-Talks)")
 
 
 def show_donates() -> None:
@@ -44,6 +46,6 @@ def show_donates() -> None:
     _, img_col, _ = st.columns(3)
     with img_col:
         st.image("assets/qr/tink.png", width=200)
-    st.markdown("---")
+    st.divider()
     st.markdown(f"<div style='text-align: justify;'>{st.session_state.locale.donates_info}</div>",
                 unsafe_allow_html=True)

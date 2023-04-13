@@ -62,7 +62,7 @@ def show_gpt_conversation() -> None:
         st.session_state.messages.append({"role": "assistant", "content": ai_content})
         if ai_content:
             show_chat(ai_content, st.session_state.user_text)
-            st.markdown("---")
+            st.divider()
             show_player(ai_content)
     except InvalidRequestError as err:
         if err.code == "context_length_exceeded":
