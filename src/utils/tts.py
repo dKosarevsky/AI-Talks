@@ -4,7 +4,7 @@ import streamlit as st
 from gtts import gTTS, gTTSError
 
 
-def show_player(ai_content: str) -> None:
+def show_audio_player(ai_content: str) -> None:
     sound_file = BytesIO()
     try:
         tts = gTTS(text=ai_content, lang=st.session_state.locale.lang_code)
