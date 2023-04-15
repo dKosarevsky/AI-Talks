@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List
+from typing import List  # NOQA: UP035
 
 
 @dataclass
@@ -36,6 +36,7 @@ class Locale:
     footer_channel: str
     responsibility_denial: str
     donates_info: str
+    empty_api_handler: str
 
 
 AI_ROLE_OPTIONS_EN = [
@@ -70,6 +71,9 @@ AI_ROLE_OPTIONS_RU = [
     "полезный помощник, следующий шаблонам",
     "переводчик корпоративного жаргона на простой русский",
 ]
+
+readme_url = "https://github.com/dKosarevsky/AI-Talks#readme"
+ai_talks_url = "https://ai-talks.streamlit.app/"
 
 en = Locale(
     ai_role_options=AI_ROLE_OPTIONS_EN,
@@ -112,6 +116,10 @@ en = Locale(
         `AI Talks` collects donations solely for the purpose of paying for the `Open AI` API.
         This allows you to provide access to communication with AI for all users.
         Support us for joint development and interaction with the intelligence of the future!
+    """,
+    empty_api_handler=f"""
+        API key not found. Create `.streamlit/secrets.toml` with your API key.
+        See [README.md]({readme_url}) for instructions or use the original [AI Talks]({ai_talks_url}).
     """,
 )
 ru = Locale(
@@ -156,5 +164,9 @@ ru = Locale(
         `AI Talks` собирает донаты исключительно с целью оплаты API `Open AI`.
         Это позволяет обеспечить доступ к общению с ИИ для всех желающих пользователей.
         Поддержите нас для совместного развития и взаимодействия с интеллектом будущего!
+    """,
+    empty_api_handler=f"""
+        Ключ API не найден. Создайте `.streamlit/secrets.toml` с вашим ключом API.
+        Инструкции см. в [README.md]({readme_url}) или используйте оригинальный [AI Talks]({ai_talks_url}).
     """,
 )
