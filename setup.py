@@ -6,13 +6,13 @@ with open("requirements.txt") as f:
 
 setup(
     name="ai-talks",
-    version="0.8.8.1",
+    version="0.8.8.2",
     exclude_package_data={"": ["secrets.toml"]},
     packages=find_packages(exclude=["secrets.toml", ]),
     install_requires=requirements,  # Use the parsed requirements here
     entry_points={
         "console_scripts": [
-            "ai-talks=run_agi:main",
+            "ai-talks=pkg.run_agi:main",
         ],
     },
     author="Dmitry Kosarevsky",
