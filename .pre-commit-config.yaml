@@ -27,22 +27,47 @@ repos:
       - id: check-added-large-files
       - id: detect-private-key
       - id: requirements-txt-fixer
+      - id: check-ast
+      - id: check-builtin-literals
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-toml
+      - id: check-xml
+      - id: debug-statements
+      - id: destroyed-symlinks
+      - id: fix-byte-order-marker
+      - id: mixed-line-ending
+      - id: name-tests-test
+      - id: check-docstring-first
+      - id: check-json
+      - id: check-yaml
+        args: [ --unsafe ]
+      - id: debug-statements
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.254
+    rev: v0.0.261
     hooks:
       - id: ruff
+        exclude: ^tests/
 
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: e22efabdc7203a4a6388231f8052c296cbb6eb8d
+    rev: v0.12.2
     hooks:
       - id: validate-pyproject
 
   - repo: https://github.com/pre-commit/pygrep-hooks
-    rev: v1.9.0
+    rev: v1.10.0
     hooks:
       - id: python-check-mock-methods
       - id: python-use-type-annotations
       - id: python-check-blanket-noqa
       - id: python-use-type-annotations
       - id: text-unicode-replacement-char
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.2.0
+    hooks:
+      - id: mypy
+        additional_dependencies: [ types-PyYAML==6.0.10, types_requests==2.28.8, types-ujson==5.6.0 ]
+        args: [ --ignore-missing-imports, --warn-no-return, --warn-redundant-casts, --disallow-incomplete-defs ]
+        exclude: ^setup.py
