@@ -6,7 +6,7 @@ with open("requirements.txt") as f:
 
 setup(
     name="ai-talks",
-    version="0.8.8.2",
+    version="0.8.8.8",
     exclude_package_data={"": ["secrets.toml"]},
     packages=find_packages(exclude=["secrets.toml", ]),
     install_requires=requirements,  # Use the parsed requirements here
