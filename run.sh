@@ -1,1 +1,1 @@
-streamlit run chat.py
+streamlit run ai_talks/chat.py

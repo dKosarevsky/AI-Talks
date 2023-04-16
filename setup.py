@@ -6,13 +6,12 @@ with open("requirements.txt") as f:
 
 setup(
     name="ai-talks",
-    version="0.8.8.8",
-    exclude_package_data={"": ["secrets.toml"]},
-    packages=find_packages(exclude=["secrets.toml", ]),
+    version="0.8.997",
+    packages=find_packages(),
     install_requires=requirements,  # Use the parsed requirements here
     entry_points={
         "console_scripts": [
-            "ai-talks=chat:run_agi",
+            "ai-talks=ai_talks.chat:run_agi",
         ],
     },
     author="Dmitry Kosarevsky",
@@ -25,10 +24,6 @@ setup(
         "Development Status :: 3 - Alpha",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",

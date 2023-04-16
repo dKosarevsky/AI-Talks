@@ -46,7 +46,7 @@ def show_donates() -> None:
     """)
     _, img_col, _ = st.columns(3)
     with img_col:
-        st.image("assets/qr/tink.png", width=200)
+        st.image("ai_talks/assets/qr/tink.png", width=200)
     st.divider()
     st.markdown(f"<div style='text-align: justify;'>{st.session_state.locale.donates_info}</div>",
                 unsafe_allow_html=True)

@@ -6,7 +6,7 @@ A ChatGPT API wrapper, providing a user-friendly Streamlit web interface.
 
 Enhance your ChatGPT experience with our user-friendly API wrapper, featuring a seamless Streamlit web interface. Effortlessly interact with ChatGPT, while enjoying an intuitive and responsive design. Discover simplified access to advanced AI technology in just a few clicks.
 
-![](assets/demo/ai-talks.gif)
+![](ai_talks/assets/demo/ai-talks.gif)
 
 ## Setup
 
@@ -40,7 +40,7 @@ bash run.sh
 Another way:
 
 ```bash
-streamlit run chat.py
+streamlit run ai_talks/chat.py
 ```
 
 Once the script is started, you can go to the URL [http://localhost:8501](http://localhost:8501) to start using the bot.
@@ -81,6 +81,6 @@ UQDbnx17N2iOmxfQF0k55QScDMB0MHL9rsq-iGB93RMqDhIH
 - [boosty](https://boosty.to/ai-talks/donate)
 - [CloudTips (Tinkoff)](https://pay.cloudtips.ru/p/eafa15b2)
 
-![](/assets/qr/tink.png)
+![](ai_talks/assets/qr/tink.png)
 
 </details>
