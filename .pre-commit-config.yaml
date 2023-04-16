@@ -14,7 +14,7 @@ ci:
   submodules: false
 
 default_stages: [ commit, push ]
-files: ^(src/)
+files: ^(ai_talks/)
 exclude_types: [ css, toml, template ]
 fail_fast: false
 repos:
