@@ -12,7 +12,7 @@ setup(
     install_requires=requirements,  # Use the parsed requirements here
     entry_points={
         "console_scripts": [
-            "ai-talks=pkg.run_agi:main",
+            "ai-talks=chat:run_agi",
         ],
     },
     author="Dmitry Kosarevsky",

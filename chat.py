@@ -88,7 +88,7 @@ def main() -> None:
     show_chat_buttons()
 
 
-if __name__ == "__main__":
+def run_agi():
     match selected_lang:
         case "En":
             st.session_state.locale = en
@@ -120,3 +120,7 @@ if __name__ == "__main__":
             show_donates()
         case _:
             show_info(tg_svg)
+
+
+if __name__ == "__main__":
+    run_agi()
