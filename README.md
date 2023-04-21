@@ -59,6 +59,12 @@ Support us for joint development and interaction with the intelligence of the fu
 
 **Crypto:**
 
+- Bitcoin (BTC)
+
+```
+1HRDUif7oKDw9XJFXZ14TZZazokf4QH9fb
+```
+
 - USD Tether (USDT TRC20):
 
 ```
