@@ -5,7 +5,7 @@ from bokeh.models import CustomJS
 from bokeh.models.widgets import Button
 from streamlit_bokeh_events import streamlit_bokeh_events
 
-REC_GIF = "assets/icons/rec_on.gif"
+REC_GIF = "ai_talks/assets/icons/rec_on.gif"
 
 
 def get_js_code(lang: str) -> str:
