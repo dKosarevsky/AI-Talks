@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List  # NOQA: UP035
 
-from ai_talks.src.utils.constants import AI_ROLE_OPTIONS_EN, AI_ROLE_OPTIONS_RU, AI_TALKS_URL, README_URL
+from constants import AI_ROLE_OPTIONS_EN, AI_ROLE_OPTIONS_RU, AI_TALKS_URL, README_URL
 
 
 @dataclass
