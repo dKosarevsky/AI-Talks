@@ -28,7 +28,7 @@ exclude = [".bzr",
     ".idea",
     ".streamlit",
 ]
-extend-exclude = ["tests", "assets", "src/styles"]
+extend-exclude = ["tests", "ai_talks/assets", "ai_talks/src/styles"]
 per-file-ignores = { }
 
 # Allow unused variables when underscore-prefixed.

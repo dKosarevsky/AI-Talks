@@ -1,13 +1,13 @@
-from streamlit_option_menu import option_menu
 from pathlib import Path
-
-from src.styles.menu_styles import HEADER_STYLES, FOOTER_STYLES
-from src.utils.lang import en, ru
-from src.utils.footer import show_donates, show_info
-from src.utils.helpers import get_random_img, get_files_in_dir
-from src.utils.conversation import get_user_input, show_chat_buttons, show_conversation
+from random import randrange
 
 import streamlit as st
+from src.styles.menu_styles import FOOTER_STYLES, HEADER_STYLES
+from src.utils.conversation import get_user_input, show_chat_buttons, show_conversation
+from src.utils.footer import show_donates, show_info
+from src.utils.helpers import get_files_in_dir, get_random_img
+from src.utils.lang import en, ru
+from streamlit_option_menu import option_menu
 
 # --- PATH SETTINGS ---
 current_dir: Path = Path(__file__).parent if "__file__" in locals() else Path.cwd()
@@ -33,7 +33,7 @@ st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
 
 # --- LOAD CSS ---
 with open(css_file) as f:
-    st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 selected_lang = option_menu(
     menu_title=None,
@@ -58,6 +58,8 @@ if "user_text" not in st.session_state:
     st.session_state.user_text = ""
 if "input_kind" not in st.session_state:
     st.session_state.input_kind = st.session_state.locale.input_kind_1
+if "seed" not in st.session_state:
+    st.session_state.seed = randrange(10**3)  # noqa: S311
 
 
 def main() -> None:

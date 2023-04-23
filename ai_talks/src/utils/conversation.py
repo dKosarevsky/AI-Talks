@@ -1,3 +1,5 @@
+from random import randrange
+
 import streamlit as st
 from openai.error import InvalidRequestError, OpenAIError
 from requests.exceptions import TooManyRedirects
@@ -14,6 +16,7 @@ def clear_chat() -> None:
     st.session_state.past = []
     st.session_state.messages = []
     st.session_state.user_text = ""
+    st.session_state.seed = randrange(10**8)  # noqa: S311
 
 
 def show_text_input() -> None:
@@ -50,8 +53,8 @@ def show_chat(ai_content: str, user_text: str) -> None:
         st.session_state.generated.append(ai_content)
     if st.session_state.generated:
         for i in range(len(st.session_state.generated)):
-            message(st.session_state.past[i], is_user=True, key=str(i) + "_user", avatar_style="micah")
-            message("", key=str(i))
+            message(st.session_state.past[i], is_user=True, key=str(i) + "_user", seed=st.session_state.seed)
+            message("", key=str(i), seed=st.session_state.seed)
             st.markdown(st.session_state.generated[i])
 
 
