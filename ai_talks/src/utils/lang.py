@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import List  # NOQA: UP035
 
+from ai_talks.src.utils.constants import AI_ROLE_OPTIONS_EN, AI_ROLE_OPTIONS_RU, AI_TALKS_URL, README_URL
+
 
 @dataclass
 class Locale:
@@ -39,42 +41,7 @@ class Locale:
     empty_api_handler: str
 
 
-AI_ROLE_OPTIONS_EN = [
-    "helpful assistant",
-    "code assistant",
-    "code reviewer",
-    "text improver",
-    "cinema expert",
-    "sport expert",
-    "online games expert",
-    "food recipes expert",
-    "English grammar expert",
-    "friendly and helpful teaching assistant",
-    "laconic assistant",
-    "helpful, pattern-following assistant",
-    "translate corporate jargon into plain English",
-]
-
-AI_ROLE_OPTIONS_RU = [
-    "ассистент, который готов помочь",
-    "ассистент программиста",
-    "рецензент кода программиста",
-    "эксперт по улучшению текста",
-    "эксперт по кинематографу",
-    "эксперт в области спорта",
-    "эксперт в онлайн-играх",
-    "эксперт по рецептам блюд",
-    "эксперт по английской грамматике",
-    "эксперт по русской грамматике",
-    "дружелюбный и полезный помощник преподавателя",
-    "лаконичный помощник",
-    "полезный помощник, следующий шаблонам",
-    "переводчик корпоративного жаргона на простой русский",
-]
-
-readme_url = "https://github.com/dKosarevsky/AI-Talks#readme"
-ai_talks_url = "https://ai-talks.streamlit.app/"
-
+# --- LOCALE SETTINGS ---
 en = Locale(
     ai_role_options=AI_ROLE_OPTIONS_EN,
     ai_role_prefix="You are a female",
@@ -119,9 +86,10 @@ en = Locale(
     """,
     empty_api_handler=f"""
         API key not found. Create `.streamlit/secrets.toml` with your API key.
-        See [README.md]({readme_url}) for instructions or use the original [AI Talks]({ai_talks_url}).
+        See [README.md]({README_URL}) for instructions or use the original [AI Talks]({AI_TALKS_URL}).
     """,
 )
+
 ru = Locale(
     ai_role_options=AI_ROLE_OPTIONS_RU,
     ai_role_prefix="Вы девушка",
@@ -167,6 +135,6 @@ ru = Locale(
     """,
     empty_api_handler=f"""
         Ключ API не найден. Создайте `.streamlit/secrets.toml` с вашим ключом API.
-        Инструкции см. в [README.md]({readme_url}) или используйте оригинальный [AI Talks]({ai_talks_url}).
+        Инструкции см. в [README.md]({README_URL}) или используйте оригинальный [AI Talks]({AI_TALKS_URL}).
     """,
 )

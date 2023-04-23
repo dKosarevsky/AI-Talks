@@ -6,8 +6,9 @@ with open("requirements.txt") as f:
 
 setup(
     name="ai-talks",
-    version="0.8.997",
+    version="0.9.1",
     packages=find_packages(),
+    include_package_data=True,
     install_requires=requirements,  # Use the parsed requirements here
     entry_points={
         "console_scripts": [
@@ -28,4 +29,6 @@ setup(
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
     ],
+    keywords="ai agi streamlit streamlit-component chat bot gpt llm",
+    python_requires=">=3.10",
 )

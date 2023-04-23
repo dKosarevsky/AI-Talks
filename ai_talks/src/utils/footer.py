@@ -2,7 +2,7 @@ from pathlib import Path
 
 import streamlit as st
 
-from src.utils.helpers import render_svg
+from ai_talks.src.utils.helpers import render_svg
 
 
 def show_info(icon: Path) -> None:

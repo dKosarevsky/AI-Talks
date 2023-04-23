@@ -1,3 +1,5 @@
+# mypy: ignore-errors
+
 import streamlit as st
 from bokeh.models import CustomJS
 from bokeh.models.widgets import Button
@@ -71,7 +73,7 @@ def show_voice_input() -> None:
     if result:
         if "GET_TEXT" in result and (
                 result.get("GET_TEXT")["t"] != "" and result.get("GET_TEXT")["s"] != st.session_state.input["session"]):
-            st.session_state.input["text"] = result.get("GET_TEXT")["t"]
+            st.session_state.input["text"] = result.get("GET_TEXT")["t"]  # type: ignore
             tr.code(st.session_state.input["text"])
             st.session_state.input["session"] = result.get("GET_TEXT")["s"]
         if "GET_INTRM" in result and result.get("GET_INTRM") != "":
