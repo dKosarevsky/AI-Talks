@@ -11,7 +11,7 @@ from .agi.chat_gpt import create_gpt_completion
 from .stt import show_voice_input
 from .tts import show_audio_player
 
-phind.cf_clearance = ""
+phind.cf_clearance = st.secrets.api_credentials.phind_cf_clearance
 phind.user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"  # noqa: E501
 
 
