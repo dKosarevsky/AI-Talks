@@ -88,14 +88,6 @@ class Search:
             "user-agent": user_agent
         }
 
-        res = post("https://www.phind.com/api/bing/search", headers=headers, json={
-            "q": prompt,
-            "userRankList": {},
-            "browserLanguage": language})
-        import streamlit as st
-        st.markdown(res.content)
-        st.code(res.status_code)
-        st.warning(res.dict)
         return post("https://www.phind.com/api/bing/search", headers=headers, json={
             "q": prompt,
             "userRankList": {},
