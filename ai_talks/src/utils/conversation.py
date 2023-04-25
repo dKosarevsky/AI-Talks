@@ -97,10 +97,10 @@ def phind_get_answer(question: str):
         result = phind.Completion.create(
             model="gpt-4",
             prompt=question,
-            results=phind.Search.create(question, actualSearch=True),
+            results=phind.Search.create(question, actual_search=True),
             creative=False,
             detailed=False,
-            codeContext=""
+            code_context=""
         )
         st.markdown(result.completion.choices[0].text)
     except Exception as e:
