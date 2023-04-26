@@ -38,6 +38,9 @@ class Locale:
     footer_channel: str
     responsibility_denial: str
     donates_info: str
+    tokens_count: str
+    message_cost: str
+    total_cost: str
     empty_api_handler: str
 
 
@@ -84,6 +87,9 @@ en = Locale(
         This allows you to provide access to communication with AI for all users.
         Support us for joint development and interaction with the intelligence of the future!
     """,
+    tokens_count="Tokens count: ",
+    message_cost="Message cost: ",
+    total_cost="Total cost of conversation: ",
     empty_api_handler=f"""
         API key not found. Create `.streamlit/secrets.toml` with your API key.
         See [README.md]({README_URL}) for instructions or use the original [AI Talks]({AI_TALKS_URL}).
@@ -133,6 +139,9 @@ ru = Locale(
         Это позволяет обеспечить доступ к общению с ИИ для всех желающих пользователей.
         Поддержите нас для совместного развития и взаимодействия с интеллектом будущего!
     """,
+    tokens_count="Количество токенов: ",
+    message_cost="Cтоимость сообщения: ",
+    total_cost="Общая стоимость разговора: ",
     empty_api_handler=f"""
         Ключ API не найден. Создайте `.streamlit/secrets.toml` с вашим ключом API.
         Инструкции см. в [README.md]({README_URL}) или используйте оригинальный [AI Talks]({AI_TALKS_URL}).
