@@ -13,6 +13,13 @@ Enhance your ChatGPT experience with our user-friendly API wrapper, featuring a 
 
 ![](ai_talks/assets/demo/ai-talks.gif)
 
+<details>
+   <summary>Tokens counting</summary>
+
+![](ai_talks/assets/demo/ai-talks-tokens.gif)
+
+</details>
+
 </details>
 
 ## Setup
