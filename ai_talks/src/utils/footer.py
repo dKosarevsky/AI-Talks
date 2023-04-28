@@ -16,7 +16,7 @@ def show_info(icon: Path) -> None:
         - {render_svg(icon)} [{st.session_state.locale.footer_channel}](https://t.me/talks_aii)
     """, unsafe_allow_html=True)
     st.divider()
-    st.markdown("[project repo](https://github.com/dKosarevsky/AI-Talks)")
+    st.markdown("project [repo on github](https://github.com/dKosarevsky/AI-Talks) waiting for your :star:")
 
 
 def show_donates() -> None:
