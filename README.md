@@ -36,7 +36,7 @@ git clone https://github.com/dKosarevsky/AI-Talks.git
 pip install -r requirements.txt
 ```
 
-3. Add API key to `.streamlit/secrets.toml`:
+3. Add API key to `.streamlit/secrets.toml`
 
 ```toml
 [api_credentials]
