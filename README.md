@@ -36,7 +36,7 @@ git clone https://github.com/dKosarevsky/AI-Talks.git
 pip install -r requirements.txt
 ```
 
-3. Add API key to `.streamlit/secrets.toml`:
+3. Add API key to `.streamlit/secrets.toml`
 
 ```toml
 [api_credentials]
@@ -61,7 +61,7 @@ Once the script is started, you can go to the URL [http://localhost:8501](http:/
 
 ## License
 
-This project is released under the MIT License.
+This project is released under the [MIT License](LICENSE).
 
 ## Donation
 <details>
@@ -105,6 +105,8 @@ UQDbnx17N2iOmxfQF0k55QScDMB0MHL9rsq-iGB93RMqDhIH
 ![](ai_talks/assets/qr/tink.png)
 
 </details>
+
+## Project Stats
 
 <p align="center">
   <a href="https://star-history.com/#dKosarevsky/AI-Talks&Date">
