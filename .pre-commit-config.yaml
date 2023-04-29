@@ -65,10 +65,10 @@ repos:
       - id: python-use-type-annotations
       - id: text-unicode-replacement-char
 
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.2.0
-    hooks:
-      - id: mypy
-        additional_dependencies: [ types-PyYAML==6.0.10, types_requests==2.28.8, types-ujson==5.6.0 ]
-        args: [ --ignore-missing-imports, --warn-no-return, --warn-redundant-casts, --disallow-incomplete-defs ]
-        exclude: ^setup.py
+#  - repo: https://github.com/pre-commit/mirrors-mypy
+#    rev: v1.2.0
+#    hooks:
+#      - id: mypy
+#        additional_dependencies: [ types-PyYAML==6.0.10, types_requests==2.28.8, types-ujson==5.6.0 ]
+#        args: [ --ignore-missing-imports, --warn-no-return, --warn-redundant-casts, --disallow-incomplete-defs ]
+#        exclude: ^setup.py

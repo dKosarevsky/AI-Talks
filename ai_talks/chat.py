@@ -26,8 +26,6 @@ AI_MODEL_OPTIONS: list[str] = [
     "gpt-3.5-turbo",
     "gpt-4",
     "gpt-4-32k",
-    "bard",
-    "phind-gpt-4",
 ]
 
 st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
