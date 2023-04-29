@@ -106,6 +106,8 @@ UQDbnx17N2iOmxfQF0k55QScDMB0MHL9rsq-iGB93RMqDhIH
 
 </details>
 
+## Project Stats
+
 <p align="center">
   <a href="https://star-history.com/#dKosarevsky/AI-Talks&Date">
     <img src="https://api.star-history.com/svg?repos=dKosarevsky/AI-Talks&type=Date" alt="All Stars History Chart">
