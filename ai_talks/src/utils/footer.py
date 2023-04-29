@@ -2,6 +2,7 @@ from pathlib import Path
 
 import streamlit as st
 
+from .constants import BUG_REPORT_URL, REPO_URL
 from .helpers import render_svg
 
 
@@ -16,7 +17,7 @@ def show_info(icon: Path) -> None:
         - {render_svg(icon)} [{st.session_state.locale.footer_channel}](https://t.me/talks_aii)
     """, unsafe_allow_html=True)
     st.divider()
-    st.markdown("project [repo on github](https://github.com/dKosarevsky/AI-Talks) waiting for your :star:")
+    st.markdown(f"project [repo on github]({REPO_URL}) waiting for your :star: | [report]({BUG_REPORT_URL}) a bug")
 
 
 def show_donates() -> None:
