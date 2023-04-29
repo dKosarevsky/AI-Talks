@@ -61,7 +61,7 @@ Once the script is started, you can go to the URL [http://localhost:8501](http:/
 
 ## License
 
-This project is released under the MIT License.
+This project is released under the [MIT License](LICENSE).
 
 ## Donation
 <details>
