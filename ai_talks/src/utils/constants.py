@@ -33,5 +33,4 @@ AI_ROLE_OPTIONS_RU: list[str] = [
 
 REPO_URL: str = "https://github.com/dKosarevsky/AI-Talks"
 README_URL: str = f"{REPO_URL}#readme"
-BUG_REPORT_URL: str = f"{REPO_URL}/issues"
 AI_TALKS_URL: str = "https://ai-talks.streamlit.app/"

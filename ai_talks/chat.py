@@ -53,8 +53,6 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
 if "user_text" not in st.session_state:
     st.session_state.user_text = ""
-if "input_kind" not in st.session_state:
-    st.session_state.input_kind = st.session_state.locale.input_kind_1
 if "seed" not in st.session_state:
     st.session_state.seed = randrange(10**3)  # noqa: S311
 if "costs" not in st.session_state:
