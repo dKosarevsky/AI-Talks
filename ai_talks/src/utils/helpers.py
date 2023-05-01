@@ -32,7 +32,7 @@ def get_balance() -> float:
         return -1
     try:
         data = get(  # noqa: S113
-            url="https://api.openai.com/dashboard/billing/credit_grantssss",
+            url="https://api.openai.com/dashboard/billing/credit_grants",
             headers={"Authorization": f"Bearer {session_tkn}"}
         ).json()["grants"]["data"][0]
         return (data["grant_amount"] - data["used_amount"]) / data["grant_amount"]
