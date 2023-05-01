@@ -101,7 +101,7 @@ def show_conversation() -> None:
     if st.session_state.messages:
         st.session_state.messages.append({"role": "user", "content": st.session_state.user_text})
     else:
-        ai_role = f"{st.session_state.locale.ai_role_prefix} {st.session_state.role}. {st.session_state.locale.ai_role_postfix}"  # NOQA: E501
+        ai_role = f"{st.session_state.locale.ai_role_prefix} {st.session_state.role}."
         st.session_state.messages = [
             {"role": "system", "content": ai_role},
             {"role": "user", "content": st.session_state.user_text},

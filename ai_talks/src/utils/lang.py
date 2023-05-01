@@ -42,6 +42,7 @@ class Locale:
     message_cost: str
     total_cost: str
     empty_api_handler: str
+    balance_handler: str
 
 
 # --- LOCALE SETTINGS ---
@@ -94,6 +95,7 @@ en = Locale(
         API key not found. Create `.streamlit/secrets.toml` with your API key.
         See [README.md]({README_URL}) for instructions or use the original [AI Talks]({AI_TALKS_URL}).
     """,
+    balance_handler="Balance: "
 )
 
 ru = Locale(
@@ -146,4 +148,5 @@ ru = Locale(
         Ключ API не найден. Создайте `.streamlit/secrets.toml` с вашим ключом API.
         Инструкции см. в [README.md]({README_URL}) или используйте оригинальный [AI Talks]({AI_TALKS_URL}).
     """,
+    balance_handler="Баланс: "
 )

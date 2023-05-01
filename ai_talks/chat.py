@@ -5,7 +5,7 @@ import streamlit as st
 from src.styles.menu_styles import FOOTER_STYLES, HEADER_STYLES
 from src.utils.conversation import get_user_input, show_chat_buttons, show_conversation
 from src.utils.footer import show_donates, show_info
-from src.utils.helpers import get_files_in_dir, get_random_img
+from src.utils.helpers import get_files_in_dir, get_random_img, show_balance
 from src.utils.lang import en, ru
 from streamlit_option_menu import option_menu
 
@@ -66,6 +66,7 @@ if "total_tokens" not in st.session_state:
 
 
 def main() -> None:
+    show_balance()
     c1, c2 = st.columns(2)
     with c1, c2:
         c1.selectbox(label=st.session_state.locale.select_placeholder1, key="model", options=AI_MODEL_OPTIONS)
