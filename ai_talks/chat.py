@@ -2,10 +2,8 @@ from pathlib import Path
 from random import randrange
 
 import streamlit as st
-from src.styles.menu_styles import FOOTER_STYLES, HEADER_STYLES
-from src.utils.conversation import get_user_input, show_chat_buttons, show_conversation
-from src.utils.footer import show_donates, show_info
-from src.utils.helpers import get_files_in_dir, get_random_img, show_balance
+from src.styles.menu_styles import HEADER_STYLES
+from src.utils.conversation import clear_chat, get_user_input, show_conversation
 from src.utils.lang import en, ru
 from streamlit_option_menu import option_menu
 
@@ -66,32 +64,27 @@ if "total_tokens" not in st.session_state:
 
 
 def main() -> None:
-    show_balance()
     c1, c2 = st.columns(2)
     with c1, c2:
-        c1.selectbox(label=st.session_state.locale.select_placeholder1, key="model", options=AI_MODEL_OPTIONS)
-        st.session_state.input_kind = c2.radio(
-            label=st.session_state.locale.input_kind,
-            options=(st.session_state.locale.input_kind_1, st.session_state.locale.input_kind_2),
-            horizontal=True,
-        )
-        role_kind = c1.radio(
+        c1.selectbox(label=st.session_state.locale.select_placeholder1,
+                     key="model", options=AI_MODEL_OPTIONS, on_change=clear_chat)
+        role_kind = c2.radio(
             label=st.session_state.locale.radio_placeholder,
             options=(st.session_state.locale.radio_text1, st.session_state.locale.radio_text2),
             horizontal=True,
+            on_change=clear_chat,
         )
-        match role_kind:
-            case st.session_state.locale.radio_text1:
-                c2.selectbox(label=st.session_state.locale.select_placeholder2, key="role",
-                             options=st.session_state.locale.ai_role_options)
-            case st.session_state.locale.radio_text2:
-                c2.text_input(label=st.session_state.locale.select_placeholder3, key="role")
+    match role_kind:
+        case st.session_state.locale.radio_text1:
+            st.selectbox(label=st.session_state.locale.select_placeholder2, key="role",
+                         options=st.session_state.locale.ai_role_options)
+        case st.session_state.locale.radio_text2:
+            st.text_input(label=st.session_state.locale.select_placeholder3, key="role")
 
     if st.session_state.user_text:
         show_conversation()
         st.session_state.user_text = ""
     get_user_input()
-    show_chat_buttons()
 
 
 def run_agi():
@@ -103,29 +96,7 @@ def run_agi():
         case _:
             st.session_state.locale = en
     st.markdown(f"<h1 style='text-align: center;'>{st.session_state.locale.title}</h1>", unsafe_allow_html=True)
-    selected_footer = option_menu(
-        menu_title=None,
-        options=[
-            st.session_state.locale.footer_option1,
-            st.session_state.locale.footer_option0,
-            st.session_state.locale.footer_option2,
-        ],
-        icons=["info-circle", "chat-square-text", "piggy-bank"],  # https://icons.getbootstrap.com/
-        menu_icon="cast",
-        default_index=0,
-        orientation="horizontal",
-        styles=FOOTER_STYLES
-    )
-    match selected_footer:
-        case st.session_state.locale.footer_option0:
-            main()
-        case st.session_state.locale.footer_option1:
-            st.image(f"{img_dir}/{get_random_img(get_files_in_dir(img_dir))}")
-            show_info(tg_svg)
-        case st.session_state.locale.footer_option2:
-            show_donates()
-        case _:
-            show_info(tg_svg)
+    main()
 
 
 if __name__ == "__main__":

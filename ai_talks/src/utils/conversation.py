@@ -5,8 +5,6 @@ from openai.error import InvalidRequestError, OpenAIError
 from streamlit_chat import message
 
 from .agi.chat_gpt import create_gpt_completion
-from .stt import show_voice_input
-from .tts import show_audio_player
 
 
 def clear_chat() -> None:
@@ -24,19 +22,11 @@ def show_text_input() -> None:
 
 
 def get_user_input():
-    match st.session_state.input_kind:
-        case st.session_state.locale.input_kind_1:
-            show_text_input()
-        case st.session_state.locale.input_kind_2:
-            show_voice_input()
-        case _:
-            show_text_input()
-
-
-def show_chat_buttons() -> None:
-    b0, b1, b2 = st.columns(3)
-    with b0, b1, b2:
-        b0.button(label=st.session_state.locale.chat_run_btn)
+    with st.form(key="user_input"):
+        st.text_area(label=st.session_state.locale.chat_placeholder, value=st.session_state.user_text, key="user_text")
+        st.form_submit_button(label=st.session_state.locale.chat_run_btn)
+    _, b1, b2 = st.columns(3)
+    with _, b1, b2:
         b1.button(label=st.session_state.locale.chat_clear_btn, on_click=clear_chat)
         b2.download_button(
             label=st.session_state.locale.chat_save_btn,
@@ -84,7 +74,6 @@ def show_gpt_conversation() -> None:
         if ai_content:
             show_chat(ai_content, st.session_state.user_text)
             st.divider()
-            show_audio_player(ai_content)
     except InvalidRequestError as err:
         if err.code == "context_length_exceeded":
             st.session_state.messages.pop(1)
