@@ -10,10 +10,6 @@ from streamlit_option_menu import option_menu
 # --- PATH SETTINGS ---
 current_dir: Path = Path(__file__).parent if "__file__" in locals() else Path.cwd()
 css_file: Path = current_dir / "src/styles/.css"
-assets_dir: Path = current_dir / "assets"
-icons_dir: Path = assets_dir / "icons"
-img_dir: Path = assets_dir / "img"
-tg_svg: Path = icons_dir / "tg.svg"
 
 # --- GENERAL SETTINGS ---
 PAGE_TITLE: str = "AI Talks"
@@ -23,7 +19,7 @@ LANG_RU: str = "Ru"
 AI_MODEL_OPTIONS: list[str] = [
     "gpt-3.5-turbo",
     "gpt-4",
-    "gpt-4-32k",
+    # "gpt-4-32k",
 ]
 
 st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
