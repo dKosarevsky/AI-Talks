@@ -1,0 +1,13 @@
+cookie:
+  expiry_days: 0
+  key: ai_talks_key
+  name: ai_talks
+credentials:
+  usernames:
+    if:
+      email: admin@admin.com
+      name: admin
+      password: $2b$12$LDsXDnXx2bHMMVyd3SgwsOfECi7zpmK45OusVK7NzOItZaYQLprZy
+preauthorized:
+  emails:
+  - admin@admin.com
