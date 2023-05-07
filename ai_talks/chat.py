@@ -1,10 +1,9 @@
-import time
 from pathlib import Path
 from random import randrange
 
-import requests
 import streamlit as st
 from src.styles.menu_styles import HEADER_STYLES
+from src.utils.auth import logout, show_auth_menu
 from src.utils.conversation import clear_chat, get_user_input, show_conversation
 from src.utils.lang import en, ru
 from streamlit_option_menu import option_menu
@@ -41,28 +40,6 @@ selected_lang = option_menu(
 )
 
 
-def show_auth_menu() -> None:
-    applicant_token = ""
-    if "applicant-token" in st.session_state:
-        applicant_token = st.session_state["applicant-token"]
-    auth = option_menu(
-        menu_title=None,
-        options=["login", "register", ],
-        icons=["door-open", "door-closed"],
-        menu_icon="cast",
-        default_index=0,
-        orientation="horizontal",
-        styles=HEADER_STYLES
-    )
-    match auth:
-        case "login":
-            login(applicant_token)
-        case "register":
-            register(applicant_token)
-        case _:
-            login(applicant_token)
-
-
 # Storing The Context
 if "authentication_status" not in st.session_state:
     st.session_state.authentication_status = None
@@ -84,22 +61,9 @@ if "total_tokens" not in st.session_state:
     st.session_state.total_tokens = []
 
 
-def logout(applicant_token: str) -> None:
-    if applicant_token:
-        with st.form("my_form"):
-            st.write("Do you want to log out?")
-            submit_res = st.form_submit_button(label="Logout here")
-            if submit_res:
-                if "applicant-token" in st.session_state:
-                    del st.session_state["applicant-token"]
-                st.write("You are now logged out!")
-    else:
-        st.write("You are now logged out!")
-
-
 def show_user_data() -> None:
     with st.sidebar:
-        st.markdown(f"Welcome back, **{st.session_state.name}**!")
+        st.markdown(f"Welcome back, **{st.session_state.username}**!")
         if st.button("Logout"):
             logout(st.session_state["applicant-token"])
         st.divider()
@@ -110,60 +74,9 @@ def show_user_data() -> None:
             ...
         st.divider()
         try:
-            st.code(f"Tokens: {st.secrets.tokens[st.session_state.username]}")
+            st.code(f"Tokens: {st.session_state.user_tokens}")
         except KeyError:
             st.error("You need to activate your account. Write to Admin in telegram.")
-
-
-def login(applicant_token: str) -> None:
-    if applicant_token:
-        st.session_state.authentication_status = True
-    else:
-        with st.form("my_form"):
-            email = st.text_input(label="email")
-            password = st.text_input(label="password", type="password")
-            submit_res = st.form_submit_button(label="Login")
-            if submit_res:
-                st.write("login clicked!")
-                headers = {"Content-Type": "application/json; charset=utf-8"}
-                response = requests.post(url=st.secrets.back.base_url + "api_auth/", headers=headers,  # noqa: S113
-                                         json={"email": email, "password": password})
-                if response.status_code == 200:
-                    response_json = response.json()
-                    applicant_token = response_json["token"]
-                    if applicant_token:
-                        st.session_state.key = "applicant-token"
-                        st.session_state["applicant-token"] = applicant_token
-                        st.experimental_rerun()
-                else:
-                    st.error(f"Error: {response.text}. Status code: {response.status_code}")
-
-
-def register(applicant_token: str) -> None:
-    if applicant_token:
-        with st.form("my_form"):
-            st.write("You need to first logout before registering!")
-            submit_res = st.form_submit_button(label="Logout here")
-            if submit_res:
-                st.write("You are now logged out!")
-                del st.session_state["applicant-token"]
-                time.sleep(3)
-                st.experimental_rerun()
-    else:
-        with st.form("my_form"):
-            email = st.text_input(label="email")
-            username = st.text_input(label="username")
-            password = st.text_input(label="password", type="password")
-            submit_res = st.form_submit_button(label="Register")
-            if submit_res:
-                st.write("registered clicked!")
-                headers = {"Content-Type": "application/json; charset=utf-8"}
-                response = requests.post(url=st.secrets.back.base_url + "api_register/", headers=headers,  # noqa: S113
-                                         json={"email": email, "username": username, "password": password})
-                if response.status_code == 200:
-                    st.experimental_rerun()
-                else:
-                    st.error(f"Error: {response.text}. Status code: {response.status_code}")
 
 
 def run_agi() -> None:

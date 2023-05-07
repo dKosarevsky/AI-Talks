@@ -5,6 +5,11 @@ from pathlib import Path
 
 import streamlit as st
 from requests import exceptions, get
+from requests.auth import HTTPBasicAuth
+
+
+def get_back_auth() -> HTTPBasicAuth:
+    return HTTPBasicAuth(st.secrets.back.usr, st.secrets.back.pwd)
 
 
 def render_svg(svg: Path) -> str:

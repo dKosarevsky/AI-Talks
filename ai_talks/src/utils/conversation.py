@@ -24,7 +24,7 @@ def show_text_input() -> None:
 def get_user_input():
     with st.form(key="user_input"):
         st.text_area(label=st.session_state.locale.chat_placeholder, value=st.session_state.user_text, key="user_text")
-        st.form_submit_button(label=st.session_state.locale.chat_run_btn)
+        st.form_submit_button(label=st.session_state.locale.chat_run_btn, disabled=st.session_state.user_tokens <= 0)
     _, b1, b2 = st.columns(3)
     with _, b1, b2:
         b1.button(label=st.session_state.locale.chat_clear_btn, on_click=clear_chat)
