@@ -27,7 +27,7 @@ def get_user_input():
         st.text_area(label=st.session_state.locale.chat_placeholder, value=st.session_state.user_text, key="user_text")
         st.form_submit_button(label=st.session_state.locale.chat_run_btn, disabled=st.session_state.user_tokens <= 0)
     _, b1, b2 = st.columns(3)
-    with _, b1, b2:
+    with b1, b2:
         b1.button(label=st.session_state.locale.chat_clear_btn, on_click=clear_chat)
         b2.download_button(
             label=st.session_state.locale.chat_save_btn,
@@ -35,6 +35,7 @@ def get_user_input():
             file_name="ai-talks-chat.json",
             mime="application/json",
         )
+    st.code(f"{st.session_state.locale.available_tokens}{st.session_state.user_tokens}")
 
 
 def show_chat(ai_content: str, user_text: str) -> None:

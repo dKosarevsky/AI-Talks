@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List  # NOQA: UP035
 
-from .constants import AI_ROLE_OPTIONS_EN, AI_ROLE_OPTIONS_RU, AI_TALKS_URL, README_URL
+from .constants import ADMIN_TG, AI_ROLE_OPTIONS_EN, AI_ROLE_OPTIONS_RU, AI_TALKS_URL, README_URL
 
 
 @dataclass
@@ -25,6 +25,10 @@ class Locale:
     message_cost: str
     total_cost: str
     sum_tokens: str
+    available_tokens: str
+    activate: str
+    greetings: str
+    logout: str
     empty_api_handler: str
     balance_handler: str
 
@@ -50,6 +54,10 @@ en = Locale(
     message_cost="Message cost: ",
     total_cost="Total cost of conversation: ",
     sum_tokens="Tokens sum: ",
+    available_tokens="Available Tokens: ",
+    activate=f"Account Activating is required. Contact [Admin]({ADMIN_TG}).",
+    greetings="Hey, ",
+    logout="Logout",
     empty_api_handler=f"""
         API key not found. Create `.streamlit/secrets.toml` with your API key.
         See [README.md]({README_URL}) for instructions or use the original [AI Talks]({AI_TALKS_URL}).
@@ -70,13 +78,17 @@ ru = Locale(
     select_placeholder1="Выберите Модель",
     select_placeholder2="Выберите Роль",
     select_placeholder3="Создайте Роль",
-    radio_placeholder="Взаимодествие с Ролью",
+    radio_placeholder="Взаимодействие с Ролью",
     radio_text1="Выбрать",
     radio_text2="Создать",
     tokens_count="Количество токенов: ",
-    message_cost="Cтоимость сообщения: ",
+    message_cost="Стоимость сообщения: ",
     total_cost="Общая стоимость разговора: ",
     sum_tokens="Сумма токенов: ",
+    available_tokens="Доступные Токены: ",
+    activate=f"Необходима активация. Свяжитесь с [Администратором]({ADMIN_TG}).",
+    greetings="Привет, ",
+    logout="Выйти",
     empty_api_handler=f"""
         Ключ API не найден. Создайте `.streamlit/secrets.toml` с вашим ключом API.
         Инструкции см. в [README.md]({README_URL}) или используйте оригинальный [AI Talks]({AI_TALKS_URL}).

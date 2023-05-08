@@ -35,3 +35,4 @@ REPO_URL: str = "https://github.com/dKosarevsky/AI-Talks"
 README_URL: str = f"{REPO_URL}#readme"
 AI_TALKS_URL: str = "https://ai-talks.streamlit.app/"
 HEADERS: dict = {"Content-Type": "application/json; charset=utf-8"}
+ADMIN_TG: str = "https://t.me/wd4000"

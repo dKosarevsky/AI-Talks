@@ -3,7 +3,7 @@ from random import randrange
 
 import streamlit as st
 from src.styles.menu_styles import HEADER_STYLES
-from src.utils.back import get_ai_tokens, logout, show_auth_menu
+from src.utils.back import logout, show_auth_menu
 from src.utils.conversation import clear_chat, get_user_input, show_conversation
 from src.utils.lang import en, ru
 from streamlit_option_menu import option_menu
@@ -63,13 +63,10 @@ if "total_tokens" not in st.session_state:
 
 def show_user_data() -> None:
     with st.sidebar:
-        st.markdown(f"Welcome back, **{st.session_state.username}**!")
-        if st.button("Logout"):
+        st.markdown(f"{st.session_state.locale.greetings}**{st.session_state.username}** :wave:")
+        if st.button(st.session_state.locale.logout):
             logout(st.session_state["applicant-token"])
         st.divider()
-        st.code(f"Tokens: {st.session_state.user_tokens}")
-        if st.button("Refresh Tokens"):
-            get_ai_tokens(st.session_state.username)
 
 
 def run_agi() -> None:
@@ -99,7 +96,7 @@ def run_agi() -> None:
         else:
             st.warning("User not found.")
     except KeyError:
-        st.error("You need to activate your account. Write to Admin in telegram.")
+        st.error(st.session_state.locale.activate)
 
 
 def main():
@@ -116,12 +113,6 @@ def main():
     elif st.session_state.authentication_status:
         show_user_data()
         run_agi()
-    elif st.session_state.authentication_status is None:
-        st.warning("Please enter your username and password")
-        st.stop()
-    elif not st.session_state.authentication_status:
-        st.error("Username/password is incorrect")
-        st.stop()
 
 
 if __name__ == "__main__":
