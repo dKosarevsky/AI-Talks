@@ -3,7 +3,7 @@ from random import randrange
 
 import streamlit as st
 from src.styles.menu_styles import HEADER_STYLES
-from src.utils.auth import logout, show_auth_menu
+from src.utils.back import get_ai_tokens, logout, show_auth_menu
 from src.utils.conversation import clear_chat, get_user_input, show_conversation
 from src.utils.lang import en, ru
 from streamlit_option_menu import option_menu
@@ -67,16 +67,9 @@ def show_user_data() -> None:
         if st.button("Logout"):
             logout(st.session_state["applicant-token"])
         st.divider()
-        if st.sidebar.checkbox("Show Reset Password Menu"):
-            ...
-        st.divider()
-        if st.sidebar.checkbox("Show Update User Details"):
-            ...
-        st.divider()
-        try:
-            st.code(f"Tokens: {st.session_state.user_tokens}")
-        except KeyError:
-            st.error("You need to activate your account. Write to Admin in telegram.")
+        st.code(f"Tokens: {st.session_state.user_tokens}")
+        if st.button("Refresh Tokens"):
+            get_ai_tokens(st.session_state.username)
 
 
 def run_agi() -> None:

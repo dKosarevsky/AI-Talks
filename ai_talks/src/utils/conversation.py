@@ -5,6 +5,7 @@ from openai.error import InvalidRequestError, OpenAIError
 from streamlit_chat import message
 
 from .agi.chat_gpt import create_gpt_completion
+from .back import debit_tokens
 
 
 def clear_chat() -> None:
@@ -49,11 +50,13 @@ def show_chat(ai_content: str, user_text: str) -> None:
             st.caption(f"""
                 {st.session_state.locale.tokens_count}{st.session_state.total_tokens[i]} |
                 {st.session_state.locale.message_cost}{st.session_state.costs[i]:.5f}$
-            """, help=f"{st.session_state.locale.total_cost}{sum(st.session_state.costs):.5f}$")
+            """, help=f"{st.session_state.locale.sum_tokens}{sum(st.session_state.total_tokens)} | {st.session_state.locale.total_cost}{sum(st.session_state.costs):.5f}$")  # noqa: E501
 
 
 def calc_cost(usage: dict) -> None:
     total_tokens = usage.get("total_tokens")
+    st.session_state.user_tokens -= total_tokens
+    debit_tokens(username=st.session_state.username, used_tokens=total_tokens)
     prompt_tokens = usage.get("prompt_tokens")
     completion_tokens = usage.get("completion_tokens")
     st.session_state.total_tokens.append(total_tokens)

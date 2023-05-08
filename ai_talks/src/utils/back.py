@@ -1,7 +1,7 @@
 import time
 
 import streamlit as st
-from requests import exceptions, post
+from requests import exceptions, get, post
 from streamlit_option_menu import option_menu
 
 from ..styles.menu_styles import HEADER_STYLES
@@ -99,3 +99,35 @@ def show_auth_menu() -> None:
             register(applicant_token)
         case _:
             login(applicant_token)
+
+
+def get_ai_tokens(username: str) -> None:
+    with st.spinner("tokens refreshing..."):
+        try:
+            response = get(url=st.secrets.back.base_url + "ai_tokens/", headers=HEADERS,  # noqa: S113
+                           json={"username": username}, auth=get_back_auth())
+            if response.status_code == 200:
+                response_json = response.json()
+                st.session_state.user_tokens = response_json["ai_tokens"]
+                st.experimental_rerun()
+            elif response.status_code in range(500, 512):
+                st.error(f"Server Error. Status code: {response.status_code}")
+            else:
+                st.error(f"Error: {response.text}. Status code: {response.status_code}")
+        except exceptions.RequestException as err:
+            st.error(f"Request Error: {err}")
+
+
+def debit_tokens(username: str, used_tokens: int) -> None:
+    try:
+        response = post(url=st.secrets.back.base_url + "debit_tokens/", headers=HEADERS,  # noqa: S113
+                        json={"username": username, "used_tokens": used_tokens}, auth=get_back_auth())
+        if response.status_code == 200:
+            response_json = response.json()
+            st.session_state.user_tokens = response_json["ai_tokens"]
+        elif response.status_code in range(500, 512):
+            st.error(f"Server Error. Status code: {response.status_code}")
+        else:
+            st.error(f"Error: {response.text}. Status code: {response.status_code}")
+    except exceptions.RequestException as err:
+        st.error(f"Request Error: {err}")

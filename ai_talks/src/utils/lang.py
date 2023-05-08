@@ -24,6 +24,7 @@ class Locale:
     tokens_count: str
     message_cost: str
     total_cost: str
+    sum_tokens: str
     empty_api_handler: str
     balance_handler: str
 
@@ -48,6 +49,7 @@ en = Locale(
     tokens_count="Tokens count: ",
     message_cost="Message cost: ",
     total_cost="Total cost of conversation: ",
+    sum_tokens="Tokens sum: ",
     empty_api_handler=f"""
         API key not found. Create `.streamlit/secrets.toml` with your API key.
         See [README.md]({README_URL}) for instructions or use the original [AI Talks]({AI_TALKS_URL}).
@@ -74,6 +76,7 @@ ru = Locale(
     tokens_count="Количество токенов: ",
     message_cost="Cтоимость сообщения: ",
     total_cost="Общая стоимость разговора: ",
+    sum_tokens="Сумма токенов: ",
     empty_api_handler=f"""
         Ключ API не найден. Создайте `.streamlit/secrets.toml` с вашим ключом API.
         Инструкции см. в [README.md]({README_URL}) или используйте оригинальный [AI Talks]({AI_TALKS_URL}).
