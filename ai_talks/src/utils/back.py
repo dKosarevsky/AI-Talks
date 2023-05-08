@@ -21,12 +21,12 @@ def login(applicant_token: str) -> None:
     if applicant_token:
         st.session_state.authentication_status = True
     else:
-        with st.form("my_form"):
-            username = st.text_input(label="username")
-            password = st.text_input(label="password", type="password")
+        with st.form("login_form"):
+            username = st.text_input(label=st.session_state.locale.username)
+            password = st.text_input(label=st.session_state.locale.password, type="password")
             data = {"username": username, "password": password}
-            if st.form_submit_button(label="Login"):
-                with st.spinner("login..."):
+            if st.form_submit_button(label=st.session_state.locale.login):
+                with st.spinner(st.session_state.locale.logining):
                     try:
                         response = post(url=st.secrets.back.base_url + "auth/", headers=HEADERS,  # noqa: S113
                                         json=data, auth=get_back_auth())
@@ -50,7 +50,7 @@ def login(applicant_token: str) -> None:
 
 def register(applicant_token: str) -> None:
     if applicant_token:
-        with st.form("my_form"):
+        with st.form("register_form"):
             st.write("You need to first logout before registering!")
             if st.form_submit_button(label="Logout here"):
                 st.write("You are now logged out!")
@@ -58,14 +58,14 @@ def register(applicant_token: str) -> None:
                 time.sleep(3)
                 st.experimental_rerun()
     else:
-        with st.form("my_form"):
+        with st.form("register_form"):
             telegram = st.text_input(label="telegram")
             email = st.text_input(label="email")
-            username = st.text_input(label="username")
-            password = st.text_input(label="password", type="password")
+            username = st.text_input(label=st.session_state.locale.username)
+            password = st.text_input(label=st.session_state.locale.password, type="password")
             data = {"telegram": telegram, "email": email, "username": username, "password": password}
-            if st.form_submit_button(label="Register"):
-                with st.spinner("registration..."):
+            if st.form_submit_button(label=st.session_state.locale.register):
+                with st.spinner(st.session_state.locale.registration):
                     try:
                         response = post(url=st.secrets.back.base_url + "register/", headers=HEADERS,  # noqa: S113
                                         json=data, auth=get_back_auth())

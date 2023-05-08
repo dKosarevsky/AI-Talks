@@ -28,6 +28,12 @@ class Locale:
     available_tokens: str
     activate: str
     greetings: str
+    username: str
+    password: str
+    login: str
+    logining: str
+    register: str
+    registration: str
     logout: str
     empty_api_handler: str
     balance_handler: str
@@ -57,12 +63,18 @@ en = Locale(
     available_tokens="Available Tokens: ",
     activate=f"Account Activating is required. Contact [Admin]({ADMIN_TG}).",
     greetings="Hey, ",
+    username="Username:",
+    password="Password:",  # noqa: S106
+    login="Login",
+    logining="login ...",
+    register="Register",
+    registration="registration ...",
     logout="Logout",
     empty_api_handler=f"""
         API key not found. Create `.streamlit/secrets.toml` with your API key.
         See [README.md]({README_URL}) for instructions or use the original [AI Talks]({AI_TALKS_URL}).
     """,
-    balance_handler="Balance: "
+    balance_handler="Balance: ",
 )
 
 ru = Locale(
@@ -88,10 +100,16 @@ ru = Locale(
     available_tokens="Доступные Токены: ",
     activate=f"Необходима активация. Свяжитесь с [Администратором]({ADMIN_TG}).",
     greetings="Привет, ",
+    username="Имя Пользователя:",
+    password="Пароль:",  # noqa: S106
+    login="Войти",
+    logining="входим ...",
+    register="Зарегистрироваться",
+    registration="регистрация ...",
     logout="Выйти",
     empty_api_handler=f"""
         Ключ API не найден. Создайте `.streamlit/secrets.toml` с вашим ключом API.
         Инструкции см. в [README.md]({README_URL}) или используйте оригинальный [AI Talks]({AI_TALKS_URL}).
     """,
-    balance_handler="Баланс: "
+    balance_handler="Баланс: ",
 )
