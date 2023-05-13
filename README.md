@@ -1,6 +1,6 @@
 # AI Talks
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ai-talks.streamlit.app)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://agi-talks.streamlit.app)
 
 ![](ai_talks/assets/img/ai_face.png)
 
