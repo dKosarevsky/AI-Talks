@@ -6,7 +6,7 @@ import streamlit as st
 from snowflake.connector import connect
 from snowflake.connector.connection import SnowflakeConnection
 
-from utils import gui, sql
+from utils import sql
 
 TIME_TO_LIVE = 60 * 60 * 6  # 6 hours caching
 
@@ -84,15 +84,15 @@ def get_queries_data(
             date_to=date_to,
         )
     )
-    queries_data["DURATION_SECS"] = round(
-        (queries_data.TOTAL_ELAPSED_TIME) / 1000
-    )
-    queries_data["DURATION_SECS_PP"] = queries_data.DURATION_SECS.apply(
-        gui.pretty_print_seconds
-    )
-    queries_data["QUERY_TEXT_PP"] = queries_data.QUERY_TEXT.apply(
-        gui.pretty_print_sql_query
-    )
+#     queries_data["DURATION_SECS"] = round(
+#         (queries_data.TOTAL_ELAPSED_TIME) / 1000
+#     )
+#     queries_data["DURATION_SECS_PP"] = queries_data.DURATION_SECS.apply(
+#         gui.pretty_print_seconds
+#     )
+#     queries_data["QUERY_TEXT_PP"] = queries_data.QUERY_TEXT.apply(
+#         gui.pretty_print_sql_query
+#     )
     return queries_data
 
 
