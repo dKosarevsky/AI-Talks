@@ -7,5 +7,5 @@ gtts>=2.3.1
 bokeh==2.4.2
 streamlit-bokeh-events>=0.1.2
 watchdog>=3.0.0
-snowflake-connector-python = ">=2.7.8"
+snowflake-connector-python >=2.7.8
 sqlparse = "*"
