@@ -72,7 +72,7 @@ def show_user_data() -> None:
 
 def run_agi() -> None:
     try:
-        if st.session_state.username and st.secrets.is_active[st.session_state.username]:
+        if st.session_state.username and st.session_state.is_active:
             c1, c2 = st.columns(2)
             with c1, c2:
                 c1.selectbox(label=st.session_state.locale.select_placeholder1,
@@ -95,9 +95,9 @@ def run_agi() -> None:
                 st.session_state.user_text = ""
             get_user_input()
         else:
-            st.warning("User not found.")
+            st.warning(st.session_state.locale.activate)
     except KeyError:
-        st.error(st.session_state.locale.activate)
+        st.error("User not found.")
 
 
 def main():

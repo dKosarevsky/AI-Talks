@@ -34,6 +34,7 @@ def login(applicant_token: str) -> None:
                             response_json = response.json()
                             applicant_token = response_json["token"]
                             st.session_state.username = response_json["username"]
+                            st.session_state.is_active = response_json["is_active"]
                             st.session_state.user_tokens = response_json["ai_tokens"]
                             if applicant_token:
                                 st.session_state.key = "applicant-token"
