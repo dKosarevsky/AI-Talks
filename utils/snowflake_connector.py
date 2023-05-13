@@ -97,5 +97,5 @@ def get_queries_data(
     return queries_data
 
 
-if __name__ == "__main__":
-    pass
+# if __name__ == "__main__":
+#     pass
