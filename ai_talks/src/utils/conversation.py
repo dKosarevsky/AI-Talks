@@ -8,6 +8,9 @@ from .agi.chat_gpt import create_gpt_completion
 from .stt import show_voice_input
 from .tts import show_audio_player
 
+# added by qiliang to test
+def show_query_result() -> None:
+    st.text_area(label=st.session_state.locale.chat_placeholder, value=st.session_state.user_text, key="user_text")
 
 def clear_chat() -> None:
     st.session_state.generated = []
