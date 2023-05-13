@@ -78,9 +78,10 @@ def sql_to_dataframe(sql_query: str) -> pd.DataFrame:
 def get_queries_data(
     date_from: datetime.date,
     date_to: datetime.date,
+    sql_query: str,
 ):
     queries_data = sql_to_dataframe(
-        sql.QUERIES_QUERY.format(
+        sql_query.format(
             date_from=date_from,
             date_to=date_to,
         )
