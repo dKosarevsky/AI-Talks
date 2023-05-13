@@ -6,7 +6,7 @@ import streamlit as st
 from snowflake.connector import connect
 from snowflake.connector.connection import SnowflakeConnection
 
-from utils import sql
+# from utils import sql
 
 TIME_TO_LIVE = 60 * 60 * 6  # 6 hours caching
 
@@ -62,6 +62,7 @@ snowflake_connector = get_connector(
 
 cur = snowflake_connector.cursor()
 cur.execute(f"use warehouse {st.secrets.sf_usage_app.warehouse};")
+cur.execute(f"use role {st.secrets.sf_usage_app.role};")
 
 
 @st.experimental_memo(ttl=TIME_TO_LIVE)
