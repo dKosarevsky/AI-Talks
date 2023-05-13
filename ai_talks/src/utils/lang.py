@@ -97,7 +97,7 @@ en = Locale(
 )
 
 
-en = Locale(
+cn = Locale(
     ai_role_options = AI_ROLE_OPTIONS_CN，
     ai_role_prefix =“您是女性”，
     ai_role_postfix =“尽可能简洁地回答。”，
