@@ -91,6 +91,7 @@ def main() -> None:
         st.session_state.user_text = ""
     get_user_input()
     show_chat_buttons()
+    show_query_data()
 
 
 def run_agi():
