@@ -67,6 +67,7 @@ def show_user_data() -> None:
         if st.button(st.session_state.locale.logout):
             logout(st.session_state["applicant-token"])
         st.divider()
+        st.markdown(f"[{st.session_state.locale.get_tokens}](https://boosty.to/ai-talks/donate)")
 
 
 def run_agi() -> None:

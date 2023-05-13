@@ -37,6 +37,7 @@ class Locale:
     logout: str
     empty_api_handler: str
     balance_handler: str
+    get_tokens: str
 
 
 # --- LOCALE SETTINGS ---
@@ -75,6 +76,7 @@ en = Locale(
         See [README.md]({README_URL}) for instructions or use the original [AI Talks]({AI_TALKS_URL}).
     """,
     balance_handler="Balance: ",
+    get_tokens="Get Tokens",
 )
 
 ru = Locale(
@@ -112,4 +114,5 @@ ru = Locale(
         Инструкции см. в [README.md]({README_URL}) или используйте оригинальный [AI Talks]({AI_TALKS_URL}).
     """,
     balance_handler="Баланс: ",
+    get_tokens="Получить Токены",
 )
