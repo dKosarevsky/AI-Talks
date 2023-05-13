@@ -96,6 +96,58 @@ en = Locale(
     """,
 )
 
+
+en = Locale(
+    ai_role_options = AI_ROLE_OPTIONS_CN，
+    ai_role_prefix =“您是女性”，
+    ai_role_postfix =“尽可能简洁地回答。”，
+    title =“AI Talks”，
+    language =“英语”，
+    lang_code =“en”，
+    donates =“捐款”，
+    donates1 =“俄罗斯”，
+    donates2 =“世界”，
+    chat_placeholder =“与AI开始对话：”，
+    chat_run_btn =“问”，
+    chat_clear_btn =“清除”，
+    chat_save_btn =“保存”，
+    speak_btn =“按下以发言”，
+    input_kind =“输入类型”，
+    input_kind_1 =“文本”，
+    input_kind_2 =“语音[测试模式]”，
+    select_placeholder1 =“选择模型”，
+    select_placeholder2 =“选择角色”，
+    select_placeholder3 =“创建角色”，
+    radio_placeholder =“角色互动”，
+    radio_text1 =“选择”，
+    radio_text2 =“创建”，
+    stt_placeholder =“按播放听AI的声音”，
+    footer_title =“支持和反馈”，
+    footer_option0 =“聊天”，
+    footer_option1 =“信息”，
+    footer_option2 =“捐赠”，
+    footer_chat =“AI Talks聊天”，
+    footer_channel =“AI Talks频道”，
+    responsibility_denial ="""
+        AI Talks使用Open AI API与生成信息的AIChatGPT交互。
+        请注意，神经网络响应可能不可靠，不准确或不相关。
+        我们不对使用或依赖所提供信息所产生的任何后果负责。
+        自行决定使用接收到的数据。
+    """,
+    donates_info ="""
+        AI Talks仅为支付Open AIAPI而收集捐款。
+        这使您可以为所有用户提供与AI的通信方式。
+        支持我们进行共同开发和与未来的智能进行交互！
+    """,
+    tokens_count =“代币数：”，
+    message_cost =“消息费用：”，
+    total_cost =“对话的总费用：”，
+    empty_api_handler =f"""
+        找不到API密钥。创建.streamlit / secrets.toml以获得您的API密钥。
+        请参阅README.md的说明或使用原始AI Talks。
+    """,
+)
+
 ru = Locale(
     ai_role_options=AI_ROLE_OPTIONS_RU,
     ai_role_prefix="Вы девушка",
