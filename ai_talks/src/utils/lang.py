@@ -26,6 +26,7 @@ class Locale:
     total_cost: str
     sum_tokens: str
     available_tokens: str
+    need_tokens: str
     activate: str
     greetings: str
     username: str
@@ -62,6 +63,7 @@ en = Locale(
     total_cost="Total cost of conversation: ",
     sum_tokens="Tokens sum: ",
     available_tokens="Available Tokens: ",
+    need_tokens="Tokens are needed for further work",
     activate=f"Account Activating is required. Contact [Admin]({ADMIN_TG}).",
     greetings="Hey, ",
     username="Username:",
@@ -100,6 +102,7 @@ ru = Locale(
     total_cost="Общая стоимость разговора: ",
     sum_tokens="Сумма токенов: ",
     available_tokens="Доступные Токены: ",
+    need_tokens="Для дальнейшей работы необходимы Токены",
     activate=f"Необходима активация. Свяжитесь с [Администратором]({ADMIN_TG}).",
     greetings="Привет, ",
     username="Имя Пользователя:",

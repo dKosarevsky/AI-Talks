@@ -36,6 +36,7 @@ def get_user_input():
             mime="application/json",
         )
     st.code(f"{st.session_state.locale.available_tokens}{st.session_state.user_tokens}")
+    st.warning(st.session_state.locale.need_tokens) if st.session_state.user_tokens <= 0 else None
 
 
 def show_chat(ai_content: str, user_text: str) -> None:
