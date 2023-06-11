@@ -49,13 +49,13 @@ en = Locale(
     ai_role_options=AI_ROLE_OPTIONS_EN,
     ai_role_prefix="You are a female",
     ai_role_postfix="Answer as concisely as possible.",
-    title="AI Talks",
+    title="teaGPT",
     language="English",
     lang_code="en",
     donates="Donates",
     donates1="Russia",
     donates2="World",
-    chat_placeholder="Start Your Conversation With AI:",
+    chat_placeholder="Whadya want?:",
     chat_run_btn="Ask",
     chat_clear_btn="Clear",
     chat_save_btn="Save",
@@ -77,15 +77,10 @@ en = Locale(
     footer_chat="AI Talks Chat",
     footer_channel="AI Talks Channel",
     responsibility_denial="""
-        `AI Talks` uses the `Open AI` API to interact with `ChatGPT`, an AI that generates information.
-        Please note that neural network responses may not be reliable, inaccurate or irrelevant.
-        We are not responsible for any consequences associated with the use or reliance on the information provided.
-        Use the received data at your discretion.
+        `teaGPT` uses the `Open AI` API to interact with `ChatGPT`, an AI that generates information.
     """,
     donates_info="""
-        `AI Talks` collects donations solely for the purpose of paying for the `Open AI` API.
-        This allows you to provide access to communication with AI for all users.
-        Support us for joint development and interaction with the intelligence of the future!
+        tbd
     """,
     tokens_count="Tokens count: ",
     message_cost="Message cost: ",
