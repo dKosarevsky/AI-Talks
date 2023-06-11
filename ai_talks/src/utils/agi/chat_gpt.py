@@ -22,13 +22,8 @@ def create_gpt_completion(ai_model: str, messages: List[dict]) -> dict:
     logging.info(f"{messages=}")
     completion = openai.ChatCompletion.create(
         model=ai_model,
-        prompt=FINAL_PROMPT
-        messages=[
-            {"role": "system", "content": "You are an AI research assistant. You use a tone that is technical and scientific."},
-            {"role": "user", "content": "Hello, who are you?"},
-            {"role": "assistant", "content": "Greeting! I am an AI research assistant. How can I help you today?"},
-            {"role": "user", "content": "Can you tell me about the creation of black holes?"}
-        ],
+        prompt=FINAL_PROMPT,
+        messages=messages,
         temperature=0,
         # stream=True,
         # temperature=0.7,
