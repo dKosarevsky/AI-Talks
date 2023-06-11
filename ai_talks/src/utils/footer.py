@@ -22,33 +22,14 @@ def show_info(icon: Path) -> None:
 
 def show_donates() -> None:
     st.markdown(f"""
-        ### :moneybag: {st.session_state.locale.donates}
-
-        **Crypto:**
-        - Bitcoin (BTC)
-        ```
-        1HRDUif7oKDw9XJFXZ14TZZazokf4QH9fb
-        ```
-        - USD Tether (USDT TRC20):
-        ```
-        TMQ5RiyQ7bv3XjB6Wf6JbPHVrGkhBKtmfA
-        ```
-        - Toncoin (TON):
-        ```
-        UQDbnx17N2iOmxfQF0k55QScDMB0MHL9rsq-iGB93RMqDhIH
-        ```
-
         **{st.session_state.locale.donates2}:**
-        - [Buy Me A Coffee](https://www.buymeacoffee.com/aitalks)
-        - [ko-fi](https://ko-fi.com/ai_talks)
-        - [PayPal](https://www.paypal.com/paypalme/aitalks)
+        - [Buy Me A Coffee](https://www.buymeacoffee.com)
+        - [ko-fi](https://ko-fi.com)
+        - [PayPal](https://www.paypal.com/paypalme)
     """)
     st.markdown(f"""
         **{st.session_state.locale.donates1}:**
-        - [Tinkoff](https://www.tinkoff.ru/cf/4Ugsr5kQ1sR)
-        - [donationalerts](https://www.donationalerts.com/r/if_ai)
-        - [boosty](https://boosty.to/ai-talks/donate)
-        - [CloudTips](https://pay.cloudtips.ru/p/eafa15b2)
+        tdb
     """)
     _, img_col, _ = st.columns(3)
     with img_col:
