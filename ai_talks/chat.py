@@ -23,7 +23,6 @@ PAGE_ICON: str = "🤖"
 LANG_EN: str = "En"
 LANG_RU: str = "Ru"
 AI_MODEL_OPTIONS: list[str] = [
-    "text-davinci-003",
     "gpt-3.5-turbo",
     "gpt-4",
     "gpt-4-32k",
