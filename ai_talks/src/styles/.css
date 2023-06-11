@@ -5,6 +5,7 @@ a {
 
 .block-container {
     padding: 0 16px 96px 16px;
+    max-width: 80%;
 }
 
 a:hover {
