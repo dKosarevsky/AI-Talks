@@ -22,9 +22,8 @@ def create_gpt_completion(ai_model: str, messages: List[dict]) -> dict:
     logging.info(f"{messages=}")
     completion = openai.ChatCompletion.create(
         model=ai_model,
-        prompt="",
         messages=messages,
-        temperature=0,
+        temperature=0.2,
         # stream=True,
         # temperature=0.7,
     )
