@@ -19,8 +19,9 @@ LANG_EN: str = "En"
 LANG_RU: str = "Ru"
 AI_MODEL_OPTIONS: list[str] = [
     "gpt-4",
-    # "gpt-4-32k",
+    "gpt-4-32k",
     "gpt-3.5-turbo",
+    "gpt-3.5-turbo-16k",
 ]
 
 st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
