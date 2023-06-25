@@ -1,4 +1,5 @@
 AI_ROLE_OPTIONS_EN: list[str] = [
+    "",
     "helpful assistant",
     "code assistant",
     "code reviewer",
@@ -15,6 +16,7 @@ AI_ROLE_OPTIONS_EN: list[str] = [
 ]
 
 AI_ROLE_OPTIONS_RU: list[str] = [
+    "",
     "ассистент, который готов помочь",
     "ассистент программиста",
     "рецензент кода программиста",
