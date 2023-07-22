@@ -16,11 +16,11 @@ def clear_chat() -> None:
     st.session_state.seed = randrange(10**8)  # noqa: S311
     st.session_state.costs = []
     st.session_state.total_tokens = []
-    st.session_state.temperature = 1
-    st.session_state.top_p = 1
+    st.session_state.temperature = 1.
+    st.session_state.top_p = 1.
     st.session_state.max_tokens = 8000
-    st.session_state.presence_penalty = 0
-    st.session_state.frequency_penalty = 0
+    st.session_state.presence_penalty = 0.
+    st.session_state.frequency_penalty = 0.
 
 
 def show_text_input() -> None:
