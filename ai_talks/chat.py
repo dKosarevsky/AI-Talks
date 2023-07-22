@@ -4,6 +4,13 @@ from random import randrange
 import streamlit as st
 from src.styles.menu_styles import HEADER_STYLES
 from src.utils.back import logout, show_auth_menu
+from src.utils.constants import (
+    FREQUENCY_PENALTY_KEY,
+    PRESENCE_PENALTY_KEY,
+    TEMP_KEY,
+    TOP_P_KEY,
+    USER_TXT_KEY,
+)
 from src.utils.conversation import clear_chat, get_user_input, show_conversation
 from src.utils.lang import en, ru
 from streamlit_option_menu import option_menu
@@ -52,19 +59,19 @@ if "past" not in st.session_state:
     st.session_state.past = []
 if "messages" not in st.session_state:
     st.session_state.messages = []
-if "user_text" not in st.session_state:
+if USER_TXT_KEY not in st.session_state:
     st.session_state.user_text = ""
 if "seed" not in st.session_state:
     st.session_state.seed = randrange(10**3)  # noqa: S311
-if "temperature" not in st.session_state:
+if TEMP_KEY not in st.session_state:
     st.session_state.temperature = 1.
-if "top_p" not in st.session_state:
+if TOP_P_KEY not in st.session_state:
     st.session_state.top_p = 1.
-if "max_tokens" not in st.session_state:
-    st.session_state.max_tokens = 8000
-if "presence_penalty" not in st.session_state:
+# if MAX_TOKENS_KEY not in st.session_state:
+#     st.session_state.max_tokens = float("inf")
+if PRESENCE_PENALTY_KEY not in st.session_state:
     st.session_state.presence_penalty = 0.
-if "frequency_penalty" not in st.session_state:
+if FREQUENCY_PENALTY_KEY not in st.session_state:
     st.session_state.frequency_penalty = 0.
 if "costs" not in st.session_state:
     st.session_state.costs = []
@@ -101,17 +108,12 @@ def run_agi() -> None:
                 case st.session_state.locale.radio_text2:
                     st.text_input(label=st.session_state.locale.select_placeholder3, key="role")
 
-            p1, p2, p3 = st.columns(3)
-            p1.number_input(label="temperature", value=st.session_state.temperature,
-                            min_value=0., max_value=2., key="temperature")
-            p2.number_input(label="top_p", value=st.session_state.top_p,
-                            min_value=0., max_value=2., key="top_p")
-            p3.number_input(label="max_tokens", value=st.session_state.max_tokens,
-                            min_value=0, max_value=16000, key="max_tokens")
-            p1.number_input(label="presence_penalty", value=st.session_state.presence_penalty,
-                            min_value=-2., max_value=2., key="presence_penalty")
-            p2.number_input(label="frequency_penalty", value=st.session_state.frequency_penalty,
-                            min_value=-2., max_value=2., key="frequency_penalty")
+            p1, p2, p3, p4 = st.columns(4)
+            p1.number_input(label=TEMP_KEY, min_value=0., max_value=2., key=TEMP_KEY)
+            p2.number_input(label=TOP_P_KEY, min_value=0., max_value=2., key=TOP_P_KEY)
+            # p3.number_input(label=MAX_TOKENS_KEY, min_value=0., max_value=float("inf"), key=MAX_TOKENS_KEY)
+            p3.number_input(label=PRESENCE_PENALTY_KEY, min_value=-2., max_value=2., key=PRESENCE_PENALTY_KEY)
+            p4.number_input(label=FREQUENCY_PENALTY_KEY, min_value=-2., max_value=2., key=FREQUENCY_PENALTY_KEY)
             if st.session_state.user_text:
                 show_conversation()
                 st.session_state.user_text = ""

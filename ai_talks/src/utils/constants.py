@@ -38,3 +38,10 @@ README_URL: str = f"{REPO_URL}#readme"
 AI_TALKS_URL: str = "https://ai-talks.streamlit.app/"
 HEADERS: dict = {"Content-Type": "application/json; charset=utf-8"}
 ADMIN_TG: str = "https://t.me/wd4000"
+
+TEMP_KEY: str = "temperature"
+TOP_P_KEY: str = "top_p"
+MAX_TOKENS_KEY: str = "max_tokens"
+PRESENCE_PENALTY_KEY: str = "presence_penalty"
+FREQUENCY_PENALTY_KEY: str = "frequency_penalty"
+USER_TXT_KEY: str = "user_text"

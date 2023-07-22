@@ -18,7 +18,7 @@ def create_gpt_completion(ai_model: str, messages: List[dict]) -> dict:
         messages=messages,
         temperature=st.session_state.temperature,
         top_p=st.session_state.top_p,
-        max_tokens=st.session_state.max_tokens,
+        # max_tokens=st.session_state.max_tokens,
         n=1,
         stop=[],
         presence_penalty=st.session_state.presence_penalty,

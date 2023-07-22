@@ -6,6 +6,7 @@ from streamlit_chat import message
 
 from .agi.chat_gpt import create_gpt_completion
 from .back import debit_tokens
+from .constants import USER_TXT_KEY
 
 
 def clear_chat() -> None:
@@ -18,18 +19,18 @@ def clear_chat() -> None:
     st.session_state.total_tokens = []
     st.session_state.temperature = 1.
     st.session_state.top_p = 1.
-    st.session_state.max_tokens = 8000
+    # st.session_state.max_tokens = float("inf")
     st.session_state.presence_penalty = 0.
     st.session_state.frequency_penalty = 0.
 
 
 def show_text_input() -> None:
-    st.text_area(label=st.session_state.locale.chat_placeholder, value=st.session_state.user_text, key="user_text")
+    st.text_area(label=st.session_state.locale.chat_placeholder, key=USER_TXT_KEY)
 
 
 def get_user_input():
     with st.form(key="user_input"):
-        st.text_area(label=st.session_state.locale.chat_placeholder, value=st.session_state.user_text, key="user_text")
+        st.text_area(label=st.session_state.locale.chat_placeholder, key=USER_TXT_KEY)
         st.form_submit_button(label=st.session_state.locale.chat_run_btn, disabled=st.session_state.user_tokens <= 0)
     _, b1, b2 = st.columns(3)
     with b1, b2:
