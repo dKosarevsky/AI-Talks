@@ -56,6 +56,16 @@ if "user_text" not in st.session_state:
     st.session_state.user_text = ""
 if "seed" not in st.session_state:
     st.session_state.seed = randrange(10**3)  # noqa: S311
+if "temperature" not in st.session_state:
+    st.session_state.temperature = 1
+if "top_p" not in st.session_state:
+    st.session_state.top_p = 1
+if "max_tokens" not in st.session_state:
+    st.session_state.max_tokens = 8000
+if "presence_penalty" not in st.session_state:
+    st.session_state.presence_penalty = 0
+if "frequency_penalty" not in st.session_state:
+    st.session_state.frequency_penalty = 0
 if "costs" not in st.session_state:
     st.session_state.costs = []
 if "total_tokens" not in st.session_state:
@@ -91,6 +101,12 @@ def run_agi() -> None:
                 case st.session_state.locale.radio_text2:
                     st.text_input(label=st.session_state.locale.select_placeholder3, key="role")
 
+            p1, p2, p3 = st.columns(3)
+            p1.number_input(label="temperature", min_value=0., max_value=2., key="temperature")
+            p2.number_input(label="top_p", min_value=0., max_value=2., key="top_p")
+            p3.number_input(label="max_tokens", min_value=0, max_value=16000, key="max_tokens")
+            p1.number_input(label="presence_penalty", min_value=-2., max_value=2., key="presence_penalty")
+            p2.number_input(label="frequency_penalty", min_value=-2., max_value=2., key="frequency_penalty")
             if st.session_state.user_text:
                 show_conversation()
                 st.session_state.user_text = ""
