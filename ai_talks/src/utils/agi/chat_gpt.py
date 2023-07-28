@@ -3,9 +3,11 @@ from typing import List  # NOQA: UP035
 
 import openai
 import streamlit as st
+from tenacity import retry, stop_after_attempt
 
 
 @st.cache_data()
+@retry(stop=stop_after_attempt(3))
 def create_gpt_completion(ai_model: str, messages: List[dict]) -> dict:
     try:
         openai.organization = st.secrets.api_credentials.api_org

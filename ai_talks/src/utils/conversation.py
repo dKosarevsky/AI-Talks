@@ -45,16 +45,16 @@ def get_user_input():
     st.warning(st.session_state.locale.need_tokens) if st.session_state.user_tokens <= 0 else None
 
 
-def show_chat(ai_content: str, user_text: str) -> None:
+def show_chat(ai_content: str) -> None:
     if ai_content not in st.session_state.generated:
         # store the ai content
-        st.session_state.past.append(user_text)
+        st.session_state.past.append(st.session_state.user_text)
         st.session_state.generated.append(ai_content)
     if st.session_state.generated:
         for i in range(len(st.session_state.generated)):
             message(st.session_state.past[i], is_user=True, key=str(i) + "_user", seed=st.session_state.seed)
-            message("", key=str(i), seed=st.session_state.seed)
-            st.markdown(st.session_state.generated[i])
+            message(st.session_state.generated[i], key=str(i), seed=st.session_state.seed)
+            # st.markdown(st.session_state.generated[i])
             st.caption(f"""
                 {st.session_state.locale.tokens_count}{st.session_state.total_tokens[i]} |
                 {st.session_state.locale.message_cost}{st.session_state.costs[i]:.5f}$
@@ -83,7 +83,7 @@ def show_gpt_conversation() -> None:
         calc_cost(completion.get("usage"))
         st.session_state.messages.append({"role": "assistant", "content": ai_content})
         if ai_content:
-            show_chat(ai_content, st.session_state.user_text)
+            show_chat(ai_content)
             st.divider()
     except InvalidRequestError as err:
         if err.code == "context_length_exceeded":
