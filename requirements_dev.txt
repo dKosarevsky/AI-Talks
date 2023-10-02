@@ -1,4 +1,4 @@
 pytest==7.3.1
-ruff==0.0.277
+ruff==0.0.292
 pre_commit==3.3.3
 pytest-cov==4.1.0
