@@ -5,7 +5,7 @@ from openai import APIError
 from openai.types import CompletionUsage
 from streamlit_chat import message
 
-from .agi.chat_gpt import create_gpt_completion
+from .agi.chat_gpt2 import create_gpt_completion
 from .back import debit_tokens
 from .constants import USER_TXT_KEY
 

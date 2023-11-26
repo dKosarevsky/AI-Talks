@@ -1,21 +1,16 @@
 import logging
-from typing import List  # NOQA: UP035
-
-import openai
-from openai import OpenAI
-
 import streamlit as st
+
+from typing import List  # NOQA: UP035
 from tenacity import retry, stop_after_attempt
+
+from .api_utils import get_api_client
 
 
 @st.cache_data()
 @retry(stop=stop_after_attempt(3))
 def create_gpt_completion(ai_model: str, messages: List[dict]) -> dict:
-    try:
-        client = OpenAI(api_key=st.secrets.api_credentials.api_key, organization=st.secrets.api_credentials.api_org)
-    except (KeyError, AttributeError):
-        st.error(st.session_state.locale.empty_api_handler)
-        st.stop()
+    client = get_api_client()
     logging.info(f"{messages=}")
     # https://platform.openai.com/docs/api-reference/chat/create
     completion = client.chat.completions.create(
