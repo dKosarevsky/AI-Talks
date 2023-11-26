@@ -1,7 +1,8 @@
 from random import randrange
 
 import streamlit as st
-from openai.error import InvalidRequestError, OpenAIError
+from openai import APIError
+from openai.types import CompletionUsage
 from streamlit_chat import message
 
 from .agi.chat_gpt import create_gpt_completion
@@ -61,40 +62,49 @@ def show_chat(ai_content: str) -> None:
             """, help=f"{st.session_state.locale.sum_tokens}{sum(st.session_state.total_tokens)} | {st.session_state.locale.total_cost}{sum(st.session_state.costs):.5f}$")  # noqa: E501
 
 
-def calc_cost(usage: dict) -> None:
-    total_tokens = usage.get("total_tokens")
+def calc_cost(usage: CompletionUsage) -> None:
+    total_tokens = usage.total_tokens
     st.session_state.user_tokens -= total_tokens
     debit_tokens(username=st.session_state.username, used_tokens=total_tokens)
-    prompt_tokens = usage.get("prompt_tokens")
-    completion_tokens = usage.get("completion_tokens")
+    prompt_tokens = usage.prompt_tokens
+    completion_tokens = usage.completion_tokens
     st.session_state.total_tokens.append(total_tokens)
     # pricing logic: https://openai.com/pricing#language-models
-    if st.session_state.model == "gpt-3.5-turbo":
-        cost = total_tokens * 0.002 / 1000
-    else:
+    cost = 0
+    if st.session_state.model == "gpt-3.5-turbo-1106":
+        cost = (prompt_tokens * 0.001 + completion_tokens * 0.002) / 1000
+    elif st.session_state.model == "gpt-3.5-turbo-instruct":
+        cost = (prompt_tokens * 0.0015 + completion_tokens * 0.002) / 1000
+    elif st.session_state.model == "gpt-4":
         cost = (prompt_tokens * 0.03 + completion_tokens * 0.06) / 1000
+    elif st.session_state.model == "gpt-4-32k":
+        cost = (prompt_tokens * 0.06 + completion_tokens * 0.12) / 1000
+    elif st.session_state.model in ["gpt-4-1106-preview", "gpt-4-vision-preview"]:
+        cost = (prompt_tokens * 0.01 + completion_tokens * 0.03) / 1000
     st.session_state.costs.append(cost)
 
 
 def show_gpt_conversation() -> None:
     try:
         completion = create_gpt_completion(st.session_state.model, st.session_state.messages)
-        ai_content = completion.get("choices")[0].get("message").get("content")
-        calc_cost(completion.get("usage"))
+        ai_content = completion.choices[0].message.content
+        calc_cost(completion.usage)
         st.session_state.messages.append({"role": "assistant", "content": ai_content})
         if ai_content:
             show_chat(ai_content)
             st.divider()
-    except InvalidRequestError as err:
-        if err.code == "context_length_exceeded":
-            st.session_state.messages.pop(1)
-            if len(st.session_state.messages) == 1:
-                st.session_state.user_text = ""
-            show_conversation()
-        else:
-            st.error(err)
-    except (OpenAIError, UnboundLocalError) as err:
+    # except InvalidRequestError as err:
+    #     if err.code == "context_length_exceeded":
+    #         st.session_state.messages.pop(1)
+    #         if len(st.session_state.messages) == 1:
+    #             st.session_state.user_text = ""
+    #         show_conversation()
+    #     else:
+    #         st.error(err)
+    #         st.stop()
+    except (APIError, UnboundLocalError) as err:
         st.error(err)
+        st.stop()
 
 
 def show_conversation() -> None:

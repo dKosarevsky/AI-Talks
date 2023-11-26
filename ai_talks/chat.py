@@ -30,8 +30,7 @@ AI_MODEL_OPTIONS: list[str] = [
     "gpt-4",
     "gpt-4-32k",
     "gpt-3.5-turbo-1106",
-    "gpt-3.5-turbo",
-    "gpt-3.5-turbo-16k",
+    "gpt-3.5-turbo-instruct",
 ]
 
 st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
@@ -125,6 +124,7 @@ def run_agi() -> None:
             st.warning(st.session_state.locale.activate)
     except KeyError:
         st.error("User not found.")
+        st.stop()
 
 
 def main():

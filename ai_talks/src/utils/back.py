@@ -43,10 +43,13 @@ def login(applicant_token: str) -> None:
                                 st.experimental_rerun()
                         elif response.status_code in range(500, 512):
                             st.error(f"Server Error. Status code: {response.status_code}")
+                            st.stop()
                         else:
                             st.error(f"Error: {response.text}. Status code: {response.status_code}")
+                            st.stop()
                     except exceptions.RequestException as err:
                         st.error(f"Request Error: {err}")
+                        st.stop()
 
 
 def register(applicant_token: str) -> None:
@@ -74,10 +77,13 @@ def register(applicant_token: str) -> None:
                             st.experimental_rerun()
                         elif response.status_code in range(500, 512):
                             st.error(f"Server Error. Status code: {response.status_code}")
+                            st.stop()
                         else:
                             st.error(f"Error: {response.text}. Status code: {response.status_code}")
+                            st.stop()
                     except exceptions.RequestException as err:
                         st.error(f"Request Error: {err}")
+                        st.stop()
 
 
 def show_auth_menu() -> None:
@@ -113,10 +119,13 @@ def get_ai_tokens(username: str) -> None:
                 st.experimental_rerun()
             elif response.status_code in range(500, 512):
                 st.error(f"Server Error. Status code: {response.status_code}")
+                st.stop()
             else:
                 st.error(f"Error: {response.text}. Status code: {response.status_code}")
+                st.stop()
         except exceptions.RequestException as err:
             st.error(f"Request Error: {err}")
+            st.stop()
 
 
 def debit_tokens(username: str, used_tokens: int) -> None:
@@ -128,7 +137,10 @@ def debit_tokens(username: str, used_tokens: int) -> None:
             st.session_state.user_tokens = response_json["ai_tokens"]
         elif response.status_code in range(500, 512):
             st.error(f"Server Error. Status code: {response.status_code}")
+            st.stop()
         else:
             st.error(f"Error: {response.text}. Status code: {response.status_code}")
+            st.stop()
     except exceptions.RequestException as err:
         st.error(f"Request Error: {err}")
+        st.stop()
