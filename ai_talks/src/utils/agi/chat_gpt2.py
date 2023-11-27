@@ -17,17 +17,14 @@ def create_gpt_completion(ai_model: str, messages: List[dict]) -> dict:
         model=ai_model,
         messages=messages,
         temperature=st.session_state.temperature,
-        top_p=st.session_state.top_p,
+        # top_p=st.session_state.top_p,
         # max_tokens=st.session_state.max_tokens,
         n=1,
-        stop="",
+        # stop="",
         presence_penalty=st.session_state.presence_penalty,
         frequency_penalty=st.session_state.frequency_penalty,
-        # logit_bias={},
         user=st.session_state.username,
         # stream=True,
-        # functions: functions,
-        # function_call: "auto",
     )
     logging.info(f"{completion=}")
     return completion
