@@ -111,11 +111,11 @@ def run_agi() -> None:
                     st.text_input(label=st.session_state.locale.select_placeholder3, key="role")
 
             p1, p2, p3, p4 = st.columns(4)
-            p1.number_input(label=TEMP_KEY, min_value=0., max_value=2., key=TEMP_KEY)
-            p2.number_input(label=TOP_P_KEY, min_value=0., max_value=2., key=TOP_P_KEY)
+            p1.number_input(label=TEMP_KEY, min_value=0., max_value=2., value=st.session_state.temperature)
+            # p2.number_input(label=TOP_P_KEY, min_value=0., max_value=2., key=TOP_P_KEY)
             # p3.number_input(label=MAX_TOKENS_KEY, min_value=0., max_value=float("inf"), key=MAX_TOKENS_KEY)
-            p3.number_input(label=PRESENCE_PENALTY_KEY, min_value=-2., max_value=2., key=PRESENCE_PENALTY_KEY)
-            p4.number_input(label=FREQUENCY_PENALTY_KEY, min_value=-2., max_value=2., key=FREQUENCY_PENALTY_KEY)
+            # p3.number_input(label=PRESENCE_PENALTY_KEY, min_value=-2., max_value=2., key=PRESENCE_PENALTY_KEY)
+            # p4.number_input(label=FREQUENCY_PENALTY_KEY, min_value=-2., max_value=2., key=FREQUENCY_PENALTY_KEY)
             if st.session_state.user_text:
                 show_conversation()
                 st.session_state.user_text = ""
