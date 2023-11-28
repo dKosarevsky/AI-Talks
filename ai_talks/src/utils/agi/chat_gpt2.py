@@ -21,8 +21,8 @@ def create_gpt_completion(ai_model: str, messages: List[dict]) -> dict:
         # max_tokens=st.session_state.max_tokens,
         n=1,
         # stop="",
-        presence_penalty=st.session_state.presence_penalty,
-        frequency_penalty=st.session_state.frequency_penalty,
+        # presence_penalty=st.session_state.presence_penalty,
+        # frequency_penalty=st.session_state.frequency_penalty,
         user=st.session_state.username,
         # stream=True,
     )
