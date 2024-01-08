@@ -1,3 +1,6 @@
+from enum import Enum
+
+
 AI_ROLE_OPTIONS_EN: list[str] = [
     "",
     "helpful assistant",
@@ -45,3 +48,13 @@ MAX_TOKENS_KEY: str = "max_tokens"
 PRESENCE_PENALTY_KEY: str = "presence_penalty"
 FREQUENCY_PENALTY_KEY: str = "frequency_penalty"
 USER_TXT_KEY: str = "user_text"
+
+
+class AIModels(Enum):
+    gpt35_turbo = "gpt-3.5-turbo-1106"
+    gpt35_turbo_instruct = "gpt-3.5-turbo-instruct"
+    gpt4 = "gpt-4"
+    gpt4_32 = "gpt-4-32k"
+    gpt4_1106 = "gpt-4-1106-preview"
+    gpt4_vision = "gpt-4-vision-preview"
+    dalle_3 = "dall-e-3"
