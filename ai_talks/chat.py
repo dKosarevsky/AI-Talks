@@ -3,7 +3,7 @@ from random import randrange
 
 import streamlit as st
 
-from ai_talks.src.utils.agi.dalle import gen_dalle_img
+from src.utils.agi.dalle import gen_dalle_img
 from src.styles.menu_styles import HEADER_STYLES
 from src.utils.back import logout, show_auth_menu
 from src.utils.constants import (
