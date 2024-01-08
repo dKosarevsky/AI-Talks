@@ -7,7 +7,7 @@ from streamlit_chat import message
 
 from .agi.chat_gpt2 import create_gpt_completion
 from .back import debit_tokens
-from .constants import USER_TXT_KEY
+from .constants import USER_TXT_KEY, AIModels
 
 
 def clear_chat() -> None:
@@ -19,10 +19,6 @@ def clear_chat() -> None:
     st.session_state.costs = []
     st.session_state.total_tokens = []
     st.session_state.temperature = 1.
-    st.session_state.top_p = 1.
-    # st.session_state.max_tokens = float("inf")
-    st.session_state.presence_penalty = 0.
-    st.session_state.frequency_penalty = 0.
 
 
 def show_text_input() -> None:
@@ -71,16 +67,17 @@ def calc_cost(usage: CompletionUsage) -> None:
     st.session_state.total_tokens.append(total_tokens)
     # pricing logic: https://openai.com/pricing#language-models
     cost = 0
-    if st.session_state.model == "gpt-3.5-turbo-1106":
-        cost = (prompt_tokens * 0.001 + completion_tokens * 0.002) / 1000
-    elif st.session_state.model == "gpt-3.5-turbo-instruct":
-        cost = (prompt_tokens * 0.0015 + completion_tokens * 0.002) / 1000
-    elif st.session_state.model == "gpt-4":
-        cost = (prompt_tokens * 0.03 + completion_tokens * 0.06) / 1000
-    elif st.session_state.model == "gpt-4-32k":
-        cost = (prompt_tokens * 0.06 + completion_tokens * 0.12) / 1000
-    elif st.session_state.model in ["gpt-4-1106-preview", "gpt-4-vision-preview"]:
-        cost = (prompt_tokens * 0.01 + completion_tokens * 0.03) / 1000
+    match st.session_state.model:
+        case AIModels.gpt35_turbo.value:
+            cost = (prompt_tokens * 0.001 + completion_tokens * 0.002) / 1000
+        case AIModels.gpt35_turbo_instruct.value:
+            cost = (prompt_tokens * 0.0015 + completion_tokens * 0.002) / 1000
+        case AIModels.gpt4.value:
+            cost = (prompt_tokens * 0.03 + completion_tokens * 0.06) / 1000
+        case AIModels.gpt4_32.value:
+            cost = (prompt_tokens * 0.06 + completion_tokens * 0.12) / 1000
+        case AIModels.gpt4_1106.value, AIModels.gpt4_vision.value:
+            cost = (prompt_tokens * 0.0015 + completion_tokens * 0.002) / 1000
     st.session_state.costs.append(cost)
 
 

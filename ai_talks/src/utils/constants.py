@@ -1,3 +1,6 @@
+from enum import Enum
+
+
 AI_ROLE_OPTIONS_EN: list[str] = [
     "",
     "helpful assistant",
@@ -39,9 +42,31 @@ AI_TALKS_URL: str = "https://ai-talks.streamlit.app/"
 HEADERS: dict = {"Content-Type": "application/json; charset=utf-8"}
 ADMIN_TG: str = "https://t.me/wd4000"
 
-TEMP_KEY: str = "temperature"
-TOP_P_KEY: str = "top_p"
-MAX_TOKENS_KEY: str = "max_tokens"
-PRESENCE_PENALTY_KEY: str = "presence_penalty"
-FREQUENCY_PENALTY_KEY: str = "frequency_penalty"
+TEMP_KEY: str = "Temperature"
 USER_TXT_KEY: str = "user_text"
+
+
+class AIModels(Enum):
+    gpt35_turbo = "gpt-3.5-turbo-1106"
+    gpt35_turbo_instruct = "gpt-3.5-turbo-instruct"
+    gpt4 = "gpt-4"
+    gpt4_32 = "gpt-4-32k"
+    gpt4_1106 = "gpt-4-1106-preview"
+    gpt4_vision = "gpt-4-vision-preview"
+    dalle_3 = "dall-e-3"
+
+
+class StyleDALLE(Enum):
+    vivid = "vivid"
+    natural = "natural"
+
+
+class QualityDALLE(Enum):
+    standard = "standard"
+    hd = "hd"
+
+
+class SizeDALLE(Enum):
+    size_1024x1024 = "1024x1024"
+    size_1024x1792 = "1024x1792"
+    size_1792x1024 = "1792x1024"

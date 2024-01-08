@@ -39,6 +39,12 @@ class Locale:
     empty_api_handler: str
     balance_handler: str
     get_tokens: str
+    dalle_prompt_placeholder: str
+    dalle_generate_placeholder: str
+    dalle_quality_placeholder: str
+    dalle_size_placeholder: str
+    dalle_style_placeholder: str
+    dalle_revised_prompt_placeholder: str
 
 
 # --- LOCALE SETTINGS ---
@@ -79,6 +85,12 @@ en = Locale(
     """,
     balance_handler="Balance: ",
     get_tokens="Get Tokens",
+    dalle_prompt_placeholder="Input Your Prompt To Generate Image: ",
+    dalle_generate_placeholder="Generate",
+    dalle_quality_placeholder="Image Quality: ",
+    dalle_size_placeholder="Image Size: ",
+    dalle_style_placeholder="Image Style: ",
+    dalle_revised_prompt_placeholder="Revised Prompt: ",
 )
 
 ru = Locale(
@@ -87,13 +99,13 @@ ru = Locale(
     title="Разговорчики с ИИ",
     language="Russian",
     lang_code="ru",
-    chat_placeholder="Начните Вашу Беседу с ИИ:",
+    chat_placeholder="Начни Вашу Беседу с ИИ:",
     chat_run_btn="Спросить",
     chat_clear_btn="Очистить",
     chat_save_btn="Сохранить",
-    select_placeholder1="Выберите Модель",
-    select_placeholder2="Выберите Роль",
-    select_placeholder3="Создайте Роль",
+    select_placeholder1="Выбери Модель",
+    select_placeholder2="Выбери Роль",
+    select_placeholder3="Создай Роль",
     radio_placeholder="Взаимодействие с Ролью",
     radio_text1="Выбрать",
     radio_text2="Создать",
@@ -103,7 +115,7 @@ ru = Locale(
     sum_tokens="Сумма токенов: ",
     available_tokens="Доступные Токены: ",
     need_tokens="Для дальнейшей работы необходимы Токены",
-    activate=f"Необходима активация. Свяжитесь с [Администратором]({ADMIN_TG}).",
+    activate=f"Необходима активация. Свяжись с [Администратором]({ADMIN_TG}).",
     greetings="Привет, ",
     username="Имя Пользователя:",
     password="Пароль:",  # noqa: S106
@@ -118,4 +130,10 @@ ru = Locale(
     """,
     balance_handler="Баланс: ",
     get_tokens="Получить Токены",
+    dalle_prompt_placeholder="Введи Запрос Для Генерации Изображения: ",
+    dalle_generate_placeholder="Сгенерировать",
+    dalle_quality_placeholder="Качество Изображения: ",
+    dalle_size_placeholder="Размер Изображения: ",
+    dalle_style_placeholder="Стиль Изображения: ",
+    dalle_revised_prompt_placeholder="Пересмотренный Запрос: ",
 )
