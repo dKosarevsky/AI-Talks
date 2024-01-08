@@ -39,6 +39,8 @@ class Locale:
     empty_api_handler: str
     balance_handler: str
     get_tokens: str
+    dalle_prompt_placeholder: str
+    dalle_generate_placeholder: str
 
 
 # --- LOCALE SETTINGS ---
@@ -79,6 +81,8 @@ en = Locale(
     """,
     balance_handler="Balance: ",
     get_tokens="Get Tokens",
+    dalle_prompt_placeholder="Input Your Prompt To Generate Image: ",
+    dalle_generate_placeholder="Generate",
 )
 
 ru = Locale(
@@ -118,4 +122,6 @@ ru = Locale(
     """,
     balance_handler="Баланс: ",
     get_tokens="Получить Токены",
+    dalle_prompt_placeholder="Введите Запрос Для Генерации Изображения: ",
+    dalle_generate_placeholder="Сгенерировать",
 )
