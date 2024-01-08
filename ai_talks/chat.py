@@ -2,14 +2,17 @@ from pathlib import Path
 from random import randrange
 
 import streamlit as st
+
+from ai_talks.src.utils.agi.dalle import gen_dalle_img
 from src.styles.menu_styles import HEADER_STYLES
 from src.utils.back import logout, show_auth_menu
 from src.utils.constants import (
-    FREQUENCY_PENALTY_KEY,
-    PRESENCE_PENALTY_KEY,
     TEMP_KEY,
-    TOP_P_KEY,
     USER_TXT_KEY,
+    AIModels,
+    QualityDALLE,
+    SizeDALLE,
+    StyleDALLE,
 )
 from src.utils.conversation import clear_chat, get_user_input, show_conversation
 from src.utils.lang import en, ru
@@ -24,14 +27,6 @@ PAGE_TITLE: str = "AI Talks"
 PAGE_ICON: str = "🤖"
 LANG_EN: str = "En"
 LANG_RU: str = "Ru"
-AI_MODEL_OPTIONS: list[str] = [
-    "gpt-4-1106-preview",
-    "gpt-4-vision-preview",
-    "gpt-4",
-    "gpt-4-32k",
-    "gpt-3.5-turbo-1106",
-    "gpt-3.5-turbo-instruct",
-]
 
 st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
 
@@ -67,14 +62,6 @@ if "seed" not in st.session_state:
     st.session_state.seed = randrange(10**3)  # noqa: S311
 if TEMP_KEY not in st.session_state:
     st.session_state.temperature = 1.
-if TOP_P_KEY not in st.session_state:
-    st.session_state.top_p = 1.
-# if MAX_TOKENS_KEY not in st.session_state:
-#     st.session_state.max_tokens = float("inf")
-if PRESENCE_PENALTY_KEY not in st.session_state:
-    st.session_state.presence_penalty = 0.
-if FREQUENCY_PENALTY_KEY not in st.session_state:
-    st.session_state.frequency_penalty = 0.
 if "costs" not in st.session_state:
     st.session_state.costs = []
 if "total_tokens" not in st.session_state:
@@ -96,30 +83,44 @@ def run_agi() -> None:
             c1, c2 = st.columns(2)
             with c1, c2:
                 c1.selectbox(label=st.session_state.locale.select_placeholder1,
-                             key="model", options=AI_MODEL_OPTIONS, on_change=clear_chat)
-                role_kind = c2.radio(
-                    label=st.session_state.locale.radio_placeholder,
-                    options=(st.session_state.locale.radio_text1, st.session_state.locale.radio_text2),
-                    horizontal=True,
-                    on_change=clear_chat,
-                )
-            match role_kind:
-                case st.session_state.locale.radio_text1:
-                    st.selectbox(label=st.session_state.locale.select_placeholder2, key="role",
-                                 options=st.session_state.locale.ai_role_options)
-                case st.session_state.locale.radio_text2:
-                    st.text_input(label=st.session_state.locale.select_placeholder3, key="role")
+                             key="model", options=[model.value for model in AIModels], on_change=clear_chat)
+            match st.session_state.model:
+                case AIModels.dalle_3.value:
+                    with st.form("dalle_form"):
+                        c2.selectbox(label=st.session_state.locale.dalle_style_placeholder,
+                                     key="style", options=[size.value for size in StyleDALLE])
+                        c1.selectbox(label=st.session_state.locale.dalle_quality_placeholder,
+                                     key="quality", options=[quality.value for quality in QualityDALLE])
+                        c2.selectbox(label=st.session_state.locale.dalle_size_placeholder,
+                                     key="size", options=[size.value for size in SizeDALLE])
+                        st.text_area(label=st.session_state.locale.dalle_prompt_placeholder, key=USER_TXT_KEY)
+                        if st.form_submit_button(label=st.session_state.locale.dalle_generate_placeholder):
+                            gen_dalle_img(
+                                ai_model=st.session_state.model,
+                                prompt=st.session_state.user_text,
+                                size=st.session_state.size,
+                                quality=st.session_state.quality,
+                                style=st.session_state.style,
+                            )
+                case _:
+                    role_kind = c2.radio(
+                        label=st.session_state.locale.radio_placeholder,
+                        options=(st.session_state.locale.radio_text1, st.session_state.locale.radio_text2),
+                        horizontal=True,
+                        on_change=clear_chat,
+                    )
+                    match role_kind:
+                        case st.session_state.locale.radio_text1:
+                            st.selectbox(label=st.session_state.locale.select_placeholder2, key="role",
+                                         options=st.session_state.locale.ai_role_options)
+                        case st.session_state.locale.radio_text2:
+                            st.text_input(label=st.session_state.locale.select_placeholder3, key="role")
 
-            p1, p2, p3, p4 = st.columns(4)
-            p1.number_input(label=TEMP_KEY, min_value=0., max_value=2., value=st.session_state.temperature)
-            # p2.number_input(label=TOP_P_KEY, min_value=0., max_value=2., key=TOP_P_KEY)
-            # p3.number_input(label=MAX_TOKENS_KEY, min_value=0., max_value=float("inf"), key=MAX_TOKENS_KEY)
-            # p3.number_input(label=PRESENCE_PENALTY_KEY, min_value=-2., max_value=2., key=PRESENCE_PENALTY_KEY)
-            # p4.number_input(label=FREQUENCY_PENALTY_KEY, min_value=-2., max_value=2., key=FREQUENCY_PENALTY_KEY)
-            if st.session_state.user_text:
-                show_conversation()
-                st.session_state.user_text = ""
-            get_user_input()
+                    c1.number_input(label=TEMP_KEY, min_value=0., max_value=2., value=st.session_state.temperature)
+                    if st.session_state.user_text:
+                        show_conversation()
+                        st.session_state.user_text = ""
+                    get_user_input()
         else:
             st.warning(st.session_state.locale.activate)
     except KeyError:
