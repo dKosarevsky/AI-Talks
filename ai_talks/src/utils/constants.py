@@ -47,12 +47,24 @@ USER_TXT_KEY: str = "user_text"
 
 
 class AIModels(Enum):
-    gpt35_turbo = "gpt-3.5-turbo-1106"
-    gpt35_turbo_instruct = "gpt-3.5-turbo-instruct"
+    # https://platform.openai.com/docs/models
+    gpt4_turbo_preview = "gpt-4-turbo-preview"
+    gpt4_0125_preview = "gpt-4-0125-preview"
+    gpt4_1106_preview = "gpt-4-1106-preview"
+
+    gpt4_vision_preview = "gpt-4-vision-preview"
+
     gpt4 = "gpt-4"
-    gpt4_32 = "gpt-4-32k"
-    gpt4_1106 = "gpt-4-1106-preview"
-    gpt4_vision = "gpt-4-vision-preview"
+    gpt4_0613 = "gpt-4-0613"
+    gpt4_32k = "gpt-4-32k"
+    gpt4_32k_0613 = "gpt-4-32k-0613"
+
+    gpt35_turbo = "gpt-3.5-turbo"
+    gpt35_turbo_1106 = "gpt-3.5-turbo-1106"
+    gpt35_turbo_16k = "gpt-3.5-turbo-16k"
+
+    gpt35_turbo_instruct = "gpt-3.5-turbo-instruct"
+
     dalle_3 = "dall-e-3"
 
 

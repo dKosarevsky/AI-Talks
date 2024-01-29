@@ -68,16 +68,19 @@ def calc_cost(usage: CompletionUsage) -> None:
     # pricing logic: https://openai.com/pricing#language-models
     cost = 0
     match st.session_state.model:
-        case AIModels.gpt35_turbo.value:
-            cost = (prompt_tokens * 0.001 + completion_tokens * 0.002) / 1000
+        case AIModels.gpt35_turbo.value, AIModels.gpt35_turbo_1106.value, AIModels.gpt35_turbo_16k.value:
+            cost = (prompt_tokens * .001 + completion_tokens * .002) / 1000
         case AIModels.gpt35_turbo_instruct.value:
-            cost = (prompt_tokens * 0.0015 + completion_tokens * 0.002) / 1000
-        case AIModels.gpt4.value:
-            cost = (prompt_tokens * 0.03 + completion_tokens * 0.06) / 1000
-        case AIModels.gpt4_32.value:
-            cost = (prompt_tokens * 0.06 + completion_tokens * 0.12) / 1000
-        case AIModels.gpt4_1106.value, AIModels.gpt4_vision.value:
-            cost = (prompt_tokens * 0.0015 + completion_tokens * 0.002) / 1000
+            cost = (prompt_tokens * .0015 + completion_tokens * .002) / 1000
+        case AIModels.gpt4.value, AIModels.gpt4_0613.value:
+            cost = (prompt_tokens * .03 + completion_tokens * .06) / 1000
+        case AIModels.gpt4_32k.value, AIModels.gpt4_32k_0613.value:
+            cost = (prompt_tokens * .06 + completion_tokens * .12) / 1000
+        case AIModels.gpt4_turbo_preview.value, AIModels.gpt4_0125_preview.value, AIModels.gpt4_1106_preview.value:
+            cost = (prompt_tokens * .01 + completion_tokens * .03) / 1000
+        case AIModels.gpt4_vision_preview.value:
+            uploaded_img_cost = .0
+            cost = (prompt_tokens * .01 + completion_tokens * .03) / 1000 + uploaded_img_cost
     st.session_state.costs.append(cost)
 
 
