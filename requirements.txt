@@ -1,7 +1,9 @@
 pip==24.0
 streamlit==1.32.2
 streamlit-chat==0.1.1
-streamlit_option_menu==0.3.12
+streamlit-option-menu==0.3.12
 openai==1.14.1
 watchdog==4.0.0
 Levenshtein==0.23.0
+bokeh==2.4.2
+streamlit-bokeh-events>=0.1.2
