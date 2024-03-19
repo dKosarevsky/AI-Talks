@@ -3,8 +3,6 @@ from random import randrange
 
 import streamlit as st
 
-from ai_talks.src.utils.stt import show_voice_input
-from src.utils.stt import show_voice_input
 from src.utils.agi.dalle import gen_dalle_img
 from src.styles.menu_styles import HEADER_STYLES
 from src.utils.back import logout, show_auth_menu
@@ -18,6 +16,7 @@ from src.utils.constants import (
 )
 from src.utils.conversation import clear_chat, get_user_input, show_conversation
 from src.utils.lang import en, ru
+from src.utils.stt import show_voice_input
 from streamlit_option_menu import option_menu
 
 # --- PATH SETTINGS ---
