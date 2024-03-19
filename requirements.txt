@@ -1,6 +1,7 @@
-pip==23.3.1
-streamlit==1.29.0
+pip==24.0
+streamlit==1.32.2
 streamlit-chat==0.1.1
-streamlit_option_menu==0.3.6
-openai==1.4.0
-watchdog==3.0.0
+streamlit_option_menu==0.3.12
+openai==1.14.1
+watchdog==4.0.0
+Levenshtein==0.23.0
