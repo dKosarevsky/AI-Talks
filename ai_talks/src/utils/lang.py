@@ -45,6 +45,7 @@ class Locale:
     dalle_size_placeholder: str
     dalle_style_placeholder: str
     dalle_revised_prompt_placeholder: str
+    speak_btn: str
 
 
 # --- LOCALE SETTINGS ---
@@ -91,6 +92,7 @@ en = Locale(
     dalle_size_placeholder="Image Size: ",
     dalle_style_placeholder="Image Style: ",
     dalle_revised_prompt_placeholder="Revised Prompt: ",
+    speak_btn="Push to Speak",
 )
 
 ru = Locale(
@@ -136,4 +138,5 @@ ru = Locale(
     dalle_size_placeholder="Размер Изображения: ",
     dalle_style_placeholder="Стиль Изображения: ",
     dalle_revised_prompt_placeholder="Пересмотренный Запрос: ",
+    speak_btn="Нажми и Говори",
 )
