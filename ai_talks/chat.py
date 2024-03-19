@@ -3,6 +3,7 @@ from random import randrange
 
 import streamlit as st
 
+from ai_talks.src.utils.stt import show_voice_input
 from src.utils.agi.dalle import gen_dalle_img
 from src.styles.menu_styles import HEADER_STYLES
 from src.utils.back import logout, show_auth_menu
@@ -71,10 +72,12 @@ if "total_tokens" not in st.session_state:
 def show_user_data() -> None:
     with st.sidebar:
         st.markdown(f"{st.session_state.locale.greetings}**{st.session_state.username}** :wave:")
+        st.divider()
         if st.button(st.session_state.locale.logout):
             logout(st.session_state["applicant-token"])
         st.divider()
         st.markdown(f"[{st.session_state.locale.get_tokens}](https://boosty.to/ai-talks/donate)")
+        st.divider()
 
 
 def run_agi() -> None:
@@ -117,6 +120,8 @@ def run_agi() -> None:
                             st.text_input(label=st.session_state.locale.select_placeholder3, key="role")
 
                     c1.number_input(label=TEMP_KEY, min_value=0., max_value=2., value=st.session_state.temperature)
+                    with c2:
+                        show_voice_input(lang=st.session_state.locale.lang_code)
                     if st.session_state.user_text:
                         show_conversation()
                         st.session_state.user_text = ""
