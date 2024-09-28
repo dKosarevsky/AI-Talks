@@ -65,17 +65,18 @@ def calc_cost(usage: CompletionUsage) -> None:
     prompt_tokens = usage.prompt_tokens
     completion_tokens = usage.completion_tokens
     st.session_state.total_tokens.append(total_tokens)
-    # pricing logic: https://openai.com/pricing#language-models
-    cost = 0
+    # pricing logic: https://openai.com/pricing
     match st.session_state.model:
-        case AIModels.gpt35_turbo_instruct.value:
-            cost = (prompt_tokens * .0015 + completion_tokens * .002) / 1000
-        case AIModels.gpt4.value:
-            cost = (prompt_tokens * .03 + completion_tokens * .06) / 1000
-        case AIModels.gpt4_turbo.value:
-            cost = (prompt_tokens * .01 + completion_tokens * .03) / 1000
         case AIModels.gpt4o.value:
             cost = (prompt_tokens * .005 + completion_tokens * .015) / 1000
+        case AIModels.gpt_4o_mini.value:
+            cost = (prompt_tokens * .00015 + completion_tokens * .0006) / 1000
+        case AIModels.o1_preview.value:
+            cost = (prompt_tokens * .015 + completion_tokens * .06) / 1000
+        case AIModels.o1_mini.value:
+            cost = (prompt_tokens * .003 + completion_tokens * .012) / 1000
+        case _:
+            cost = (prompt_tokens * .1 + completion_tokens * .2) / 1000
     st.session_state.costs.append(cost)
 
 
