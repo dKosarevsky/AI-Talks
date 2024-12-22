@@ -5,5 +5,5 @@ streamlit-option-menu==0.4.0
 openai==1.58.1
 watchdog==6.0.0
 Levenshtein==0.26.1
-bokeh==2.4.2
+bokeh==3.6.2
 streamlit-bokeh-events>=0.1.2
