@@ -14,7 +14,7 @@ def logout(applicant_token: str) -> None:
         st.session_state["applicant-token"] = ""
     st.session_state.authentication_status = False
     st.session_state.username = ""
-    st.experimental_rerun()
+    st.rerun()
 
 
 def login(applicant_token: str) -> None:
@@ -40,7 +40,7 @@ def login(applicant_token: str) -> None:
                                 st.session_state.key = "applicant-token"
                                 st.session_state["applicant-token"] = applicant_token
                                 st.session_state.authentication_status = True
-                                st.experimental_rerun()
+                                st.rerun()
                         elif response.status_code in range(500, 512):
                             st.error(f"Server Error. Status code: {response.status_code}")
                             st.stop()
@@ -60,7 +60,7 @@ def register(applicant_token: str) -> None:
                 st.write("You are now logged out!")
                 del st.session_state["applicant-token"]
                 time.sleep(3)
-                st.experimental_rerun()
+                st.rerun()
     else:
         with st.form("register_form"):
             telegram = st.text_input(label="telegram")
@@ -74,7 +74,7 @@ def register(applicant_token: str) -> None:
                         response = post(url=st.secrets.back.base_url + "register/", headers=HEADERS,  # noqa: S113
                                         json=data, auth=get_back_auth())
                         if response.status_code == 200:
-                            st.experimental_rerun()
+                            st.rerun()
                         elif response.status_code in range(500, 512):
                             st.error(f"Server Error. Status code: {response.status_code}")
                             st.stop()
@@ -116,7 +116,7 @@ def get_ai_tokens(username: str) -> None:
             if response.status_code == 200:
                 response_json = response.json()
                 st.session_state.user_tokens = response_json["ai_tokens"]
-                st.experimental_rerun()
+                st.rerun()
             elif response.status_code in range(500, 512):
                 st.error(f"Server Error. Status code: {response.status_code}")
                 st.stop()
