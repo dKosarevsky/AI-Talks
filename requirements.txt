@@ -7,3 +7,4 @@ watchdog==6.0.0
 Levenshtein==0.26.1
 bokeh==3.6.2
 streamlit-bokeh-events>=0.1.2
+pendulum==3.0.0
