@@ -121,14 +121,20 @@ def show_gpt_conversation() -> None:
         st.stop()
 
 
+def append_user_message() -> None:
+    st.session_state.messages.append({"role": "user", "content": st.session_state.user_text})
+
+
 def show_conversation() -> None:
     if st.session_state.messages:
-        st.session_state.messages.append({"role": "user", "content": st.session_state.user_text})
+        # st.session_state.messages.append({"role": "user", "content": st.session_state.user_text})
+        append_user_message()
     else:
-        ai_role = f"{st.session_state.locale.ai_role_prefix + ' ' if st.session_state.role else ''}" \
-                  f"{st.session_state.role + '.' if st.session_state.role else ''}"
-        st.session_state.messages = [
-            {"role": "system", "content": ai_role + st.secrets.prompt.system},
-            {"role": "user", "content": st.session_state.user_text},
-        ]
+        if st.session_state.model not in [AIModels.o1.value, AIModels.o1_preview.value, AIModels.o1_mini.value]:
+            ai_role = f"{st.session_state.locale.ai_role_prefix + ' ' if st.session_state.role else ''}" \
+                      f"{st.session_state.role + '.' if st.session_state.role else ''}"
+            st.session_state.messages = [
+                {"role": "system", "content": ai_role + st.secrets.prompt.system},
+            ]
+        append_user_message()
     show_gpt_conversation()
