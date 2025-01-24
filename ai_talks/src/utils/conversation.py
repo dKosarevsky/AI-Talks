@@ -58,6 +58,23 @@ def show_chat(ai_content: str) -> None:
             """, help=f"{st.session_state.locale.sum_tokens}{sum(st.session_state.total_tokens)} | {st.session_state.locale.total_cost}{sum(st.session_state.costs):.5f}$")  # noqa: E501
 
 
+def calc_total(prompt_tkns: int, compl_tkns: int, in_cost_pm: float, out_cost_pm: float) -> float:
+    """
+    Рассчитывает общую стоимость входных и выходных токенов с заданными тарифами.
+    OpenAI pricing logic: https://openai.com/api/pricing/#language-models
+
+    :param prompt_tkns: Количество входных токенов.
+    :param compl_tkns: Количество выходных токенов.
+    :param in_cost_pm: Стоимость за миллион входных токенов.
+    :param out_cost_pm: Стоимость за миллион выходных токенов.
+    :return: Общая стоимость токенов.
+    """
+    cost_per_input_token = in_cost_pm / 1_000_000
+    cost_per_output_token = out_cost_pm / 1_000_000
+    total_cost = (prompt_tkns * cost_per_input_token) + (compl_tkns * cost_per_output_token)
+    return total_cost
+
+
 def calc_cost(usage: CompletionUsage) -> None:
     total_tokens = usage.total_tokens
     st.session_state.user_tokens -= total_tokens
@@ -65,18 +82,19 @@ def calc_cost(usage: CompletionUsage) -> None:
     prompt_tokens = usage.prompt_tokens
     completion_tokens = usage.completion_tokens
     st.session_state.total_tokens.append(total_tokens)
-    # pricing logic: https://openai.com/pricing
     match st.session_state.model:
         case AIModels.gpt4o.value:
-            cost = (prompt_tokens * .005 + completion_tokens * .015) / 1000
+            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens, in_cost_pm=2.5, out_cost_pm=10.)
         case AIModels.gpt_4o_mini.value:
-            cost = (prompt_tokens * .00015 + completion_tokens * .0006) / 1000
+            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens, in_cost_pm=.15, out_cost_pm=.6)
         case AIModels.o1_preview.value:
-            cost = (prompt_tokens * .015 + completion_tokens * .06) / 1000
+            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens, in_cost_pm=15., out_cost_pm=60.)
+        case AIModels.o1.value:
+            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens, in_cost_pm=15., out_cost_pm=60.)
         case AIModels.o1_mini.value:
-            cost = (prompt_tokens * .003 + completion_tokens * .012) / 1000
+            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens, in_cost_pm=3., out_cost_pm=12.)
         case _:
-            cost = (prompt_tokens * .1 + completion_tokens * .2) / 1000
+            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens, in_cost_pm=30., out_cost_pm=120.)
     st.session_state.costs.append(cost)
 
 
