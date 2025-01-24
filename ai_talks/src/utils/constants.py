@@ -55,6 +55,10 @@ class AIModels(Enum):
     o1_mini = "o1-mini"
     o1 = "o1"
 
+    o3_preview = "o3-preview"
+    o3_mini = "o3-mini"
+    o3 = "o3"
+
     dalle_3 = "dall-e-3"
 
 
