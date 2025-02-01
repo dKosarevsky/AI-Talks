@@ -48,16 +48,14 @@ USER_TXT_KEY: str = "user_text"
 
 class AIModels(Enum):
     # https://platform.openai.com/docs/models
-    gpt4o = "gpt-4o"
     gpt_4o_mini = "gpt-4o-mini"
+    o1_mini = "o1-mini"
+    o3_mini = "o3-mini"
+
+    gpt4o = "gpt-4o"
 
     o1_preview = "o1-preview"
-    o1_mini = "o1-mini"
     o1 = "o1"
-
-    o3_preview = "o3-preview"
-    o3_mini = "o3-mini"
-    o3 = "o3"
 
     dalle_3 = "dall-e-3"
 
