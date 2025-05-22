@@ -123,7 +123,7 @@ def run_agi() -> None:
                     with c2:
                         show_voice_input(lang=st.session_state.locale.lang_code)
                     if st.session_state.user_text:
-                        show_conversation()
+                        show_conversation(is_open_ai="claude" not in st.session_state.model)
                         st.session_state.user_text = ""
                     get_user_input()
         else:

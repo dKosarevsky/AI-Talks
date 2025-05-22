@@ -3,6 +3,7 @@ streamlit==1.45.1
 streamlit-chat==0.1.1
 streamlit-option-menu==0.4.0
 openai==1.82.0
+anthropic==0.52.0
 watchdog==6.0.0
 Levenshtein==0.27.1
 bokeh==3.6.2

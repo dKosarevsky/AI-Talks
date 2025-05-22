@@ -5,7 +5,7 @@ from openai import APIError
 from openai.types import CompletionUsage
 from streamlit_chat import message
 
-from .agi.chat_gpt2 import create_gpt_completion
+from .agi.chat_gpt2 import create_llm_content
 from .back import debit_tokens
 from .constants import USER_TXT_KEY, AIModels
 
@@ -75,58 +75,62 @@ def calc_total(prompt_tkns: int, compl_tkns: int, in_cost_pm: float, out_cost_pm
     return total_cost
 
 
-def calc_cost(usage: CompletionUsage) -> None:
-    total_tokens = usage.total_tokens
-    st.session_state.user_tokens -= total_tokens
-    debit_tokens(username=st.session_state.username, used_tokens=total_tokens)
-    prompt_tokens = usage.prompt_tokens
-    completion_tokens = usage.completion_tokens
-    st.session_state.total_tokens.append(total_tokens)
-    match st.session_state.model:
-        case AIModels.o3_mini.value:
-            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
-                              in_cost_pm=1.1, out_cost_pm=4.4)
-        case AIModels.o4_mini.value:
-            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
-                              in_cost_pm=1.1, out_cost_pm=4.4)
-        case AIModels.o1.value:
-            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
-                              in_cost_pm=15., out_cost_pm=60.)
-        case AIModels.o3.value:
-            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
-                              in_cost_pm=10., out_cost_pm=40.)
-        case AIModels.o1_pro.value:
-            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
-                              in_cost_pm=150., out_cost_pm=600.)
-        case AIModels.gpt_4_1_mini.value:
-            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
-                              in_cost_pm=.4, out_cost_pm=1.6)
-        case AIModels.gpt_4_1_nano.value:
-            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
-                              in_cost_pm=.1, out_cost_pm=.4)
-        case AIModels.gpt_4o_mini.value:
-            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
-                              in_cost_pm=.15, out_cost_pm=.6)
-        case AIModels.gpt4o.value:
-            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
-                              in_cost_pm=2.5, out_cost_pm=10.)
-        case AIModels.chatgpt_4o.value:
-            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
-                              in_cost_pm=5., out_cost_pm=15.)
-        case AIModels.gpt4_1.value:
-            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
-                              in_cost_pm=2., out_cost_pm=8.)
-        case _:
-            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
-                              in_cost_pm=150., out_cost_pm=600.)
-    st.session_state.costs.append(cost)
+def calc_cost(usage: CompletionUsage | None) -> None:
+    if usage:
+        total_tokens = usage.total_tokens
+        st.session_state.user_tokens -= total_tokens
+        debit_tokens(username=st.session_state.username, used_tokens=total_tokens)
+        prompt_tokens = usage.prompt_tokens
+        completion_tokens = usage.completion_tokens
+        st.session_state.total_tokens.append(total_tokens)
+        match st.session_state.model:
+            case AIModels.o3_mini.value:
+                cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                                  in_cost_pm=1.1, out_cost_pm=4.4)
+            case AIModels.o4_mini.value:
+                cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                                  in_cost_pm=1.1, out_cost_pm=4.4)
+            case AIModels.o1.value:
+                cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                                  in_cost_pm=15., out_cost_pm=60.)
+            case AIModels.o3.value:
+                cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                                  in_cost_pm=10., out_cost_pm=40.)
+            case AIModels.o1_pro.value:
+                cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                                  in_cost_pm=150., out_cost_pm=600.)
+            case AIModels.gpt_4_1_mini.value:
+                cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                                  in_cost_pm=.4, out_cost_pm=1.6)
+            case AIModels.gpt_4_1_nano.value:
+                cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                                  in_cost_pm=.1, out_cost_pm=.4)
+            case AIModels.gpt_4o_mini.value:
+                cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                                  in_cost_pm=.15, out_cost_pm=.6)
+            case AIModels.gpt4o.value:
+                cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                                  in_cost_pm=2.5, out_cost_pm=10.)
+            case AIModels.chatgpt_4o.value:
+                cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                                  in_cost_pm=5., out_cost_pm=15.)
+            case AIModels.gpt4_1.value:
+                cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                                  in_cost_pm=2., out_cost_pm=8.)
+            case _:
+                cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                                  in_cost_pm=150., out_cost_pm=600.)
+        st.session_state.costs.append(cost)
 
 
-def show_gpt_conversation() -> None:
+def show_llm_conversation(is_open_ai: bool) -> None:
     try:
-        completion = create_gpt_completion(st.session_state.model, st.session_state.messages)
-        ai_content = completion.choices[0].message.content
-        calc_cost(completion.usage)
+        ai_content, usage = create_llm_content(
+            ai_model=st.session_state.model,
+            messages=st.session_state.messages,
+            is_open_ai=is_open_ai,
+        )
+        calc_cost(usage)
         st.session_state.messages.append({"role": "assistant", "content": ai_content})
         if ai_content:
             show_chat(ai_content)
@@ -149,16 +153,16 @@ def append_user_message() -> None:
     st.session_state.messages.append({"role": "user", "content": st.session_state.user_text})
 
 
-def show_conversation() -> None:
+def show_conversation(is_open_ai: bool) -> None:
     if st.session_state.messages:
         # st.session_state.messages.append({"role": "user", "content": st.session_state.user_text})
         append_user_message()
     else:
-        if st.session_state.model not in [AIModels.o1.value, AIModels.o1_preview.value, AIModels.o1_mini.value]:
+        if st.session_state.model not in [AIModels.o1.value, ]:
             ai_role = f"{st.session_state.locale.ai_role_prefix + ' ' if st.session_state.role else ''}" \
                       f"{st.session_state.role + '.' if st.session_state.role else ''}"
             st.session_state.messages = [
                 {"role": "system", "content": ai_role + st.secrets.prompt.system},
             ]
         append_user_message()
-    show_gpt_conversation()
+    show_llm_conversation(is_open_ai)

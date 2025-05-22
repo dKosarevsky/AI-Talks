@@ -69,6 +69,14 @@ class AIModels(Enum):
     # Image generation models
     dalle_3 = "dall-e-3"
 
+    # anthropic models
+    opus_4 = "claude-opus-4-0"
+    opus_3 = "claude-3-opus-latest"
+    sonnet_4 = "claude-sonnet-4-0"
+    sonnet_3_7 = "claude-3-7-sonnet-latest"
+    sonnet_3_5 = "claude-3-5-sonnet-latest"
+    haiku_3_5 = "claude-3-5-haiku-latest"
+
 
 class StyleDALLE(Enum):
     vivid = "vivid"
