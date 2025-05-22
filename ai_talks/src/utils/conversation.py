@@ -83,27 +83,42 @@ def calc_cost(usage: CompletionUsage) -> None:
     completion_tokens = usage.completion_tokens
     st.session_state.total_tokens.append(total_tokens)
     match st.session_state.model:
-        case AIModels.gpt4o.value:
-            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
-                              in_cost_pm=2.5, out_cost_pm=10.)
-        case AIModels.gpt_4o_mini.value:
-            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
-                              in_cost_pm=.15, out_cost_pm=.6)
-        case AIModels.o1_preview.value:
-            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
-                              in_cost_pm=15., out_cost_pm=60.)
-        case AIModels.o1.value:
-            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
-                              in_cost_pm=15., out_cost_pm=60.)
-        case AIModels.o1_mini.value:
-            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
-                              in_cost_pm=1.1, out_cost_pm=4.4)
         case AIModels.o3_mini.value:
             cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
                               in_cost_pm=1.1, out_cost_pm=4.4)
+        case AIModels.o4_mini.value:
+            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                              in_cost_pm=1.1, out_cost_pm=4.4)
+        case AIModels.o1.value:
+            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                              in_cost_pm=15., out_cost_pm=60.)
+        case AIModels.o3.value:
+            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                              in_cost_pm=10., out_cost_pm=40.)
+        case AIModels.o1_pro.value:
+            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                              in_cost_pm=150., out_cost_pm=600.)
+        case AIModels.gpt_4_1_mini.value:
+            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                              in_cost_pm=.4, out_cost_pm=1.6)
+        case AIModels.gpt_4_1_nano.value:
+            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                              in_cost_pm=.1, out_cost_pm=.4)
+        case AIModels.gpt_4o_mini.value:
+            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                              in_cost_pm=.15, out_cost_pm=.6)
+        case AIModels.gpt4o.value:
+            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                              in_cost_pm=2.5, out_cost_pm=10.)
+        case AIModels.chatgpt_4o.value:
+            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                              in_cost_pm=5., out_cost_pm=15.)
+        case AIModels.gpt4_1.value:
+            cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
+                              in_cost_pm=2., out_cost_pm=8.)
         case _:
             cost = calc_total(prompt_tkns=prompt_tokens, compl_tkns=completion_tokens,
-                              in_cost_pm=30., out_cost_pm=120.)
+                              in_cost_pm=150., out_cost_pm=600.)
     st.session_state.costs.append(cost)
 
 

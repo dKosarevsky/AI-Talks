@@ -48,15 +48,25 @@ USER_TXT_KEY: str = "user_text"
 
 class AIModels(Enum):
     # https://platform.openai.com/docs/models
-    gpt_4o_mini = "gpt-4o-mini"
-    o1_mini = "o1-mini"
+
+    # Reasoning models
     o3_mini = "o3-mini"
-
-    gpt4o = "gpt-4o"
-
-    o1_preview = "o1-preview"
+    o4_mini = "o4-mini"
     o1 = "o1"
+    o3 = "o3"
+    o1_pro = "o1-pro"
 
+    # Flagship chat models
+    gpt4o = "gpt-4o"
+    gpt4_1 = "gpt-4.1"
+    chatgpt_4o = "chatgpt-4o-latest"
+
+    # Cost-optimized models
+    gpt_4_1_mini = "gpt-4.1-mini"
+    gpt_4_1_nano = "gpt-4.1-nano"
+    gpt_4o_mini = "gpt-4o-mini"
+
+    # Image generation models
     dalle_3 = "dall-e-3"
 
 
