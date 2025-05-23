@@ -42,7 +42,7 @@ def get_user_input():
     st.warning(st.session_state.locale.need_tokens) if st.session_state.user_tokens <= 0 else None
 
 
-def show_chat(ai_content: str) -> None:
+def show_chat(ai_content: str, is_open_ai: bool) -> None:
     if ai_content not in st.session_state.generated:
         # store the ai content
         st.session_state.past.append(st.session_state.user_text)
@@ -52,10 +52,11 @@ def show_chat(ai_content: str) -> None:
             message(st.session_state.past[i], is_user=True, key=str(i) + "_user", seed=st.session_state.seed)
             message(st.session_state.generated[i], key=str(i), seed=st.session_state.seed)
             # st.markdown(st.session_state.generated[i])
-            st.caption(f"""
-                {st.session_state.locale.tokens_count}{st.session_state.total_tokens[i]} |
-                {st.session_state.locale.message_cost}{st.session_state.costs[i]:.5f}$
-            """, help=f"{st.session_state.locale.sum_tokens}{sum(st.session_state.total_tokens)} | {st.session_state.locale.total_cost}{sum(st.session_state.costs):.5f}$")  # noqa: E501
+            if is_open_ai:
+                st.caption(f"""
+                    {st.session_state.locale.tokens_count}{st.session_state.total_tokens[i]} |
+                    {st.session_state.locale.message_cost}{st.session_state.costs[i]:.5f}$
+                """, help=f"{st.session_state.locale.sum_tokens}{sum(st.session_state.total_tokens)} | {st.session_state.locale.total_cost}{sum(st.session_state.costs):.5f}$")  # noqa: E501
 
 
 def calc_total(prompt_tkns: int, compl_tkns: int, in_cost_pm: float, out_cost_pm: float) -> float:
@@ -133,7 +134,7 @@ def show_llm_conversation(is_open_ai: bool) -> None:
         calc_cost(usage)
         st.session_state.messages.append({"role": "assistant", "content": ai_content})
         if ai_content:
-            show_chat(ai_content)
+            show_chat(ai_content, is_open_ai)
             st.divider()
     # except InvalidRequestError as err:
     #     if err.code == "context_length_exceeded":
@@ -158,7 +159,7 @@ def show_conversation(is_open_ai: bool) -> None:
         # st.session_state.messages.append({"role": "user", "content": st.session_state.user_text})
         append_user_message()
     else:
-        if st.session_state.model not in [AIModels.o1.value, ]:
+        if is_open_ai and st.session_state.model not in [AIModels.o1.value, ]:
             ai_role = f"{st.session_state.locale.ai_role_prefix + ' ' if st.session_state.role else ''}" \
                       f"{st.session_state.role + '.' if st.session_state.role else ''}"
             st.session_state.messages = [

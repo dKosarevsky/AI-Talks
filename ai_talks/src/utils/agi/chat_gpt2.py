@@ -38,4 +38,4 @@ def create_llm_content(ai_model: str, messages: List[dict], is_open_ai: bool) ->
             model=ai_model,
         )
         logging.info(f"{message=}")
-        return message.content, None
+        return message.content[0].text, None

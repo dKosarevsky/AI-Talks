@@ -1,3 +1,5 @@
+import logging
+
 from openai import OpenAI
 from anthropic import Anthropic
 
@@ -5,6 +7,7 @@ import streamlit as st
 
 
 def get_api_client(is_open_ai: bool = True):
+    logging.info(f"{is_open_ai=}")
     try:
         if is_open_ai:
             client = OpenAI(api_key=st.secrets.api_credentials.api_key, organization=st.secrets.api_credentials.api_org)
