@@ -33,7 +33,7 @@ def create_llm_content(ai_model: str, messages: List[dict], is_open_ai: bool) ->
         return completion.choices[0].message.content, completion.usage
     else:
         message = client.messages.create(
-            max_tokens=1024,
+            max_tokens=320_000,
             messages=messages,
             model=ai_model,
         )
