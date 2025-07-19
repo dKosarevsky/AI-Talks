@@ -7,6 +7,8 @@ from openai.types import CompletionUsage
 from openai import OpenAIError
 from tenacity import retry, stop_after_attempt
 
+from anthropic import AnthropicError
+
 from .api_utils import get_api_client
 
 
@@ -32,10 +34,16 @@ def create_llm_content(ai_model: str, messages: List[dict], is_open_ai: bool) ->
         logging.info(f"{completion=}")
         return completion.choices[0].message.content, completion.usage
     else:
-        message = client.messages.create(
-            max_tokens=320_000,
-            messages=messages,
-            model=ai_model,
-        )
-        logging.info(f"{message=}")
-        return message.content[0].text, None
+        # https://github.com/anthropics/anthropic-sdk-python
+        try:
+            message = client.messages.create(
+                max_tokens=32_000,
+                messages=messages,
+                model=ai_model,
+                stream=True,
+            )
+            logging.info(f"{message=}")
+            return message.content[0].text, None
+        except (AnthropicError, ValueError) as err:
+            st.error(err)
+            st.stop()
