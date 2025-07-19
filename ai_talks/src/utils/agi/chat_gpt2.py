@@ -26,13 +26,24 @@ def create_llm_content(ai_model: str, messages: List[dict], is_open_ai: bool) ->
                 temperature=st.session_state.temperature,
                 n=1,
                 user=st.session_state.username,
-                # stream=True,
+                stream=True,
             )
+            # Handle streaming response
+            content = ""
+            for chunk in completion:
+                if chunk.choices and hasattr(chunk.choices[0], 'delta') and hasattr(chunk.choices[0].delta, 'content') and chunk.choices[0].delta.content:
+                    content += chunk.choices[0].delta.content
+
+            # Get usage information from the last chunk
+            usage = None
+            if hasattr(chunk, 'usage'):
+                usage = chunk.usage
+
+            logging.info(f"Collected content: {content}")
+            return content, usage
         except OpenAIError as err:
             st.error(err)
             st.stop()
-        logging.info(f"{completion=}")
-        return completion.choices[0].message.content, completion.usage
     else:
         # https://github.com/anthropics/anthropic-sdk-python
         try:
@@ -42,8 +53,18 @@ def create_llm_content(ai_model: str, messages: List[dict], is_open_ai: bool) ->
                 model=ai_model,
                 stream=True,
             )
-            logging.info(f"{message=}")
-            return message.content[0].text, None
+            # Handle streaming response
+            content = ""
+            for chunk in message:
+                if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'text') and chunk.delta.text:
+                    content += chunk.delta.text
+                elif hasattr(chunk, 'content') and chunk.content and len(chunk.content) > 0:
+                    for content_block in chunk.content:
+                        if hasattr(content_block, 'text'):
+                            content += content_block.text
+
+            logging.info(f"Collected content: {content}")
+            return content, None
         except (AnthropicError, ValueError) as err:
             st.error(err)
             st.stop()
