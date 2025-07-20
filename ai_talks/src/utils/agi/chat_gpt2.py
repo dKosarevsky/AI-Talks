@@ -12,11 +12,17 @@ from anthropic import AnthropicError
 from .api_utils import get_api_client
 
 
-@st.cache_data()
 @retry(stop=stop_after_attempt(3))
-def create_llm_content(ai_model: str, messages: List[dict], is_open_ai: bool) -> tuple[str, CompletionUsage | None]:
+def create_llm_content(
+        ai_model: str,
+        messages: List[dict],
+        is_open_ai: bool,
+        placeholder=None
+) -> tuple[str, CompletionUsage | None]:
     client = get_api_client(is_open_ai=is_open_ai)
     logging.info(f"{messages=}")
+    content = ""
+    chunk = None
     if is_open_ai:
         # https://platform.openai.com/docs/api-reference/chat/create
         try:
@@ -29,14 +35,21 @@ def create_llm_content(ai_model: str, messages: List[dict], is_open_ai: bool) ->
                 stream=True,
             )
             # Handle streaming response
-            content = ""
             for chunk in completion:
-                if chunk.choices and hasattr(chunk.choices[0], 'delta') and hasattr(chunk.choices[0].delta, 'content') and chunk.choices[0].delta.content:
+                if (
+                        chunk.choices
+                        and hasattr(chunk.choices[0], "delta")
+                        and hasattr(chunk.choices[0].delta, "content")
+                        and chunk.choices[0].delta.content
+                ):
                     content += chunk.choices[0].delta.content
+                    # Update the placeholder with the current content if provided
+                    if placeholder is not None:
+                        placeholder.markdown(content)
 
             # Get usage information from the last chunk
             usage = None
-            if hasattr(chunk, 'usage'):
+            if hasattr(chunk, "usage"):
                 usage = chunk.usage
 
             logging.info(f"Collected content: {content}")
@@ -54,14 +67,19 @@ def create_llm_content(ai_model: str, messages: List[dict], is_open_ai: bool) ->
                 stream=True,
             )
             # Handle streaming response
-            content = ""
             for chunk in message:
-                if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'text') and chunk.delta.text:
+                if hasattr(chunk, "delta") and hasattr(chunk.delta, "text") and chunk.delta.text:
                     content += chunk.delta.text
-                elif hasattr(chunk, 'content') and chunk.content and len(chunk.content) > 0:
+                    # Update the placeholder with the current content if provided
+                    if placeholder is not None:
+                        placeholder.markdown(content)
+                elif hasattr(chunk, "content") and chunk.content and len(chunk.content) > 0:
                     for content_block in chunk.content:
-                        if hasattr(content_block, 'text'):
+                        if hasattr(content_block, "text"):
                             content += content_block.text
+                            # Update the placeholder with the current content if provided
+                            if placeholder is not None:
+                                placeholder.markdown(content)
 
             logging.info(f"Collected content: {content}")
             return content, None

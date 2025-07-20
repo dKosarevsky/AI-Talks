@@ -50,8 +50,9 @@ def show_chat(ai_content: str, is_open_ai: bool) -> None:
     if st.session_state.generated:
         for i in range(len(st.session_state.generated)):
             message(st.session_state.past[i], is_user=True, key=str(i) + "_user", seed=st.session_state.seed)
-            message(st.session_state.generated[i], key=str(i), seed=st.session_state.seed)
-            # st.markdown(st.session_state.generated[i])
+            # message(st.session_state.generated[i], key=str(i), seed=st.session_state.seed)
+            message(message="", key=str(i), seed=st.session_state.seed)
+            st.markdown(st.session_state.generated[i])
             if is_open_ai:
                 st.caption(f"""
                     {st.session_state.locale.tokens_count}{st.session_state.total_tokens[i]} |
@@ -126,11 +127,20 @@ def calc_cost(usage: CompletionUsage | None) -> None:
 
 def show_llm_conversation(is_open_ai: bool) -> None:
     try:
+        # Create a placeholder for streaming content
+        response_placeholder = st.empty()
+
+        # Call create_llm_content with the placeholder
         ai_content, usage = create_llm_content(
             ai_model=st.session_state.model,
             messages=st.session_state.messages,
             is_open_ai=is_open_ai,
+            placeholder=response_placeholder,
         )
+
+        # Clear the placeholder after streaming is complete
+        response_placeholder.empty()
+
         calc_cost(usage)
         st.session_state.messages.append({"role": "assistant", "content": ai_content})
         if ai_content:
